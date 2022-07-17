@@ -1,0 +1,5 @@
+.seat-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(192rpx, 1fr));
+  row-gap: 28rpx;
+  column-gap: 40rpx; }

@@ -1,0 +1,1 @@
+<van-picker title="{{title}}" data-key="{{pickerKey}}" show-toolbar="{{showToolbar}}" columns="{{ targetDictColumns }}" bind:confirm="handleConfirm" bind:cancel="handleClosePicker" />

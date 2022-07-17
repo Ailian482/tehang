@@ -1,0 +1,76 @@
+<view class="flex-direction-column d-flex h-full text-grey1">
+    <view class="p-x-16 p-y-10 bg-grey9 z-index-1">
+        <button class="text-primary bg-white r-8 box-shadow-full b-1 b-white f-s-15" bindtap="throttleAdd">
+            <iconfont icon="add" />
+            新增常用旅客
+        </button>
+    </view>
+    <view class="flex-1 h-1">
+        <scroll-view scroll-y="{{true}}" class="h-full bg-grey9 f-s-14" bindscrolltolower="throttlescrolltolower">
+            <view class="p-x-10">
+                <block wx:for="{{list}}" wx:key="id">
+                    <van-swipe-cell right-width="86">
+                        <view class="m-y-4 p-x-16 p-y-12 d-flex r-4 bg-white align-items-center" data-employee="{{item}}" bindtap="handleToggleEmployee">
+                            <block wx:if="{{selectedModule.isSelected(selected,item.id)}}">
+                                <iconfont icon="radio-selected" class="text-primary f-s-16" />
+                                <view class="p-l-14 flex-1">
+                                    <view class="f-s-16 f-w-bold text-primary">
+                                        <employee-name employeeInfo="{{item}}"></employee-name>
+                                    </view>
+                                    <view class="text-primary m-t-8" wx:if="{{item.mobile}}">
+                                        {{item.mobile}}
+                                    </view>
+                                </view>
+                                <iconfont icon="edit" class="f-s-18 text-primary" catchtap="throttleEdit" data-item="{{item}}" />
+                            </block>
+                            <block wx:else>
+                                <iconfont icon="radio-unselected" class="text-grey4 f-s-16" />
+                                <view class="p-l-14 flex-1">
+                                    <view class="f-s-16 f-w-bold">
+                                        <employee-name employeeInfo="{{item}}"></employee-name>
+                                    </view>
+                                    <view class="text-grey2 m-t-8" wx:if="{{item.mobile}}">
+                                        {{item.mobile}}
+                                    </view>
+                                </view>
+                                <iconfont icon="edit" class="f-s-18 text-primary" catchtap="throttleEdit" data-item="{{item}}" />
+                            </block>
+                        </view>
+                        <view slot="right" class="p-l-10 text-red1 d-flex align-items-center justify-content-center w-86 h-full flex-direction-column f-s-12" bindtap="throttleRemove" data-item="{{item}}" data-index="{{index}}">
+                            <iconfont icon="trash"></iconfont>
+                            <view>删除</view>
+                        </view>
+                    </van-swipe-cell>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="box-shadow-footer p-t-8 p-x-10 p-b-16 f-s-14 z-index-1">
+        <view class="d-grid grid-template-columns-4">
+            <view class="bg-grey8 p-y-8 p-x-16 text-primary r-4 d-inline-block m-b-12 m-x-6 text-center" wx:for="{{selected}}" wx:key="index" data-employee="{{item}}" bindtap="handleToggleEmployee">
+                <employee-name employeeInfo="{{item}}"></employee-name>
+            </view>
+        </view>
+        <view class="f-s-12 text-grey2 text-center m-b-12" wx:if="{{count}}">
+            <text>还需选择</text>
+            <text class="m-x-4 text-orange1">{{remain}}</text>
+            <text>人，每间房需选择1人</text>
+        </view>
+        <button bindtap="throttleConfirm" class="bg-btn-primary text-white f-w-bold f-s-16 r-full l-h-42">
+            确定
+        </button>
+    </view>
+</view>
+<van-dialog id="van-dialog" confirm-button-color="#3642ff" />
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />
+<wxs module="selectedModule">
+module.exports.isSelected = function(selected,id){
+    var result = false
+    selected.forEach(function(item){
+        if(item.id===id){
+            result = true
+        }
+    })
+    return result
+};
+</wxs>

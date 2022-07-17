@@ -1,0 +1,89 @@
+<van-popup show="{{ visible }}" round position="bottom" bind:close="throttleClose">
+  <view class="hotel-order-fee-container" wx:if="{{orderDetail}}">
+    <view class="f-s-16 text-grey1">费用明细</view>
+    <view class="m-t-20 d-flex justify-content-sp-bw">
+      <view class="f-s-12 text-grey1 f-w-bold">订房金额</view>
+      <view class="text-orange1">
+        <text class="f-s-12">￥</text>
+        <text class="f-s-17">{{ orderDetail.fee.totalBookFee }}</text>
+      </view>
+    </view>
+    <view class="m-t-10">
+      <view class="fee-item" wx:for="{{anyGuest.dayInfos}}" wx:key="*this">
+        <view>
+          <date-format value="{{item.begin}}" format="MM-dd" />
+          房费 {{orderDetail.hotel.roomInfo.breakfast}}
+        </view>
+        <view>￥{{ item.roomFee }} x {{ roomCount }}</view>
+      </view>
+      <view class="fee-item" wx:if="{{bookServiceFeeSingle}}">
+        <view>系统使用费</view>
+        <view>￥{{anyGuest.feeInfo.bookServiceFee }} x {{ roomCount }}</view>
+      </view>
+      <view class="fee-item" wx:if="{{bookTrusteeFee}}">
+        <view>托管费</view>
+        <!-- 托管费按间夜：配置托管费 * 天数 * 房间数 -->
+        <view wx:if="{{configBookTrusteeChargeType === 'RoomNights'}}">
+          ￥{{configBookTrusteeFee}} x {{orderDetail.days}} x {{ roomCount }}
+        </view>
+        <!-- 托管费按房费比例：总房价 * 配置托管费比例 -->
+        <view wx:if="{{configBookTrusteeChargeType === 'Percentage'}}">
+          ￥{{orderDetail.fee.bookRoomFee}} x {{configBookTrusteeFee}}%
+        </view>
+      </view>
+      <view class="fee-item" wx:if="{{purchaseAgentFeeSingle}}">
+        <view>代购费</view>
+        <view>{{anyGuest.feeInfo.purchaseAgentFee}} x {{ roomCount }}</view>
+      </view>
+    </view>
+    <!-- 退订金额 -->
+    <block wx:if="{{returnRecordsFeeMix.length}}">
+      <view class="m-t-20 d-flex justify-content-sp-bw">
+        <view class="f-s-12 text-grey1 f-w-bold">退订金额</view>
+        <view class="text-orange1">
+          <text class="f-s-12">-￥</text>
+          <text class="f-s-17">{{ returnFeeAmount }}</text>
+        </view>
+      </view>
+      <view class="m-t-10" wx:for="{{returnRecordsFeeMix}}" wx:for-item="returnRecord" wx:key="*this">
+        <view class="f-s-12 text-grey2">
+          退订时间：
+          <date-format value="{{returnRecord.createTime}}" format="MM-dd HH:mm" />
+        </view>
+        <view>
+          <view class="fee-item" wx:for="{{returnRecord.returnDays}}" wx:key="*this">
+            <view>
+              <date-format value="{{item.begin}}" format="MM-dd" />
+              房费 {{orderDetail.hotel.breakfast}}
+            </view>
+            <view>-￥{{ item.roomFee }} x {{item.count}}</view>
+          </view>
+          <view class="fee-item">
+            <view>退订手续费</view>
+            <view>￥{{ returnRecord.returnedHandingFee }}</view>
+          </view>
+          <view class="fee-item" wx:if="{{!orderDetail.hotel.roomInfo.wasContractPrice}}">
+            <view>系统使用费</view>
+            <view>￥{{ returnRecord.returnedServiceFee }}</view>
+          </view>
+          <view class="fee-item" wx:if="{{orderDetail.hotel.roomInfo.wasContractPrice}}">
+            <view>退订托管费</view>
+            <!-- 托管费按间夜：配置托管费 * 天数 * 房间数 -->
+            <view wx:if="{{returnRecord.configReturnTrusteeChargeType === 'RoomNights'}}">
+              ￥{{returnRecord.configReturnTrusteeFee}} x {{returnRecord.returnDays.length}}
+            </view>
+            <!-- 托管费按房费比例：总房价 * 配置托管费比例 -->
+            <view wx:if="{{returnRecord.configReturnTrusteeChargeType === 'Percentage'}}">
+              <!-- 退订总房费是负数，这里加个-号，取正值，展示退订托管费 -->
+              ￥{{-returnRecord.returnedRoomFee}} x {{returnRecord.configReturnTrusteeFee}}%
+            </view>
+          </view>
+        </view>
+        <view class="fee-item">
+          <view>小计</view>
+          <view>-￥{{ returnRecord.total }}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</van-popup>

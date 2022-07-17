@@ -1,0 +1,24 @@
+:host {
+  position: relative;
+  z-index: 9999999; }
+
+.mask {
+  z-index: 1;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .mask .wrapper {
+    width: 240rpx;
+    height: 240rpx;
+    background: #444444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24rpx;
+    margin-bottom: 200rpx;
+    --loading-text-color: #d6d6d6; }

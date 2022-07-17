@@ -1,0 +1,75 @@
+page {
+  box-sizing: border-box;
+  background: #f9f9f9; }
+
+.employee-role-list {
+  margin-top: 28rpx;
+  background: white; }
+  .employee-role-list .van-cell {
+    padding: 32rpx;
+    background: transparent; }
+    .employee-role-list .van-cell .cell-title {
+      font-size: 32rpx;
+      color: #333333; }
+
+.invitation-padding-list {
+  margin-top: 30rpx;
+  background: white; }
+  .invitation-padding-list .van-cell {
+    padding: 32rpx;
+    background: transparent; }
+    .invitation-padding-list .van-cell .cell-title {
+      font-size: 32rpx;
+      color: #333333; }
+
+.overlay-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 46rpx; }
+  .overlay-wrapper .invitation-detail-container {
+    width: 100%;
+    background: white;
+    border-radius: 12rpx;
+    position: relative;
+    padding-bottom: 34rpx; }
+    .overlay-wrapper .invitation-detail-container .header {
+      position: relative;
+      text-align: center; }
+      .overlay-wrapper .invitation-detail-container .header .header-icon {
+        width: 220rpx;
+        height: 154rpx;
+        margin-top: -90rpx; }
+      .overlay-wrapper .invitation-detail-container .header iconfont {
+        font-size: 36rpx;
+        color: #d8d8d8;
+        position: absolute;
+        right: 26rpx;
+        top: 24rpx; }
+    .overlay-wrapper .invitation-detail-container .component-info {
+      margin-top: 52rpx;
+      font-size: 28rpx;
+      text-align: center; }
+    .overlay-wrapper .invitation-detail-container .employee-info {
+      margin: 0 40rpx;
+      background: #ecf2ff;
+      border-radius: 4px;
+      padding: 20rpx 0 20rpx 32rpx;
+      font-size: 28rpx;
+      color: #333333;
+      line-height: 48rpx; }
+    .overlay-wrapper .invitation-detail-container .expiration-info {
+      margin: 48rpx 0 36rpx 0;
+      text-align: center; }
+    .overlay-wrapper .invitation-detail-container .operate-group {
+      padding: 0 48rpx; }
+      .overlay-wrapper .invitation-detail-container .operate-group .join-btn {
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        padding: 16rpx 0;
+        text-align: center;
+        background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+        box-shadow: 0px 0px 10px 0px rgba(76, 127, 247, 0.65);
+        border-radius: 42rpx; }

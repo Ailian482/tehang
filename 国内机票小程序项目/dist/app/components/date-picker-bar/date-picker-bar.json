@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "date-format": "./../../../components/date-format/date-format",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "van-calendar": "./../../../@vant/weapp/dist/calendar/index"
+  }
+}

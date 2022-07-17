@@ -1,0 +1,4 @@
+<view class="footer-placeholder"></view>
+<view class="footer">
+    <slot name="content"></slot>
+</view>

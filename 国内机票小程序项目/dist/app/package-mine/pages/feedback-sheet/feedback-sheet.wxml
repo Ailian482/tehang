@@ -1,0 +1,39 @@
+<view class="form-group m-t-10">
+    <view class="form-item vertical {{ errMsgs.description ? 'has-error' : ''}}">
+        <view class="label">问题描述</view>
+        <view class="control width-100">
+            <view class="content width-100">
+                <textarea class="width-100" placeholder="请您描述具体问题，以便工作人员尽快帮您解决" value="{{formData.description}}" maxlength="300" data-name="description" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.description}}</view>
+        </view>
+        <view class="width-100 p-b-14 p-r-12 f-s-14 text-grey2 text-right">
+            {{formData.description ? formData.description.length : 0}}/300
+        </view>
+    </view>
+</view>
+<view class="form-group m-t-6">
+    <view class="form-item vertical">
+        <view class="label">上传图片</view>
+        <view class="control">
+            <view class="content">
+                <van-uploader file-list="{{ fileList }}" bind:delete="handleRemoveFile" bind:after-read="handleUpload" />
+            </view>
+        </view>
+    </view>
+</view>
+<view class="form-group m-t-6">
+    <view class="form-item {{ errMsgs.contactTel ? 'has-error' : ''}}">
+        <view class="label">联系电话</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="请输入联系电话" value="{{formData.contactTel}}" class="flex-1" data-name="contactTel" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.contactTel}}</view>
+        </view>
+    </view>
+</view>
+<footer-container>
+    <view class="submit-btn" slot="content" bindtap="handleSubmit">保存</view>
+</footer-container>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

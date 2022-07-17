@@ -1,0 +1,24 @@
+.address-list {
+  padding: 0 20rpx; }
+  .address-list .address-item {
+    padding: 24rpx 32rpx;
+    background: white;
+    margin-top: 24rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 4px; }
+  .address-list .default-tag {
+    padding: 4rpx 8rpx;
+    border-radius: 4rpx;
+    color: #3642ff;
+    background: #cddbff; }
+  .address-list .delete-btn {
+    color: #fb0101;
+    text-align: center;
+    font-size: 24rpx;
+    width: 196rpx;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+    .address-list .delete-btn iconfont {
+      font-size: 36rpx; }

@@ -1,0 +1,4 @@
+<view class="empty-list">
+    <image class="empty-image" src="{{type ? emptyImageOptions[type] : defaultImageUrl}}" mode="aspectFit" lazy-load="true" />
+    <view class="empty-tips">{{tips}}</view>
+</view>

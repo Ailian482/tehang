@@ -1,0 +1,31 @@
+<view class="address-list" wx:if="{{addressList && addressList.length}}">
+    <van-swipe-cell right-width="{{ 100 }}" wx:for="{{addressList}}" wx:for-item="addressItem" wx:for-index="idx" wx:key="id">
+        <view class="address-item" slot="">
+            <view class="flex-1">
+                <view class="d-flex align-items-center">
+                    <view class="f-s-16 f-w-bold">{{addressItem.consignee}}</view>
+                    <view class="f-s-12 text-grey3 m-l-12">
+                        <number-encrypt value="{{addressItem.mobile}}" encryptType="Mobile"></number-encrypt>
+                    </view>
+                </view>
+                <view class="f-s-12 text-grey2 m-t-2">
+                    <text class="default-tag m-r-8" wx:if="{{addressItem.defaulted}}">默认</text>
+                    <text>{{addressItem.province}}</text>
+                    <text class="m-l-4">{{addressItem.city}}</text>
+                    <text class="m-l-4">{{addressItem.area}}</text>
+                    <text class="m-l-4">{{addressItem.address}}</text>
+                </view>
+            </view>
+            <view class="f-s-20 text-grey4" bindtap="handleToModifyPage" data-address="{{addressItem}}">
+                <iconfont icon="modify"></iconfont>
+            </view>
+        </view>
+        <view slot="right" class="delete-btn" bindtap="handleDeleted" data-id="{{addressItem.id}}">
+            <iconfont icon="trash"></iconfont>
+            <view>删除</view>
+        </view>
+    </van-swipe-cell>
+</view>
+<block wx:else>
+    <empty-list tips="暂无地址"></empty-list>
+</block>

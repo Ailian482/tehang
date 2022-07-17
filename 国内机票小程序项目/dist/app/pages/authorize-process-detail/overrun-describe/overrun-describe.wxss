@@ -1,0 +1,13 @@
+@charset "UTF-8";
+.overrun-container {
+  padding: 16rpx 32rpx;
+  background: #fdefee;
+  font-size: 24rpx;
+  color: #f75e53; }
+
+.placeholder {
+  width: 100vw;
+  height: 24rpx; }
+
+.item::before {
+  content: '·'; }

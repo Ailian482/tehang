@@ -1,0 +1,65 @@
+<view class="flight-item {{flightItem.approachingDepartureTime ? 'p-t-16' : ''}}" wx:if="{{flightItem}}">
+    <!-- 临近起飞tip -->
+    <view class="approaching-tip" wx:if="{{flightItem.approachingDepartureTime}}">
+        <iconfont icon="lightning"></iconfont>
+        临近起飞
+    </view>
+    <view class="d-flex align-items-center justify-content-sp-bw">
+        <!-- 航班出发到达信息 -->
+        <!-- <view class="d-flex align-items-center"> -->
+        <view class="width-100 text-center">
+            <view class="f-s-20 f-w-bold">
+                <date-format value="{{flightItem.departure.dateTime}}" format="HH:mm"></date-format>
+            </view>
+            <view class="f-s-12">
+                <view wx:if="{{flightItem.departure.airportName}}">
+                    {{ flightItem.departure.airportName }}
+                </view>
+                <view wx:if="{{flightItem.departure.terminal}}">
+                    {{flightItem.departure.terminal}}
+                </view>
+            </view>
+        </view>
+        <view class="text-center relative width-100">
+            <view class="stop-tip" wx:if="{{flightItem.stops}}">经停</view>
+            <image class="route-arrow" src="{{flightRouteArrowSrc}}" lazy-load="true" />
+            <view class="f-s-10 text-grey3">
+                <time-duration value="{{[flightItem.departure.dateTime,flightItem.arrival.dateTime]}}"></time-duration>
+            </view>
+        </view>
+        <view class="width-100 text-center">
+            <view class="f-s-20 f-w-bold d-flex justify-content-center">
+                <date-format value="{{flightItem.arrival.dateTime}}" format="HH:mm"></date-format>
+                <view class="cross-day">
+                    <count-cross-day timeArray="{{[flightItem.departure.dateTime, flightItem.arrival.dateTime]}}"></count-cross-day>
+                </view>
+            </view>
+            <view class="f-s-12">
+                <view wx:if="{{flightItem.arrival.airportName}}">
+                    {{ flightItem.arrival.airportName }}
+                </view>
+                <view wx:if="{{flightItem.arrival.terminal}}">{{flightItem.arrival.terminal}}</view>
+            </view>
+        </view>
+        <!-- </view> -->
+        <!-- 舱位信息 -->
+        <view class="bunk-info">
+            <view class="d-flex align-items-baseline justify-content-flex-end text-orange1">
+                <view class="f-s-14">￥</view>
+                <view class="f-s-20">{{bunkInfo.adultPrice.factBunkPrice}}</view>
+            </view>
+            <view class="f-s-12 text-grey3">
+                <view>{{ bunkInfo.bunkName }}</view>
+                <discount value="{{bunkInfo.adultPrice.discount}}"></discount>
+            </view>
+        </view>
+    </view>
+    <view class="d-flex align-items-center m-t-10">
+        <airline-thumbnail class="airline-thumbnail" airlineCode="{{flightItem.airline}}"></airline-thumbnail>
+        <view class="f-s-12 text-grey3 m-l-2">
+            {{ flightItem.airlineName }} {{ flightItem.flightNo }}
+            <plane-type value="{{flightItem.planeType}}"></plane-type>
+            餐食:{{ flightItem.meal }}
+        </view>
+    </view>
+</view>

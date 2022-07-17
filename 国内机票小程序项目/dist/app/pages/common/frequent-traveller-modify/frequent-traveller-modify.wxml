@@ -1,0 +1,57 @@
+<view class="flex-direction-column d-flex h-full">
+    <view class="flex-1 h-1  bg-grey9 overflow-auto">
+        <view class="text-orange1 p-x-16 p-y-8 f-s-12" style="background:#FCF5EE;">
+            <iconfont icon="fill-exclamation" />
+            入住人姓名需要与实际入住人上的姓名保持一致。
+        </view>
+        <view class="form-group">
+            <view wx:if="{{formData.isNameCn}}" class="form-item  {{ errMsgs.surnameCn||errMsgs.givenNameCn ? 'has-error' : ''}}">
+                <view class="label">中文姓名</view>
+                <view class="control">
+                    <view class="content">
+                        <teh-input type="text" placeholder="与证件姓名一致" value="{{(formData.surnameCn ||'')+ (formData.givenNameCn||'')}}" class="flex-1" bindinput="handleNameCnInput" />
+                        <iconfont icon="namecn" class="f-s-22 text-primary line-height-1" bindtap="handleSwitchNameType" />
+                    </view>
+                    <view class="error">{{errMsgs.surnameCn || errMsgs.givenNameCn}}</view>
+                </view>
+            </view>
+            <block wx:else>
+                <view class="form-item {{ errMsgs.surnameEn? 'has-error' : ''}}">
+                    <view class="label">英文姓</view>
+                    <view class="control">
+                        <view class="content">
+                            <input type="text" class="flex-1" placeholder="拼音姓/Surname(例：WANG)" value="{{formData.surnameEn}}" data-name="surnameEn" bindinput="handleInput" />
+                            <iconfont icon="nameen" class="f-s-22 text-primary line-height-1" bindtap="handleSwitchNameType" />
+                        </view>
+                        <view class="error">{{errMsgs.surnameEn}}</view>
+                    </view>
+                </view>
+                <view class="form-item {{ errMsgs.givenNameEn ? 'has-error' : ''}}">
+                    <view class="label">英文名</view>
+                    <view class="control">
+                        <view class="content">
+                            <input type="text" class="flex-1" placeholder="拼音名/Given name(例：HUAHUA)" value="{{formData.givenNameEn}}" data-name="givenNameEn" bindinput="handleInput" />
+                        </view>
+                        <view class="error">{{errMsgs.givenNameEn}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="text-right text-primary f-s-12 p-12" bindtap="throttleShowNameInputNotice">
+            姓名填写说明
+        </view>
+    </view>
+    <view class="z-index-1 box-shadow-footer p-t-8 p-x-10 p-b-16 f-s-14">
+        <button bindtap="throttleConfirm" class="bg-btn-primary text-white f-w-bold f-s-16 r-full l-h-42" bindtap="throttleConfirm">
+            保存
+        </button>
+    </view>
+</view>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />
+<van-dialog confirm-button-color="#3642ff" confirm-button-text="我知道了" show="{{nameInputNoticeVisible}}" title="姓名填写说明" use-slot>
+    <view class="m-y-20 text-grey2 p-x-24 f-s-14">
+        <view>·英文姓名中不能包含数字或特殊符号</view>
+        <view>·姓在前，名在后，如有中间名则空一格紧随名之后。</view>
+        <view class="m-t-16">例如：Surname填写“Green”，Given name 填写“Jim Stephanie”</view>
+    </view>
+</van-dialog>

@@ -1,0 +1,154 @@
+page {
+  background: #f9f9f9; }
+
+.authorize-status {
+  padding: 26rpx 70rpx 24rpx 34rpx;
+  margin-bottom: 20rpx;
+  background: white;
+  display: flex;
+  align-items: center; }
+  .authorize-status .process-content {
+    margin-right: 34rpx; }
+    .authorize-status .process-content .process-image {
+      width: 86rpx;
+      height: 86rpx; }
+
+.nav-header {
+  display: flex;
+  font-size: 28rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #666666;
+  box-shadow: 0px -5px 12px 0px rgba(217, 226, 233, 0.5); }
+  .nav-header .nav-item {
+    color: #999999;
+    flex: 1;
+    text-align: center;
+    position: relative; }
+  .nav-header .nav-item.active {
+    font-weight: bold;
+    color: #3642ff; }
+  .nav-header .nav-item.active::after {
+    position: absolute;
+    content: '';
+    width: 112rpx;
+    height: 6rpx;
+    background: linear-gradient(90deg, #3642ff 0%, #6ba2fe 100%);
+    border-radius: 4rpx;
+    left: 50%;
+    margin-left: -56rpx;
+    bottom: 0; }
+
+.history-container {
+  font-size: 28rpx;
+  padding: 28rpx 20rpx 52rpx 32rpx;
+  margin-top: 20rpx; }
+  .history-container .history-list-content .history-item {
+    height: 80rpx;
+    display: flex;
+    position: relative; }
+    .history-container .history-list-content .history-item .tag {
+      width: 120rpx;
+      text-align: center;
+      position: relative; }
+    .history-container .history-list-content .history-item .item-detail {
+      flex: 1;
+      margin-left: 40rpx;
+      font-size: 28rpx; }
+  .history-container .status-wait {
+    color: #fe7800; }
+  .history-container .status-passed {
+    color: #3642ff; }
+  .history-container .status-rejected {
+    color: #f75e53; }
+  .history-container .status-cancelled {
+    color: #666666; }
+  .history-container .tag::after,
+  .history-container .tag::before,
+  .history-container .tag-wait::after,
+  .history-container .tag-rejected::after,
+  .history-container .tag-passed::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto; }
+  .history-container .tag::after,
+  .history-container .tag-passed::after {
+    width: 11px;
+    height: 11px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    background-image: url("https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/common/checked.svg"); }
+  .history-container .tag::before,
+  .history-container .tag-first::before,
+  .history-container .tag-passed::before,
+  .history-container .tag-last::before {
+    width: 1px;
+    background-color: #d8d8d8; }
+  .history-container .tag-first::before {
+    top: 50% !important; }
+  .history-container .tag-last::before {
+    bottom: 50% !important; }
+  .history-container .tag-rejected::after {
+    border: 2px solid #fb0101 !important; }
+  .history-container .tag-rejected::after,
+  .history-container .tag-wait::after {
+    width: 9px;
+    height: 9px;
+    border-radius: 9px;
+    background: white; }
+  .history-container .tag-wait::after {
+    border: 2px solid #3642ff; }
+
+.align-self-center {
+  align-self: center; }
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 20rpx 0 20rpx; }
+  .btn-group .rejected-btn,
+  .btn-group .agree-btn {
+    font-size: 34rpx;
+    font-weight: bold;
+    text-align: center;
+    padding: 18rpx 0;
+    flex: 1;
+    border-radius: 42rpx; }
+  .btn-group .rejected-btn {
+    color: #3642ff;
+    border: 1px solid #3642ff;
+    margin-right: 20rpx; }
+  .btn-group .agree-btn {
+    color: white;
+    background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%); }
+
+.reject-container {
+  padding: 0 20rpx; }
+  .reject-container .textarea-content {
+    padding: 20rpx 32rpx;
+    border-radius: 8rpx;
+    border: 1px solid #ececec;
+    margin-top: 34rpx; }
+    .reject-container .textarea-content textarea {
+      width: auto;
+      font-size: 28rpx;
+      height: 172rpx; }
+  .reject-container .confirm-btn {
+    color: white;
+    font-size: 34rpx;
+    font-weight: bold;
+    text-align: center;
+    height: 84rpx;
+    line-height: 84rpx;
+    margin-top: 70rpx;
+    background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+    border-radius: 42rpx; }
+
+.textarea-placeholder {
+  color: #cbcbcb;
+  font-size: 28rpx; }

@@ -1,0 +1,62 @@
+<view class="bg-grey9 h-full f-s-15 text-grey1 flex-direction-column d-flex">
+    <scroll-view scroll-y="{{true}}" class="flex-1 h-1 form p-y-16">
+        <view class="m-b-16 ">
+            <view class="form-item">
+                <view class="label">员工姓名</view>
+                <view class="control">
+                    <view class="content">
+                        <employee-name employeeInfo="{{formData.employee}}" class="text-grey3" />
+                    </view>
+                </view>
+            </view>
+            <view class="form-item">
+                <view class="label">归属部门</view>
+                <view class="control" bindtap="throttleReselectDept">
+                    <view class="content">
+                        <view class="flex-1">{{formData.department.name}}</view>
+                        <iconfont icon="arrow-right" />
+                    </view>
+                </view>
+            </view>
+            <view class="form-item  {{ errMsgs.mobile?'has-error':''}}">
+                <view class="label">手机号码</view>
+                <view class="control">
+                    <view class="content">
+                        <teh-input type="text" value="{{formData.mobile}}" class="flex-1" data-name='mobile' bind:input="handleInput" />
+                    </view>
+                    <view class="error">{{errMsgs.mobile}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="form-item {{ errMsgs.project?'has-error':''}}" wx:if="{{policyConfig.projectEnabled}}">
+            <view class="label">关联项目</view>
+            <view class="control" bindtap="throttleReselectProject">
+                <view class="content">
+                    <view class="flex-1">{{formData.project.name}}</view>
+                    <iconfont icon="arrow-right" />
+                </view>
+                <view class="error">{{errMsgs.project}}</view>
+            </view>
+        </view>
+        <view class="form-item {{ errMsgs.approvalNo?'has-error':''}}" wx:if="{{policyConfig.approvalEnabled}}">
+            <view class="label">审批单号</view>
+            <view class="control">
+                <block wx:if="{{policyConfig.inputApprovalNoEnabled}}">
+                    <view class="content">
+                        <teh-input value="{{formData.approvalNo}}" class="flex-1" data-name='approvalNo' bind:input="handleInput" />
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="content" bindtap="throttleSelectApproval">
+                        <view class="flex-1">{{formData.approvalNo||''}}</view>
+                        <iconfont icon="arrow-right" />
+                    </view>
+                </block>
+                <view class="error">{{errMsgs.approvalNo}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="footer p-x-10 p-y-16 f-s-14">
+        <button bindtap="throttleConfirm">确定</button>
+    </view>
+</view>

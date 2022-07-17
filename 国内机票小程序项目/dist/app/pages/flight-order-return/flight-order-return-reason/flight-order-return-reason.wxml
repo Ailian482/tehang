@@ -1,0 +1,27 @@
+<view class="h-full  d-flex flex-direction-column">
+    <view class="flex-1 h-1 text-grey1 bg-grey9 ">
+        <view class="bg-white p-l-16 p-t-16 p-b-2 p-r-20">
+            <view class="f-s-16 f-w-bold m-b-32">选择退票原因</view>
+            <view class="f-s-14">
+                <view wx:for="{{ options }}" wx:key="*this" class="d-flex p-b-16 m-b-16" bindtap="handleSelectReason" data-item="{{item}}">
+                    <view class="flex-1">{{item}}</view>
+                    <iconfont icon="radio-{{!isOthers&&item===reason?'':'un'}}selected" class="text-primary f-s-16" />
+                </view>
+                <block wx:if="{{supportItemOthers}}">
+                    <view class="d-flex p-b-16 m-b-16" bindtap="handleSelectOther">
+                        <view class="flex-1">其他</view>
+                        <iconfont icon="radio-{{isOthers?'':'un'}}selected" class="text-primary f-s-16" />
+                    </view>
+                    <view class="d-flex m-b-32" wx:if="{{isOthers}}">
+                        <teh-textarea placeholder="请输入其他原因" class="r-4 b-1 b-grey7 p-10 flex-1 h-116" bindinput="handleReasonInput" value="{{reason}}"></teh-textarea>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="z-index-1 p-y-16 p-x-10 box-shadow-footer">
+        <button bindtap="throttleConfirm" class="bg-btn-primary text-white f-w-bold f-s-16 r-full l-h-42">
+            下一步
+        </button>
+    </view>
+</view>

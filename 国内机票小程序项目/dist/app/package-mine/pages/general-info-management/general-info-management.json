@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "常用信息",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "traveler-list-management": "./traveler-list-management/traveler-list-management",
+    "address-list-management": "./address-list-management/address-list-management",
+    "invoice-list-management": "./invoice-list-management/invoice-list-management"
+  }
+}

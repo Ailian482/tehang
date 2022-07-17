@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'iconfont-colorful';
+  /* Project id 2830207 */
+  /* Color fonts */
+  src: url("//at.alicdn.com/t/font_2830207_fys2z9oke1.woff2?t=1632389370407") format("woff2"), url("//at.alicdn.com/t/font_2830207_fys2z9oke1.woff?t=1632389370407") format("woff"), url("//at.alicdn.com/t/font_2830207_fys2z9oke1.ttf?t=1632389370407") format("truetype"); }
+
+.iconfont-colorful {
+  font-family: 'iconfont-colorful' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-colorful-history:before {
+  content: '\e60b'; }
+
+.icon-colorful-metros:before {
+  content: '\e60a'; }
+
+.icon-colorful-Hospital:before {
+  content: '\e609'; }
+
+.icon-colorful-College:before {
+  content: '\e604'; }
+
+.icon-colorful-RailwayStation:before {
+  content: '\e605'; }
+
+.icon-colorful-ViewSpot:before {
+  content: '\e606'; }
+
+.icon-colorful-ExaminationPoint:before {
+  content: '\e607'; }
+
+.icon-colorful-counties:before {
+  content: '\e608'; }
+
+.icon-colorful-businesszones:before {
+  content: '\e603'; }
+
+.icon-colorful-brands:before {
+  content: '\e602'; }
+
+.icon-colorful-Airport:before {
+  content: '\e601'; }

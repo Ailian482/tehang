@@ -1,0 +1,51 @@
+<view class="p-t-16 p-l-10 p-r-15">
+    <view class="f-s-16 f-w-bold text-black">1. 积分能为我带来什么？</view>
+    <view class="text-grey2 f-s-14 m-t-16">
+        <view>1）可以在积分商城总兑换各种超值好礼</view>
+        <view>2）可以在下单时抵现金（目前只支持人工代订模式下</view>
+    </view>
+    <view class="f-s-16 f-w-bold  text-black m-t-28 ">2. 如何获取更多积分？</view>
+    <view class="m-t-16 f-s-14">
+        <view class="text-grey2">消费即可获得相应积分，各产品的积分规则如下：</view>
+        <block wx:for="{{pointRules}}" wx:key="id">
+            <view class="text-grey1 m-t-16">
+                <dict-transform dict="BizType" code="{{item.bizType}}"></dict-transform>
+            </view>
+            <view class="d-flex m-t-28">
+                <view class="text-grey3">积分方式：</view>
+                <view class="text-grey1">
+                    <dict-transform dict="PointsMethod" code="{{item.method}}"></dict-transform>
+                </view>
+            </view>
+            <block wx:if="{{item.method !== pointsMethod.None}}">
+                <view class="d-flex" wx:if="{{item.feeTypes.length}}">
+                    <view class="text-grey3">积分金额：</view>
+                    <view>
+                        <block wx:for="{{item.feeTypes}}" wx:for-item="feeType" wx:key="*this">
+                            <dict-transform dict="FlightFeeType" code="{{feeType}}"></dict-transform>
+                        </block>
+                    </view>
+                </view>
+                <view class="d-flex" wx:if="{{item.passengerTypes.length}}">
+                    <view class="text-grey3">积分票型：</view>
+                    <view>
+                        <block wx:for="{{item.passengerTypes}}" wx:for-item="passengerType" wx:key="*this">
+                            <dict-transform dict="FlightPassengerType" code="{{passengerType}}"></dict-transform>
+                        </block>
+                    </view>
+                </view>
+                <view class="d-flex">
+                    <view class="text-grey3">积分比例：</view>
+                    <view wx:if="{{item.method === pointsMethod.Amount}}">
+                        每{{ 1 / item.ratio }}元积1分
+                    </view>
+                    <view wx:if="{{item.method === pointsMethod.Person}}">
+                        每单每乘机人积{{ item.ratio }}分
+                    </view>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class="f-s-16 f-w-bold text-black m-t-28 ">3. 其他规则</view>
+    <view class="text-grey2 f-s-14 m-t-6">国际机票发生退票时，会扣减该单预订时获得的相应积分。如有任何疑问，请联系客服</view>
+</view>

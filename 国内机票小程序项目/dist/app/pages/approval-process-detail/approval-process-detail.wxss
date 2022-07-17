@@ -1,0 +1,161 @@
+page {
+  background: #f9f9f9; }
+
+.approval-status {
+  padding: 26rpx 70rpx 24rpx 34rpx;
+  margin-top: 20rpx;
+  background: white;
+  display: flex;
+  align-items: center; }
+  .approval-status .process-content {
+    margin-right: 34rpx; }
+    .approval-status .process-content .process-image {
+      width: 86rpx;
+      height: 86rpx; }
+
+.approval-container {
+  padding: 30rpx 76rpx 30rpx 32rpx;
+  margin-top: 20rpx;
+  background: white; }
+  .approval-container .detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    margin-bottom: 30rpx; }
+    .approval-container .detail-item .label {
+      color: #999999;
+      width: 120rpx;
+      margin-right: 80rpx; }
+    .approval-container .detail-item .value {
+      color: #333333;
+      flex: 1; }
+  .approval-container .detail-item:last-child {
+    margin-bottom: 0; }
+
+.history-container {
+  background: white;
+  font-size: 28rpx;
+  padding: 28rpx 20rpx 52rpx 32rpx;
+  margin-top: 20rpx; }
+  .history-container .history-list-content .history-item {
+    height: 80rpx;
+    display: flex;
+    position: relative; }
+    .history-container .history-list-content .history-item .tag {
+      width: 120rpx;
+      text-align: center;
+      position: relative; }
+    .history-container .history-list-content .history-item .item-detail {
+      flex: 1;
+      display: flex;
+      margin-left: 40rpx;
+      font-size: 28rpx; }
+  .history-container .status-wait {
+    color: #fe7800; }
+  .history-container .status-passed {
+    color: #3642ff; }
+  .history-container .status-rejected {
+    color: #f75e53; }
+  .history-container .status-cancelled {
+    color: #666666; }
+  .history-container .tag::after,
+  .history-container .tag::before,
+  .history-container .tag-wait::after,
+  .history-container .tag-rejected::after,
+  .history-container .tag-passed::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto; }
+  .history-container .tag::after,
+  .history-container .tag-passed::after {
+    width: 11px;
+    height: 11px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    background-image: url("https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/common/checked.svg"); }
+  .history-container .tag::before,
+  .history-container .tag-first::before,
+  .history-container .tag-passed::before,
+  .history-container .tag-last::before {
+    width: 1px;
+    background-color: #d8d8d8; }
+  .history-container .tag-first::before {
+    top: 50% !important; }
+  .history-container .tag-last::before {
+    bottom: 50% !important; }
+  .history-container .tag-rejected::after {
+    border: 2px solid #fb0101 !important; }
+  .history-container .tag-rejected::after,
+  .history-container .tag-wait::after {
+    width: 9px;
+    height: 9px;
+    border-radius: 9px;
+    background: white; }
+  .history-container .tag-wait::after {
+    border: 2px solid #3642ff; }
+
+.align-self-center {
+  align-self: center; }
+
+.submit-btn {
+  color: white;
+  width: calc(100vw - 20px);
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30rpx;
+  margin: 30rpx auto 0;
+  padding: 18rpx 0;
+  background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+  border-radius: 42rpx; }
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 20rpx 0 20rpx; }
+  .btn-group .rejected-btn,
+  .btn-group .agree-btn {
+    font-size: 34rpx;
+    font-weight: bold;
+    text-align: center;
+    padding: 18rpx 0;
+    flex: 1;
+    border-radius: 42rpx; }
+  .btn-group .rejected-btn {
+    color: #3642ff;
+    border: 1px solid #3642ff;
+    margin-right: 20rpx; }
+  .btn-group .agree-btn {
+    color: white;
+    background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%); }
+
+.reject-container {
+  padding: 0 20rpx; }
+  .reject-container .textarea-content {
+    padding: 20rpx 32rpx;
+    border-radius: 8rpx;
+    border: 1px solid #ececec;
+    margin-top: 34rpx; }
+    .reject-container .textarea-content textarea {
+      width: auto;
+      font-size: 28rpx;
+      height: 172rpx; }
+  .reject-container .confirm-btn {
+    color: white;
+    font-size: 34rpx;
+    font-weight: bold;
+    text-align: center;
+    height: 84rpx;
+    line-height: 84rpx;
+    margin-top: 70rpx;
+    background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+    border-radius: 42rpx; }
+
+.textarea-placeholder {
+  color: #cbcbcb;
+  font-size: 28rpx; }

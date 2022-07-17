@@ -1,0 +1,28 @@
+page {
+  background: #f9f9f9;
+  height: 100vh;
+  overflow: auto; }
+
+.nav {
+  background: white;
+  box-shadow: 0 10rpx 24rpx 0 rgba(217, 226, 233, 0.5);
+  white-space: nowrap;
+  overflow: auto;
+  padding: 0 8rpx;
+  position: sticky;
+  top: 0; }
+  .nav .type-item {
+    background: #f7f7fc;
+    border-radius: 8rpx;
+    display: inline-block;
+    margin: 12rpx;
+    color: #333333;
+    font-size: 22rpx;
+    padding: 16rpx; }
+
+.images-wrapper image {
+  width: 344rpx;
+  height: 344rpx;
+  border-radius: 16rpx; }
+  .images-wrapper image:nth-child(odd) {
+    margin-right: 20rpx; }

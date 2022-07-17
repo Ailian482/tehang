@@ -1,0 +1,27 @@
+<view class="d-flex bg-white" wx:if="{{currentDate}}">
+    <view class="flex-1">
+        <scroll-view class="scroll-container" scroll-with-animation="{{true}}" scroll-left="{{navScrollLeft}}" scroll-x="{{true}}" enable-flex="{{true}}">
+            <block wx:for="{{dateList}}" wx:key="*this">
+                <view id="item-{{index}}" class="date-item {{item === selectedDate ? 'active' : ''}}" data-index="{{index}}" bindtap="handleSelectedDate">
+                    <view class="data-info">
+                        <view>
+                            <date-format value="{{item}}" format="MM.dd"></date-format>
+                        </view>
+                        <view class="m-t-8">
+                            <date-format value="{{item}}" format="E" />
+                        </view>
+                    </view>
+                    <!-- <view class="">￥1430</view> -->
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+    <view class="date-picker" bindtap="handleChooseDate">
+        <view class="text-center text-grey1">
+            <iconfont icon="calendar" class="f-s-18"></iconfont>
+            <view>日历</view>
+        </view>
+    </view>
+</view>
+<!-- 日期选择组件 -->
+<van-calendar show="{{ calenderVisible }}" type="single" bind:select="handleDateSelect" bind:close="handleDateClose" max-date="{{maxDate}}" default-date="{{calendarDefaultDate}}" show-confirm="{{false}}" />

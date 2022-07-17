@@ -1,0 +1,29 @@
+- K8S 客户端安装
+    + https://kubernetes.io/zh/docs/tasks/tools/install-kubectl/
+- 配置
+    + ~/.kube/config
+    + ~/.bash_profile
+
+- 查看服务运行状况
+  kubectl get po
+  kubectl describe po {PodName}
+
+- 重启服务
+  kubectl delete po {PodName}
+
+- 切换环境
+  kube-switch test-3
+
+- 查看服务日志
+  kubectl logs {PodName} --tail={LineNumber}
+  kubectl logs {PodName} --tail={LineNumber} | grep "Keyword"
+  kubectl logs {PodName} --tail={LineNumber} | grep -C {LineNumber} "Keyword"
+  kubectl logs {PodName} --tail={LineNumber} -f | tee ~/Desktop/PodLog.log
+  kube-log {Keyword} --tail={LineNumber}
+
+- 服务端口映射
+  kubectl get services
+  kubectl port-forward services/tmc-services 10031:10031
+
+- mysql 安装
+- MySQL官网

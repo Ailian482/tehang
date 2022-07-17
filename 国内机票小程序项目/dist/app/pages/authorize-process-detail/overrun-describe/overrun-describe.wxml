@@ -1,0 +1,15 @@
+<view wx:if="{{wasOver}}" class="overrun-container">
+    <view class="overrun" wx:if="{{hotelOverrunInfo}}">{{hotelOverrunInfo}}</view>
+    <view wx:else>
+        <view class="item m-t-8" wx:if="{{flightOverrunInfo.lowPriceOverrun}}">
+            {{flightOverrunInfo.lowPriceWarningMsg}}
+        </view>
+        <view class="item m-t-8" wx:if="{{flightOverrunInfo.preDaysOverrun}}">
+            {{flightOverrunInfo.preDaysWarningMsg}}
+        </view>
+        <view class="item m-t-8" wx:if="{{flightOverrunInfo.departureTimeLimitOverrun}}">
+            {{flightOverrunInfo.departureTimeLimitWarningMsg}}
+        </view>
+    </view>
+</view>
+<view wx:else class="placeholder"></view>

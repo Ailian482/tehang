@@ -1,0 +1,37 @@
+page {
+  height: 100vh; }
+
+.footer {
+  box-shadow: 0px -5px 12px 0px rgba(217, 226, 233, 0.5);
+  z-index: 1; }
+  .footer button {
+    line-height: 42px;
+    background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+    border-radius: 21px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px; }
+
+.item {
+  height: 40rpx;
+  position: relative;
+  padding-left: 28rpx; }
+  .item::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    left: -4px;
+    top: 6px;
+    background: #3642ff; }
+  .item::after {
+    content: '';
+    height: 80rpx;
+    width: 1px;
+    background: #3642ff;
+    position: absolute;
+    left: 0;
+    top: 50%; }
+  .item.is-last::after {
+    content: none; }

@@ -1,0 +1,74 @@
+<view class="order-info-card">
+    <view class="p-l-6">
+        <view class="d-flex justify-content-sp-bw align-items-center f-w-bold">
+            <view class="f-s-18 text-grey1 d-flex align-items-center">
+                {{segment.departureCityName}}
+                <image class="router-icon" src="{{routerIcon}}" lazy-load="true" />
+                {{segment.arrivalCityName}}
+            </view>
+            <view class="text-orange1">
+                <text class="f-s-14">￥</text>
+                <text class="f-s-22">{{feeInfo.paymentAmount}}</text>
+            </view>
+        </view>
+        <view class="f-s-13 text-grey2 m-t-6">
+            {{segment.airlineName}} | {{segment.flightNo}} {{segment.bunkPrice.bunkName}} {{segment.bunkPrice.discount }}折
+        </view>
+        <view class="d-flex justify-content-sp-bw align-items-center f-s-13 text-grey2 m-t-6">
+            <view>
+                预定时间
+                <date-format value="{{ flightInfo.orderPlaceTime }}" format="yyyy-MM-dd HH:mm"></date-format>
+            </view>
+            <view>订单号： {{bigOrderNo}}</view>
+        </view>
+    </view>
+    <view class="card-content">
+        <image class="card-bg-image" src="{{cardBackgroundUrl}}" lazy-load="true" />
+        <view class="content-info">
+            <view class="d-flex justify-content-sp-bw align-items-center">
+                <view class="segment-departure">
+                    <view class="f-s-15 f-w-bold text-ellipsis">
+                        {{segment.departureAirportName}}
+                        <block wx:if="{{segment.departureTerminal}}">
+                            {{segment.departureTerminal}}
+                        </block>
+                    </view>
+                    <view class="f-s-27">
+                        <date-format value="{{segment.departureDateTime}}" format="HH:mm"></date-format>
+                    </view>
+                    <view class="f-s-11">
+                        <date-format value="{{segment.departureDateTime}}" format="MM月dd日"></date-format>
+                        <date-format value="{{segment.departureDateTime}}" format="E"></date-format>
+                    </view>
+                </view>
+                <view class="text-center">
+                    <view class="f-s-12">
+                        <stop-info stopInfo="{{segment.stopInfo}}"></stop-info>
+                    </view>
+                    <image class="segment-router-image" src="{{segmentRouterImgUrl}}" lazy-load="true" />
+                    <view class="f-s-12">{{durationInfo}}</view>
+                </view>
+                <view class="text-right">
+                    <view class="f-s-15 f-w-bold text-ellipsis">
+                        {{segment.arrivalAirportName}}
+                        <block wx:if="{{segment.arrivalTerminal}}">
+                            {{segment.arrivalTerminal}}
+                        </block>
+                    </view>
+                    <view class="f-s-27">
+                        <date-format value="{{segment.arrivalDateTime}}" format="HH:mm"></date-format>
+                    </view>
+                    <view class="f-s-11">
+                        <date-format value="{{segment.arrivalDateTime}}" format="MM月dd日"></date-format>
+                        <date-format value="{{segment.arrivalDateTime}}" format="E"></date-format>
+                    </view>
+                </view>
+            </view>
+            <view class="f-s-11 m-t-10">
+                机票 ￥{{ feeInfo.bunkPrice }} 基建 ￥{{ feeInfo.airportFee }} 燃油
+          ￥{{ feeInfo.oilFee }} 保险 ￥{{ feeInfo.insuranceFee }} 服务
+          ￥{{ feeInfo.serviceFee }}
+            </view>
+        </view>
+    </view>
+</view>

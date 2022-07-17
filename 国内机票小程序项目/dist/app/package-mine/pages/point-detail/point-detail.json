@@ -1,0 +1,13 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "积分明细",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 100,
+  "usingComponents": {
+    "empty-list": "./../../../components/empty-list/empty-list",
+    "date-format": "./../../../../components/date-format/date-format",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

@@ -1,0 +1,113 @@
+<block wx:if="{{approvalDetail}}">
+    <view class="approval-status">
+        <view class="process-content">
+            <image class="process-image" src="{{approvalStatusOps[approvalDetail.status].processUrl}}" lazy-load="true" />
+        </view>
+        <view>
+            <view class="f-s-15 text-grey1 f-w-bold m-b-4">
+                <dict-transform dict="ApprovalStatus" code="{{approvalDetail.status}}"></dict-transform>
+            </view>
+            <view class="f-s-12">
+                <text class="text-grey3 m-r-16">出差事由</text>
+                <text class="text-grey1">{{approvalDetail.travelReason}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="approval-container">
+        <view class="detail-item">
+            <view class="label">出差人</view>
+            <view class="value">{{approvalDetail.employeeNamesStr}}</view>
+        </view>
+        <view class="detail-item">
+            <view class="label">行程</view>
+            <view class="value">
+                <view wx:for="{{approvalDetail.travelPlaces}}" wx:for-item="travelPlace" wx:key="*this">
+                    {{travelPlace}}
+                </view>
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="label">出差时间</view>
+            <view class="value">
+                <view wx:for="{{approvalDetail.travelDates}}" wx:for-item="travelDate" wx:key="*this">
+                    {{travelDate}}
+                </view>
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="label">交通工具</view>
+            <view class="value">
+                <view wx:for="{{approvalDetail.transports}}" wx:for-item="transport" wx:key="*this">
+                    {{transport}}
+                </view>
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="label">审批单号</view>
+            <view class="value">{{approvalDetail.approvalNo}}</view>
+        </view>
+        <view class="detail-item">
+            <view class="label">申请时间</view>
+            <view class="value">
+                <date-format value="{{approvalDetail.createTime}}" format="yyyy-MM-dd HH:mm"></date-format>
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="label">备注</view>
+            <view class="value">{{approvalDetail.memo || '-'}}</view>
+        </view>
+    </view>
+    <view class="history-container">
+        <view class="text-grey3  m-b-18">审批流程</view>
+        <view class="history-list-content">
+            <view class="history-item" wx:for="{{approvalDetail.approvalHis}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
+                <view class="tag {{index === 0 ? 'tag-first' : ''}} {{index === (approvalDetail.approvalHis.length-1) ? 'tag-last' : ''}} {{item.status === 'Passed' ? 'tag-passed' : '' }} {{item.status === 'WaitApproval' ? 'tag-wait' : '' }} {{item.status === 'Rejected' ? 'tag-rejected' : '' }}"></view>
+                <view class="item-detail align-self-center">
+                    <view wx:if="{{item.status === null}}" class="text-grey2">
+                        {{ item.auditEmployeeName || item.toAuditEmployeeNames }}
+                    </view>
+                    <block wx:else>
+                        <view class="m-r-6 text-grey2">
+                            {{ item.status === 'Passed' ? item.auditEmployeeName : item.toAuditEmployeeNames }}
+                        </view>
+                        <view class="{{item.status === 'Passed' ? 'status-passed' : '' }} {{item.status === 'WaitApproval' ? 'status-wait' : '' }} {{item.status === 'Rejected' ? 'status-rejected' : '' }} {{item.status === 'Cancelled' ? 'status-cancelled' : '' }}">
+                            <dict-transform dict="ApprovalStatus" code="{{item.status}}"></dict-transform>
+                        </view>
+                    </block>
+                </view>
+                <view class="f-s-12 text-grey3 align-self-center">
+                    <date-format value="{{ item.auditDate }}" format="MM-dd HH:mm"></date-format>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 从「我发起的」列表页，跳转过来 且 操作可撤回 -->
+    <block wx:if="{{approvalSource === 'Mine' && approvalDetail.operation.canBeCanceled}}">
+        <footer-container>
+            <view class="submit-btn" slot="content" bindtap="handleCancel">撤销</view>
+        </footer-container>
+    </block>
+    <!-- 从「我审批的」列表页，跳转过来 且可审批 -->
+    <block wx:if="{{approvalSource === 'Other' && approvalDetail.operation.canBeAudited}}">
+        <footer-container>
+            <view class="btn-group" slot="content">
+                <view class="rejected-btn" bindtap="handleShowRejectReason">拒绝</view>
+                <view class="agree-btn" catchtap="handleAgree">同意</view>
+            </view>
+        </footer-container>
+    </block>
+</block>
+<!-- 拒绝审批/授权时展示弹窗 -->
+<van-action-sheet show="{{ showRejectReason }}" title="填写原因" bind:close="handleCloseRejectReason" bind:click-overlay="handleCloseRejectReason">
+    <view class="reject-container">
+        <view class="p-x-24">
+            <view class="f-s-14 text-grey1">确认拒绝该审批单吗？</view>
+            <view class="textarea-content">
+                <!-- 弹窗展示时 .textarea-placeholder 应用失效，直接写style -->
+                <textarea placeholder-style="font-size: 28rpx;color: #cbcbcb" bindinput="bindTextChange" placeholder="请填写拒绝理由（非必填）" />
+            </view>
+        </view>
+        <view class="confirm-btn" bindtap="handleReject">确定</view>
+    </view>
+</van-action-sheet>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

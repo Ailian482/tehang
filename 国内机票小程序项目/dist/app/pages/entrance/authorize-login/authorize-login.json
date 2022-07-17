@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "navigationBarBackgroundColor": "#000000",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "top-bar": "./../../../components/top-bar/top-bar",
+    "van-overlay": "./../../../../@vant/weapp/dist/overlay/index",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

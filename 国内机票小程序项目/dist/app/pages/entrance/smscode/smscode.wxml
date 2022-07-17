@@ -1,0 +1,20 @@
+<top-bar></top-bar>
+<view class="container">
+    <view class="p-t-64 m-b-32">
+        <text class="f-s-28">请输入短信验证码</text>
+        <view>
+            <text class="f-s-12 m-t-12">已发送短信验证码至 {{reformatNumber}}</text>
+        </view>
+    </view>
+    <input class="code-input" type="number" focus="{{smsCodeInputFocused}}" bindblur="handleSmsCodeBlur" bindinput="handleSmsCodeInput" maxlength="6" />
+    <view class="d-flex" bindtap="handleSetFocus">
+        <text wx:for="{{smsCodes}}" wx:key="index" class="flex-1 text-center sms-code-container {{index<=smsFormData.verificationCode.length ? 'active':''}}">
+            {{item}}
+        </text>
+    </view>
+    <view class="f-s-12 m-t-8">
+        <text wx:if="{{cdtime}}">{{cdtime}}s后重新发送</text>
+        <text wx:else bindtap="handleResendSmsCode">重发验证码</text>
+    </view>
+</view>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

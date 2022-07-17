@@ -1,0 +1,71 @@
+<!-- tabBar的占位区域 -->
+<view id="tabbar-placeholder" class="tabbar-placeholder">
+    <view></view>
+</view>
+<!-- 底部筛选排序tabBar -->
+<view class="tab-bar-container">
+    <view class="tab-bar-list">
+        <view class="tab-bar-item {{sortType === sortTypeEnum.Time ? 'active' : ''}}" data-sort="{{sortTypeEnum.Time}}" bindtap="handleChangeSort">
+            <image src="{{sortType === sortTypeEnum.Time ? timeIcon.active : timeIcon.normal}}" />
+            <view>
+                {{sortType === sortTypeEnum.Time ? orderBy === orderByEnum.TimeAsc ? '出发早-晚' : '出发晚-早' : '时间'}}
+            </view>
+        </view>
+        <view class="tab-bar-item {{sortType === sortTypeEnum.Price ? 'active' : ''}}" data-sort="{{sortTypeEnum.Price}}" bindtap="handleChangeSort">
+            <image src="{{sortType === sortTypeEnum.Price ? priceIcon.active : priceIcon.normal}}" />
+            <view>
+                {{sortType === sortTypeEnum.Price ? orderBy === orderByEnum.PriceAsc ? '价格低-高' : '价格高-低' : '价格'}}
+            </view>
+        </view>
+        <view class="tab-bar-item {{hasSelected ? 'active' : ''}}" bindtap="handleShowPopup">
+            <image src="{{hasSelected ? filterIcon.active : filterIcon.normal}}" />
+            <view>筛选</view>
+        </view>
+    </view>
+</view>
+<!-- 筛选面板 -->
+<van-popup show="{{ showPopup }}" round position="bottom" custom-style="max-height: 70%;" lock-scroll="true" bind:close="handleClosePopup">
+    <view class="filter-popup-header-container">
+        <view class="popup-header">
+            <view class="flex-1 text-grey3" bindtap="handleClosePopup">取消</view>
+            <view class="flex-1 text-grey1 text-center" bindtap="handleClearSelected">清空筛选</view>
+            <view class="flex-1 text-primary f-w-bold text-right" bindtap="handleConfirm">确定</view>
+        </view>
+    </view>
+    <view class="filter-selected-list" wx:if="{{hasSelected}}">
+        <block wx:for="{{filterOptionList}}" wx:key="key">
+            <block wx:for="{{item.options}}" wx:for-item="option" wx:for-index="optionIndex" wx:key="value">
+                <view class="selected-item" wx:if="{{option.checked}}">
+                    {{option.label}}
+                    <iconfont icon="delete" class="m-l-10 text-grey6" data-index="{{[index, optionIndex]}}" bindtap="handleUnSelected"></iconfont>
+                </view>
+            </block>
+        </block>
+    </view>
+    <view class="filter-content">
+        <scroll-view scroll-y="true" scroll-x="false" class="filter-title-nav">
+            <block wx:for="{{filterOptionList}}" wx:key="key">
+                <view class="title-item {{activeIndex === index ? 'active' : ''}}" data-index="{{index}}" bindtap="handleActiveNav">
+                    <view class="active-dot" wx:if="{{item.active && activeIndex !== index}}"></view>
+                    {{item.title}}
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" scroll-x="false" class="filter-list">
+            <view wx:for="{{filterOptionList}}" wx:key="key" wx:if="{{activeIndex === index}}">
+                <block wx:for="{{item.options}}" wx:for-item="option" wx:for-index="optionIndex" wx:key="value">
+                    <view class="option-item {{option.checked ? 'active' : ''}}" data-index="{{[index, optionIndex]}}" bindtap="handleSelectedFilter">
+                        <view class="d-flex align-items-center">
+                            <block wx:if="{{item.key === 'airline'}}">
+                                <airline-thumbnail class="airline-thumbnail m-r-8" airlineCode="{{option.value}}"></airline-thumbnail>
+                            </block>
+                            {{option.label}}
+                        </view>
+                        <iconfont icon="{{ option.checked ? 'radio-selected' : 'radio-unselected'  }}" class="f-s-16"></iconfont>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+        <!-- <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" max="{{ max }}" bind:click-nav="onClickNav" bind:click-item="onClickItem"></van-tree-select> -->
+    </view>
+</van-popup>

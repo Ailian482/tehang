@@ -1,0 +1,15 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "新增常用旅客",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "footer-container": "./../../../components/footer-container/footer-container",
+    "dict-picker": "./../../../components/dict-picker/dict-picker",
+    "dict-transform": "./../../../../components/dict-transform/index",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "van-popup": "./../../../../@vant/weapp/dist/popup/index",
+    "van-datetime-picker": "./../../../../@vant/weapp/dist/datetime-picker/index",
+    "van-dialog": "./../../../../@vant/weapp/dist/dialog/index",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

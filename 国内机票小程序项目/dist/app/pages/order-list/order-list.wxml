@@ -1,0 +1,207 @@
+<view class="orders-container">
+    <view class="nav-tab-container">
+        <view class="nav-tab">
+            <view class="{{selectedCategory === '' ? 'tab-item-active' : 'tab-item'}}" bindtap="handleChangeCategory" data-category="">
+                全部
+            </view>
+            <view class="{{selectedCategory === 'UnPaid' ? 'tab-item-active' : 'tab-item'}}" bindtap="handleChangeCategory" data-category="UnPaid">
+                待付款
+            </view>
+            <view class="{{selectedCategory === 'Processing' ? 'tab-item-active' : 'tab-item'}}" bindtap="handleChangeCategory" data-category="Processing">
+                处理中
+            </view>
+            <view class="{{selectedCategory === 'ToTravel' ? 'tab-item-active' : 'tab-item'}}" bindtap="handleChangeCategory" data-category="ToTravel">
+                待出行
+            </view>
+            <view class="{{selectedCategory === 'RefundOrCancel' ? 'tab-item-active' : 'tab-item'}}" bindtap="handleChangeCategory" data-category="RefundOrCancel">
+                退款/取消
+            </view>
+        </view>
+    </view>
+    <view class="order-list-content" wx:if="{{orderList && orderList.length}}">
+        <block wx:for="{{orderList}}" wx:key="id">
+            <!-- 国内酒店item -->
+            <view class="order-item" wx:if="{{item.bizType === 'Hotel'}}" bindtap="toHotelOrderDetail" data-id="{{item.id}}">
+                <image class="order-icon" src="{{bizTypeIconOptions[item.bizType]}}" lazy-load="true" />
+                <view class="order-content">
+                    <view class="order-detail">
+                        <view class="order-route">
+                            <view class="f-s-18 f-w-bold">{{item.hotel.hotelNameCn}}</view>
+                            <view class="text-grey2">
+                                <view class="m-t-8">
+                                    {{item.hotel.checkInDate}}至{{item.hotel.checkOutDate}}
+                                </view>
+                                <view class="m-t-8">
+                                    {{item.hotel.roomTypeNameCn}} {{item.hotel.days}}晚/{{item.hotel.roomsCount}}间
+                                </view>
+                            </view>
+                        </view>
+                        <view class="text-grey2">
+                            <view class="order-traveller m-t-8">
+                                <block wx:for="{{item.hotel.travellers}}" wx:for-item="hoteTraveller" wx:for-index="idx" wx:key="travellerName">
+                                    {{hoteTraveller.travellerName}}
+                                    <block wx:if="{{idx < item.hotel.travellers.length-1}}">
+                                        ，
+                                    </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="order-status">
+                        <view class="order-price">
+                            <view class="f-s-14">¥</view>
+                            <view class="f-s-16">{{item.paymentAmount}}</view>
+                        </view>
+                        <view class="m-t-8 f-w-bold f-s-13 {{item.status === 'ReturnApply' ? 'text-red2' : ''}}">
+                            <!-- 只有当状态为待确认，但是支付状态是未支付时，为待付款 -->
+                            <block wx:if="{{item.status === 'Submitted' && item.paymentStatus === 'UnPaid'}}">
+                                待付款
+                            </block>
+                            <block wx:else>
+                                <dict-transform dict="HotelOrderStatus" code="{{item.status}}"></dict-transform>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 国际酒店item -->
+            <view class="order-item" wx:if="{{item.bizType === 'IntHotel'}}" bindtap="unsupportedToast">
+                <image class="order-icon" src="{{bizTypeIconOptions[item.bizType]}}" lazy-load="true" />
+                <view class="order-content">
+                    <view class="order-detail">
+                        <view class="order-route">
+                            <view class="f-s-18 f-w-bold">{{item.hotel.hotelNameCn}}</view>
+                            <view class="m-t-8">
+                                {{item.hotel.checkInDate}}至{{item.hotel.checkOutDate}}
+                            </view>
+                            <view class="m-t-8">
+                                {{item.hotel.roomTypeNameCn}} {{item.hotel.days}}晚/{{item.hotel.roomsCount}}间
+                            </view>
+                        </view>
+                        <view class="order-traveller m-t-8">
+                            <block wx:for="{{item.hotel.travellers}}" wx:for-item="hoteTraveller" wx:for-index="idx" wx:key="travellerName">
+                                {{hoteTraveller.travellerName}}
+                                <block wx:if="{{idx < item.hotel.travellers.length-1}}">，</block>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="order-status">
+                        <view class="order-price">
+                            <view class="f-s-14">¥</view>
+                            <view class="f-s-16">{{item.paymentAmount}}</view>
+                        </view>
+                        <view class="m-t-8 f-w-bold f-s-14 {{item.status === 'ReturnApply' ? 'text-red2' : ''}}">
+                            <dict-transform dict="HotelOrderStatus" code="{{item.status}}"></dict-transform>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 国内机票item -->
+            <view class="order-item" wx:if="{{item.bizType === 'Flight'}}" bindtap="toFlightOrderDetail" data-id="{{item.id}}">
+                <image class="order-icon" src="{{bizTypeIconOptions[item.bizType]}}" lazy-load="true" />
+                <view class="order-content">
+                    <view class="order-detail">
+                        <view class="order-router f-s-12" wx:for="{{item.flight.routes}}" wx:for-item="flightRoute" wx:key="*this">
+                            <view class="f-s-18 f-w-bold">
+                                {{flightRoute.departureCityName}} -> {{flightRoute.arrivalCityName}} {{flightRoute.flightNo}}
+                            </view>
+                            <view class="m-t-8">
+                                {{flightRoute.departureDate}}-{{flightRoute.arrivalDate}}
+                            </view>
+                            <view class="m-t-8">
+                                {{flightRoute.departureAirportName}}{{flightRoute.departureTerminal}}/{{flightRoute.arrivalAirportName}}{{flightRoute.arrivalTerminal}}
+                            </view>
+                        </view>
+                        <view class="order-traveller m-t-8">
+                            <block wx:for="{{item.flight.travellers}}" wx:for-item="flightTraveller" wx:for-index="idx" wx:key="travellerName">
+                                {{flightTraveller.travellerName}}
+                                <block wx:if="{{idx < item.flight.travellers.length-1}}">，</block>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="order-status">
+                        <view class="order-price">
+                            <view class="f-s-14">¥</view>
+                            <view class="f-s-16">{{item.paymentAmount}}</view>
+                        </view>
+                        <view class="m-t-8 f-w-bold f-s-14">
+                            <dict-transform dict="FlightOrderStatus" code="{{item.status}}"></dict-transform>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 国际机票item -->
+            <view class="order-item" wx:if="{{item.bizType === 'IntFlight'}}" bindtap="unsupportedToast">
+                <image class="order-icon" src="{{bizTypeIconOptions[item.bizType]}}" lazy-load="true" />
+                <view class="order-content">
+                    <view class="order-detail">
+                        <view class="order-router f-s-12" wx:for="{{item.flight.routes}}" wx:for-item="flightRoute" wx:key="*this">
+                            <view class="f-s-18 f-w-bold">
+                                {{flightRoute.departureCityName}} -> {{flightRoute.arrivalCityName}} {{flightRoute.flightNo}}
+                            </view>
+                            <view class="m-t-8">
+                                {{flightRoute.departureDate}}-{{flightRoute.arrivalDate}}
+                            </view>
+                            <view class="m-t-8">
+                                {{flightRoute.departureAirportName}}{{flightRoute.departureTerminal}}/{{flightRoute.arrivalAirportName}}{{flightRoute.arrivalTerminal}}
+                            </view>
+                        </view>
+                        <view class="order-traveller m-t-8">
+                            <block wx:for="{{item.flight.travellers}}" wx:for-item="flightTraveller" wx:for-index="idx" wx:key="travellerName">
+                                {{flightTraveller.travellerName}}
+                                <block wx:if="{{idx < item.flight.travellers.length-1}}">，</block>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="order-status">
+                        <view class="order-price">
+                            <view class="f-s-14">¥</view>
+                            <view class="f-s-16">{{item.paymentAmount}}</view>
+                        </view>
+                        <view class="m-t-8 f-w-bold f-s-14">
+                            <dict-transform dict="IntFlightOrderStatus" code="{{item.status}}"></dict-transform>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 火车票item -->
+            <view class="order-item" wx:if="{{item.bizType === 'Train'}}" bindtap="unsupportedToast">
+                <image class="order-icon" src="{{bizTypeIconOptions[item.bizType]}}" lazy-load="true" />
+                <view class="order-content">
+                    <view class="order-detail">
+                        <view class="order-router f-s-12" wx:for="{{item.train.routes}}" wx:for-item="trainRouter" wx:key="*this">
+                            <view class="f-s-18 f-w-bold">
+                                {{trainRouter.departureCityName}} -> {{trainRouter.arrivalCityName}}
+                            </view>
+                            <view class="m-t-8">
+                                {{trainRouter.departureDate}}-{{trainRouter.arrivalDate}}
+                            </view>
+                            <view class="m-t-8">
+                                {{trainRouter.arrivalStationName}}/{{trainRouter.arrivalStationName}}
+                            </view>
+                        </view>
+                        <view class="order-traveller m-t-8">
+                            <block wx:for="{{item.train.travellers}}" wx:for-item="trainTraveller" wx:for-index="idx" wx:key="travellerName">
+                                {{trainTraveller.travellerName}}
+                                <block wx:if="{{idx < item.train.travellers.length-1}}">，</block>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="order-status">
+                        <view class="order-price">
+                            <view class="f-s-14">¥</view>
+                            <view class="f-s-16">{{item.paymentAmount}}</view>
+                        </view>
+                        <view class="m-t-8 f-w-bold f-s-14">
+                            <dict-transform dict="TrainOrderStatus" code="{{item.status}}"></dict-transform>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <block wx:else>
+        <empty-list tips="暂无订单"></empty-list>
+    </block>
+</view>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

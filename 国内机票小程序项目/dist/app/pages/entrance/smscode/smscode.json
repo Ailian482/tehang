@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "navigationBarBackgroundColor": "#000000",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "top-bar": "./../../../components/top-bar/top-bar",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

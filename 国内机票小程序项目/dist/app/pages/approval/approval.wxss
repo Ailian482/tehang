@@ -1,0 +1,58 @@
+page {
+  background: #f9f9f9; }
+
+.approval-header-placeholder,
+.approval-header {
+  background: white;
+  width: 100vw;
+  height: 84rpx;
+  line-height: 84rpx;
+  z-index: 1; }
+
+.approval-header {
+  position: fixed;
+  top: 0; }
+  .approval-header .nav-first {
+    display: flex;
+    font-size: 28rpx;
+    color: #666666;
+    border-bottom: 1px solid #ececec; }
+    .approval-header .nav-first .nav-first-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+    .approval-header .nav-first .nav-first-item.active {
+      font-size: 32rpx;
+      font-weight: bold;
+      color: #3642ff; }
+
+.remind-tag {
+  width: 32rpx;
+  height: 32rpx;
+  background: #fe585d;
+  color: white;
+  font-size: 20rpx;
+  line-height: 32rpx;
+  text-align: center;
+  border-radius: 50%;
+  margin-left: 12rpx; }
+
+.travel-plan-btn {
+  width: 112rpx;
+  height: 112rpx;
+  color: white;
+  font-size: 24rpx;
+  border-radius: 50%;
+  background: #3642ff;
+  position: fixed;
+  right: 34rpx;
+  bottom: 200rpx;
+  box-shadow: 0px 0px 12px 0px rgba(199, 209, 216, 0.5);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center; }
+  .travel-plan-btn .add-icon {
+    width: 40rpx;
+    height: 40rpx; }

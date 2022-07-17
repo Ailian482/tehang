@@ -1,0 +1,285 @@
+<page-meta page-style="{{ showRoomDetailPopup ? 'overflow: hidden;' : '' }}">
+    <view class="hotel-container d-flex flex-direction-column">
+        <view>
+            <top-bar backToFirstPage="{{backToFirstPage}}" class="text-white">
+                <view class="text-center f-s-16 f-w-bold">订单详情</view>
+            </top-bar>
+            <view class="order-base-info">
+                <view class="base-info-item f-s-24">
+                    <view class="f-w-bold">
+                        <dict-transform dict="HotelOrderStatus" code="{{orderDetail.status}}"></dict-transform>
+                    </view>
+                    <view class="text-right d-flex align-items-center" bindtap="handleShowOrderFee">
+                        <image src="{{hotelContractImg}}" class="h-16 w-14 m-r-4" wx:if="{{orderDetail.hotel.roomInfo.wasContractPrice}}" />
+                        <view class="f-s-16">￥</view>
+                        <view>{{orderDetail.paymentAmount}}</view>
+                        <iconfont icon="tip" class="f-s-14 m-l-4"></iconfont>
+                    </view>
+                </view>
+                <view class="base-info-item">
+                    <view class="f-s-15 f-w-bold flex-1">订单号：{{orderDetail.bigOrderNo}}</view>
+                    <view class="text-ellipsis text-right f-s-12 flex-1">
+                        {{orderDetail.hotel.roomInfo.rule}}
+                    </view>
+                </view>
+                <view class="operate-btn-group" wx:if="{{orderDetail.hotelOrderOperation.canBePaid && orderDetail.hotelOrderOperation.canBeCanceled}}">
+                    <view class="btn orange-btn m-r-6" bindtap="handlePayment">去支付</view>
+                    <view class="flex-1 d-flex">
+                        <view class="btn orange-btn m-r-6" wx:if="{{canBookAgain}}" bindtap="handleRepeatBooking">
+                            再次预订
+                        </view>
+                        <view class="btn" bindtap="handleCanceled" wx:if="{{orderDetail.hotelOrderOperation.canBeCanceled}}">
+                            取消订单
+                        </view>
+                    </view>
+                </view>
+                <view class="operate-btn-group" wx:elif="{{orderDetail.hotelOrderOperation.canBeCanceled}}">
+                    <view class="btn orange-btn m-r-6" wx:if="{{canBookAgain}}" bindtap="handleRepeatBooking">
+                        再次预订
+                    </view>
+                    <view class="btn" bindtap="handleCanceled">取消订单</view>
+                </view>
+                <view class="operate-btn-group" wx:elif="{{orderDetail.hotelOrderOperation.canBeReturned}}">
+                    <view class="btn orange-btn m-r-6" wx:if="{{canBookAgain}}" bindtap="handleRepeatBooking">
+                        再次预订
+                    </view>
+                    <view class="btn" bindtap="handleToReturnPage">退订</view>
+                </view>
+                <view class="operate-btn-group" wx:else>
+                    <view class="btn orange-btn" wx:if="{{canBookAgain}}" bindtap="handleRepeatBooking">
+                        再次预订
+                    </view>
+                </view>
+            </view>
+        </view>
+        <scroll-view scroll-y="{{true}}" class="flex-1 h-1">
+            <view class="content">
+                <view class="bg-container">
+                    <view class="hotel-info">
+                        <view wx:if="{{!isSK}}" class="order-travel-bg">
+                            <image src="{{orderTravelTypeImage[orderDetail.travelType]}}" lazy-load="true" />
+                        </view>
+                        <view class="hotel-base">
+                            <view class="d-flex justify-content-sp-bw align-items-center" bindtap="handleRepeatBooking">
+                                <view class="f-s-16 f-w-bold ">{{orderDetail.hotel.name}}</view>
+                                <iconfont icon="arrow-right" class="text-grey3 f-s-12"></iconfont>
+                            </view>
+                            <view class="f-s-12 m-t-8">
+                                <iconfont icon="address" class="text-primary f-s-12"></iconfont>
+                                {{orderDetail.hotel.address}}
+                            </view>
+                            <view class="f-s-12 m-t-8">
+                                <iconfont icon="tel" class="text-primary f-s-12"></iconfont>
+                                {{orderDetail.hotel.contactTel}}
+                            </view>
+                        </view>
+                        <view class="booking-data">
+                            <view class="d-flex align-items-center">
+                                <view class="f-s-14 f-w-bold">
+                                    <!-- 入住日期 -->
+                                    <date-format class="m-r-2" value="{{orderDetail.checkInDate}}" format="MM月dd日"></date-format>
+                                    {{checkInDateAlias}}
+                                </view>
+                                <view class="total">{{orderDetail.days}}晚</view>
+                                <view class="f-s-14 f-w-bold">
+                                    <!-- 离店日期 -->
+                                    <date-format class="m-r-2" value="{{orderDetail.checkOutDate}}" format="MM月dd日"></date-format>
+                                    {{checkOutDateAlias}}
+                                </view>
+                            </view>
+                        </view>
+                        <view class="room-info">
+                            <view class="d-flex justify-content-sp-bw">
+                                <view class="f-s-14 f-w-bold">
+                                    {{orderDetail.hotel.roomInfo.roomName}}
+                                </view>
+                                <view class="f-s-12 text-primary" bindtap="handleShowRoomDetailPopup">
+                                    房型详情
+                                </view>
+                            </view>
+                            <view class="f-s-12 m-t-4 text-grey2">
+                                <block wx:if="{{orderDetail.hotel.roomInfo.wifi}}">
+                                    {{orderDetail.hotel.roomInfo.wifi}} |
+                                </block>
+                                <block wx:if="{{orderDetail.hotel.roomInfo.windowType}}">
+                                    {{orderDetail.hotel.roomInfo.windowType}} |
+                                </block>
+                                <block wx:if="{{orderDetail.hotel.roomInfo.breakfast}}">
+                                    {{orderDetail.hotel.roomInfo.breakfast}}
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 房间信息 -->
+                    <view class="customer-info">
+                        <view class="d-flex justify-content-sp-bw">
+                            <view class="d-flex align-items-center">
+                                <view class="f-s-14 f-w-bold">房间信息</view>
+                                <view class="f-s-12 text-orange1 m-l-16" wx:if="{{orderDetail.latestArrivalTime}}">
+                                    最晚到店：{{orderDetail.latestArrivalTime}}（当天）
+                                </view>
+                            </view>
+                            <view class="d-flex align-items-center" bindtap="handleToggleGuestList">
+                                <view class="f-s-12 text-grey3 m-r-10">
+                                    {{showGuestList ? '收起' : '展开'}}
+                                </view>
+                                <view class="{{showGuestList ? 'triangle-up' : 'triangle-down'}}"></view>
+                            </view>
+                        </view>
+                        <view class="customer-list" wx:if="{{showGuestList}}">
+                            <block wx:for="{{orderDetail.guests}}" wx:for-item="guest" wx:key="*this">
+                                <view class="customer-item f-s-12" data-id="{{guest.subOrderId}}" bindtap="handleGuestDetail">
+                                    <view class="d-flex align-items-center">
+                                        <view class="f-w-bold">房间{{index + 1}}</view>
+                                        <view class="m-l-32">
+                                            <view>
+                                                {{guest.guestName}}
+                                                <block wx:if="{{!isSK && guest.belongedDeptName}}">
+                                                    {{guest.belongedDeptName}}
+                                                </block>
+                                            </view>
+                                            <view class="text-grey3">入住请携带本人有效证件</view>
+                                        </view>
+                                    </view>
+                                    <view>
+                                        <van-icon name="arrow" color="#999999" />
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="customer-preview" wx:else>
+                            <view class="m-r-10 d-inline" wx:for="{{orderDetail.guests}}" wx:for-item="guest" wx:key="*this">
+                                <view class="d-inline">{{guest.guestName}}</view>
+                                <block wx:if="{{!isSK && guest.belongedDeptName}}">
+                                    <view class="d-inline text-grey2 m-l-4">
+                                        {{guest.belongedDeptName}}
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 退订房间信息 -->
+                    <view class="return-customer-info" wx:if="{{returnGuests.length}}">
+                        <view class="d-flex justify-content-sp-bw">
+                            <view class="d-flex align-items-center">
+                                <view class="f-s-14 f-w-bold">已申请退订</view>
+                            </view>
+                            <view class="d-flex align-items-center" bindtap="handleToggleReturnGuestList">
+                                <view class="f-s-12 text-grey3 m-r-10">
+                                    {{showReturnGuestList ? '收起' : '展开'}}
+                                </view>
+                                <view class="{{showReturnGuestList ? 'triangle-up' : 'triangle-down'}}"></view>
+                            </view>
+                        </view>
+                        <view class="customer-list" wx:if="{{showReturnGuestList}}">
+                            <block wx:for="{{returnGuests}}" wx:for-item="guest" wx:key="*this">
+                                <view class="customer-item f-s-12" data-id="{{guest.subOrderId}}" bindtap="handleGuestDetail">
+                                    <view class="d-flex align-items-center">
+                                        <view class="f-w-bold">房间{{index + 1}}</view>
+                                        <view class="m-l-32 flex-1">
+                                            <view>
+                                                {{guest.guestName}}
+                                                <block wx:if="{{!isSK && guest.belongedDeptName}}">
+                                                    {{guest.belongedDeptName}}
+                                                </block>
+                                            </view>
+                                            <view class="text-grey3">
+                                                <view class="d-inline">退订日期：</view>
+                                                <view class="d-inline" wx:for="{{guest.returnDayInfos}}" wx:for-index="idx" wx:key="*this">
+                                                    <date-format value="{{item}}" format="MM-dd" />
+                                                    <block wx:if="{{idx !== (guest.returnDayInfos.length-1) }}">
+                                                        ,
+                                                    </block>
+                                                </view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view>
+                                        <van-icon name="arrow" color="#999999" />
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="customer-preview" wx:else>
+                            <view class="m-r-10 d-inline" wx:for="{{orderDetail.guests}}" wx:for-item="guest" wx:key="*this">
+                                <view class="d-inline">{{guest.guestName}}</view>
+                                <block wx:if="{{!isSK && guest.belongedDeptName}}">
+                                    <view class="d-inline text-grey2 m-l-4">
+                                        {{guest.belongedDeptName}}
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="contact-info m-t-8 f-s-14">
+                        <view class="f-w-bold m-b-12">联系人信息</view>
+                        <view class="cell">
+                            <view class="label f-w-bold">{{orderDetail.contactInfo.name}}</view>
+                            <view>
+                                <number-encrypt value="{{orderDetail.contactInfo.mobile}}" encryptType="Mobile"></number-encrypt>
+                            </view>
+                        </view>
+                        <view class="cell m-t-10 f-s-12" wx:if="{{orderDetail.contactInfo.email}}">
+                            <view class="label text-grey3">联系邮箱</view>
+                            <view>{{orderDetail.contactInfo.email}}</view>
+                        </view>
+                        <view class="cell m-t-10 f-s-12">
+                            <view class="label text-grey3">下单时间</view>
+                            <view>
+                                <date-format value="{{orderDetail.bookingTime}}" format="yyyy-MM-dd HH:mm" />
+                            </view>
+                        </view>
+                    </view>
+                    <view class="other-info">
+                        <view class="special" wx:if="{{orderDetail.specialNotes}}">
+                            <view class="f-s-14 f-w-bold m-b-8">入住偏好</view>
+                            <view class="f-s-12 text-grey2">{{orderDetail.specialNotes}}</view>
+                        </view>
+                        <view class="invoice-content" wx:if="{{orderDetail.invoice}}">
+                            <view class="f-w-bold m-b-12 f-s-14">发票信息</view>
+                            <view class="invoice-detail">
+                                <image class="invoice-status" src="{{invoiceStatusIcon[orderDetail.invoice.status]}}" lazy-load="true" />
+                                <view class="invoice-item">
+                                    <view class="title">发票抬头</view>
+                                    <view class="value">{{orderDetail.invoice.title}}</view>
+                                </view>
+                                <view class="invoice-item">
+                                    <view class="title">税号</view>
+                                    <view class="value">
+                                        {{orderDetail.invoice.registrationNo}}
+                                    </view>
+                                </view>
+                                <view class="invoice-item">
+                                    <view class="title">收件邮箱</view>
+                                    <view class="value">{{orderDetail.invoice.email}}</view>
+                                </view>
+                                <view wx:if="{{orderDetail.invoice.filePaths.length}}" class="show-btn" bindtap="handleToInvoice">
+                                    查看电子发票
+                                </view>
+                                <view wx:else class="show-btn disabled">查看电子发票</view>
+                            </view>
+                        </view>
+                        <view class="payment-info">
+                            <view class="f-s-14 f-w-bold m-b-12">支付信息</view>
+                            <view class="cell f-s-12">
+                                <view class="label text-grey3">支付方式</view>
+                                <view>
+                                    <dict-transform dict="CorpPayMode" code="{{orderDetail.payMode}}"></dict-transform>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</page-meta>
+<van-popup show="{{ showRoomDetailPopup }}" round="true" position="bottom" lock-scroll="true" bind:close="handleCloseRoomDetailPopup">
+    <room-detail-popup roomDetail="{{orderDetail.hotel.roomInfo}}" rule="{{orderDetail.hotel.roomInfo.rule}}"></room-detail-popup>
+</van-popup>
+<hotel-order-fee-popup orderDetailProps="{{orderDetailProps}}"></hotel-order-fee-popup>
+<pay-center payModalProps="{{payModalProps}}" bind:success="throttlePaySuccess" bind:cancel="throttlePayCancel"></pay-center>
+<!-- <view>分享按钮</view>
+    <button open-type="share" class="share-btn">分享给好友</button>
+    <view class=""></view> -->
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

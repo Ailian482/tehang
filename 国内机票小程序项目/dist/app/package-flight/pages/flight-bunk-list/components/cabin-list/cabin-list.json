@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "discount": "./../../../../../components/discount/discount",
+    "dict-transform": "./../../../../../../components/dict-transform/index",
+    "iconfont": "./../../../../../../components/icon-iconfont/index"
+  }
+}

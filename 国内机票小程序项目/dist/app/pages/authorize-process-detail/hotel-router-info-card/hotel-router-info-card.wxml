@@ -1,0 +1,28 @@
+<view class="order-info-card">
+    <view class="d-flex justify-content-sp-bw align-items-center f-w-bold">
+        <view class="f-s-18 text-grey1">订单号： {{bigOrderNo}}</view>
+        <view class="text-orange1">
+            <text class="f-s-14">￥</text>
+            <text class="f-s-22">{{hotelInfo.amount}}</text>
+        </view>
+    </view>
+    <view class="f-s-13 text-grey2 m-t-6">{{hotelInfo.hotelName}}</view>
+    <view class="d-flex justify-content-sp-bw align-items-center f-s-13 text-grey2 m-t-6">
+        <view>
+            预定时间
+            <date-format value="{{ hotelInfo.bookingTime }}" format="yyyy-MM-dd HH:mm"></date-format>
+        </view>
+        <view>订单号： {{bigOrderNo}}</view>
+    </view>
+    <view class="card-content">
+        <image class="card-bg-image" src="{{cardBackgroundUrl}}" lazy-load="true" />
+        <view class="content-info">
+            <view class="f-s-bold">{{hotelInfo.hotelName}}</view>
+            <view class="f-s-12 m-t-8">{{hotelInfo.checkInDate}}至{{hotelInfo.checkOutDate}}</view>
+            <view class="f-s-12 m-t-8">
+                {{hotelInfo.bedTypeName}} {{hotelInfo.days}}晚/{{hotelInfo.roomsCount}}间
+            </view>
+            <view class="f-s-12 m-t-8">{{hotelInfo.guestName}}</view>
+        </view>
+    </view>
+</view>

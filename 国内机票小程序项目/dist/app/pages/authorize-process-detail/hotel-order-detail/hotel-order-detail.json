@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-icon": "./../../../../@vant/weapp/dist/icon/index",
+    "number-encrypt": "./../../../../components/number-encrypt/number-encrypt",
+    "date-format": "./../../../../components/date-format/date-format",
+    "dict-transform": "./../../../../components/dict-transform/index"
+  }
+}

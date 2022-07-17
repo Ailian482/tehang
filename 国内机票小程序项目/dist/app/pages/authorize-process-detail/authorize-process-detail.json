@@ -1,0 +1,18 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "授权申请",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "footer-container": "./../../components/footer-container/footer-container",
+    "overrun-describe": "./overrun-describe/overrun-describe",
+    "hotel-router-info-card": "./hotel-router-info-card/hotel-router-info-card",
+    "flight-router-info-card": "./flight-router-info-card/flight-router-info-card",
+    "flight-order-detail": "./flight-order-detail/flight-order-detail",
+    "hotel-order-detail": "./hotel-order-detail/hotel-order-detail",
+    "dict-transform": "./../../../components/dict-transform/index",
+    "date-format": "./../../../components/date-format/date-format",
+    "van-action-sheet": "./../../../@vant/weapp/dist/action-sheet/index"
+  }
+}

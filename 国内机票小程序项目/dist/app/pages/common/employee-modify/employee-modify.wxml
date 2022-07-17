@@ -1,0 +1,116 @@
+<view class="flex-direction-column d-flex h-full">
+    <view class="flex-1 h-1 p-y-8 bg-grey9 overflow-auto">
+        <view class="form-group m-b-8">
+            <view class="form-item {{ errMsgs.surnameCn||errMsgs.givenNameCn||errMsgs.surnameEn||errMsgs.givenNameEn ? 'has-error' : ''}}">
+                <view class="label">员工姓名({{formData.isNameCn?'中':'英'}})</view>
+                <view class="control">
+                    <view class="content">
+                        <teh-input type="text" placeholder="姓名，最少两个字" value="{{(formData.surnameCn ||'')+ (formData.givenNameCn||'')}}" class="flex-1" bindinput="handleNameCnInput" wx:if="{{formData.isNameCn}}" />
+                        <block wx:else>
+                            <view class="flex-1 d-flex">
+                                <input type="text" placeholder="姓" value="{{formData.surnameEn}}" data-name="surnameEn" bindinput="handleInput" />
+                                <input type="text" placeholder="名" value="{{formData.givenNameEn}}" data-name="givenNameEn" bindinput="handleInput" />
+                            </view>
+                        </block>
+                        <iconfont icon="{{formData.isNameCn?'namecn':'nameen'}}" class="f-s-22 text-primary line-height-1" bindtap="handleSwitchNameType" />
+                    </view>
+                    <view class="error" wx:if="{{formData.isNameCn}}">
+                        {{errMsgs.surnameCn||errMsgs.givenNameCn}}
+                    </view>
+                    <view class="error" wx:else>{{errMsgs.surnameEn||errMsgs.givenNameEn}}</view>
+                </view>
+            </view>
+            <view class="form-item {{errMsgs.department ?'has-error':''}}">
+                <view class="label">所属部门</view>
+                <view class="control" bindtap="throttleReselectDept">
+                    <view class="content">
+                        <view class="flex-1" wx:if="{{formData.department.name}}">
+                            {{formData.department.name}}
+                        </view>
+                        <view class="flex-1 input-placeholder" wx:else>请选择部门</view>
+                        <iconfont icon="arrow-right" />
+                    </view>
+                    <view class="error">{{errMsgs.department}}</view>
+                </view>
+            </view>
+            <view class="form-item {{ errMsgs.mobile ? 'has-error' : ''}}">
+                <view class="label">手机号码</view>
+                <view class="control">
+                    <view class="content">
+                        <input type="text" placeholder="请输入手机号" value="{{formData.mobile}}" class="flex-1" data-name="mobile" bindinput="handleInput" />
+                    </view>
+                    <view class="error">{{errMsgs.mobile}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="form-group">
+            <block wx:for="{{formData.employeeDocs}}" wx:key="*this">
+                <view class="form-item {{ errMsgs.employeeDocs[index].docType ? 'has-error' : ''}}">
+                    <view class="label">证件类型</view>
+                    <view class="control">
+                        <view class="content" data-index="{{index}}" bindtap="throttleOpenDocTypePicker">
+                            <view class="flex-1" wx:if="{{formData.employeeDocs[index].docType}}">
+                                <dict-transform code="{{formData.employeeDocs[index].docType}}" dict="DocType"></dict-transform>
+                            </view>
+                            <view class="flex-1 text-grey4" wx:else>请选择证件类型</view>
+                            <iconfont icon="arrow-right" />
+                        </view>
+                        <view class="error">{{errMsgs.employeeDocs[index].docType}}</view>
+                    </view>
+                </view>
+                <view class="form-item {{ errMsgs.employeeDocs[index].docNo ? 'has-error' : ''}}">
+                    <view class="label">证件号码</view>
+                    <view class="control">
+                        <view class="content">
+                            <input type="text" placeholder="请输入证件号码" value="{{item.docNo}}" class="flex-1" data-index="{{index}}" data-name="docNo" bindinput="handleEmployeeDocInput" />
+                        </view>
+                        <view class="error">{{errMsgs.employeeDocs[index].docNo}}</view>
+                    </view>
+                </view>
+            </block>
+            <view class="form-item">
+                <view class="label">出生日期</view>
+                <view class="control">
+                    <view class="content" data-key="birthday" bindtap="throttleOpenBirthdayPicker">
+                        <view class="flex-1" wx:if="{{formData.birthday}}">
+                            {{formData.birthday}}
+                        </view>
+                        <view class="flex-1 text-grey4" wx:else>请选择出生日期</view>
+                        <iconfont icon="arrow-right" />
+                    </view>
+                </view>
+            </view>
+            <view class="form-item">
+                <view class="label">性别</view>
+                <view class="control">
+                    <view class="content">
+                        <view class="d-flex">
+                            <view class=" {{isMale? 'text-primary' : 'text-grey4'}}" bindtap="throttleChangeGender" data-gender="{{Gender.Male}}">
+                                <iconfont class="f-s-15 {{isMale? 'text-primary' : ''}}" icon="{{isMale? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                                男
+                            </view>
+                            <view class="m-l-16 {{isFemale ? 'text-primary' : 'text-grey4'}}" bindtap="throttleChangeGender" data-gender="{{Gender.Female}}">
+                                <iconfont class="f-s-15 {{isFemale? 'text-primary' : ''}}" icon="{{isFemale ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                                女
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="z-index-1 box-shadow-footer p-t-8 p-x-10 p-b-16 f-s-14">
+        <button bindtap="throttleConfirm" class="bg-btn-primary text-white f-w-bold f-s-16 r-full l-h-42" bindtap="throttleConfirm">
+            确定
+        </button>
+    </view>
+</view>
+<!-- 证件类型选择 -->
+<van-popup z-index="99999" show="{{ docTypePickerVisible }}" position="bottom" bind:close="throttleCloseDocTypePicker">
+    <dict-picker title="请选择证件类型" pickerKey="doctype" dict="DocType" bind:confirm="throttleConfirmDocType" bind:closePicker="throttleCloseDocTypePicker"></dict-picker>
+</van-popup>
+<!-- 生日选择 -->
+<van-popup z-index="99999" show="{{ birthdayPickerVisible }}" position="bottom" bind:close="throttleCloseBirthdayPicker">
+    <van-datetime-picker type="date" min-date="{{birthdayPickerOptions.minDate }}" max-date="{{ birthdayPickerOptions.maxDate }}" value="{{ birthdayPickerOptions.currentDate }}" bind:confirm="throttleConfirmBirthday" bind:cancel="throttleCloseBirthdayPicker" />
+</van-popup>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

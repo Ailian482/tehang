@@ -1,0 +1,109 @@
+page {
+  background-color: #f9f9f9;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-image: url("https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/hotel/bg-onbusiness.png");
+  height: 100vh; }
+
+.container {
+  color: #333;
+  padding-top: 136rpx;
+  padding-bottom: 100rpx; }
+  .container .content {
+    margin: 0 20rpx 20rpx 20rpx;
+    box-shadow: 0px 10rpx 24rpx 0 rgba(217, 226, 233, 0.5);
+    border-radius: 28rpx;
+    overflow: hidden; }
+  .container .tabs {
+    line-height: 100rpx; }
+    .container .tabs .item-left {
+      background-color: #e6e6e6; }
+      .container .tabs .item-left .item-left-content {
+        border-top-right-radius: 28rpx; }
+        .container .tabs .item-left .item-left-content.activated {
+          background: white;
+          font-weight: 500;
+          font-size: 32rpx; }
+    .container .tabs .item-right {
+      background-color: white; }
+    .container .tabs .item-right-content {
+      border-bottom-left-radius: 28rpx;
+      background-color: #e6e6e6;
+      height: 100%; }
+  .container .hotel-search-form {
+    background: white;
+    padding: 40rpx 32rpx 24rpx 32rpx; }
+    .container .hotel-search-form .current-address-handler {
+      color: #3642ff;
+      font-size: 20rpx;
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+    .container .hotel-search-form .search-btn {
+      color: white;
+      height: 88rpx;
+      line-height: 88rpx;
+      background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+      border-radius: 44rpx;
+      font-size: 34rpx; }
+  .container .service-info {
+    font-size: 24rpx;
+    color: #9d6b22;
+    font-weight: 700;
+    margin-top: 24rpx;
+    line-height: 40rpx; }
+    .container .service-info image {
+      width: 40rpx;
+      height: 32rpx;
+      vertical-align: sub;
+      margin-right: 8rpx;
+      width: 40rpx; }
+
+.icon-close {
+  color: #d8d8d8;
+  float: right;
+  font-size: 36rpx; }
+
+.price-modal .title {
+  padding: 24rpx 24rpx 0 24rpx;
+  text-align: center;
+  color: #333;
+  font-size: 36rpx; }
+
+.price-modal .content {
+  padding: 24rpx 20rpx 0 20rpx;
+  height: 480rpx; }
+  .price-modal .content .price-slider-wrapper {
+    padding: 32rpx; }
+  .price-modal .content .price-item-wrapper {
+    margin-top: 16rpx; }
+    .price-modal .content .price-item-wrapper .price-item {
+      display: inline-block;
+      width: 160rpx;
+      height: 72rpx;
+      background: #f7f7fc;
+      border-radius: 8rpx;
+      text-align: center;
+      line-height: 72rpx;
+      font-size: 24rpx;
+      margin: 8rpx;
+      margin-bottom: 16rpx; }
+
+.price-modal .footer {
+  height: 120rpx;
+  box-shadow: 0px -5px 12px 0px rgba(217, 226, 233, 0.5);
+  align-items: center; }
+  .price-modal .footer button {
+    color: #333;
+    width: 340rpx;
+    height: 72rpx;
+    font-size: 30rpx;
+    border-radius: 36rpx;
+    border: 1px solid #d4d4d4; }
+    .price-modal .footer button.btn-clear {
+      background-color: white;
+      border: 1px solid #d4d4d4; }
+    .price-modal .footer button.btn-confirm {
+      background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+      border: 1px solid #3642ff;
+      color: white; }

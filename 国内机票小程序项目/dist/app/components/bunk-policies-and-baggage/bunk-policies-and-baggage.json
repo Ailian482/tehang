@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "airline-thumbnail": "./../airline-thumbnail/airline-thumbnail",
+    "plane-type": "./../plane-type/plane-type",
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "van-tabs": "./../../../@vant/weapp/dist/tabs/index",
+    "van-tab": "./../../../@vant/weapp/dist/tab/index",
+    "date-format": "./../../../components/date-format/date-format"
+  }
+}

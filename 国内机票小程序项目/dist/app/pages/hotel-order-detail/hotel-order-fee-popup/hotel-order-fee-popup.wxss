@@ -1,0 +1,11 @@
+.hotel-order-fee-container {
+  padding: 52rpx 32rpx 60rpx 32rpx;
+  max-height: 700rpx;
+  overflow-y: auto; }
+
+.fee-item {
+  display: flex;
+  justify-content: space-between;
+  color: #666666;
+  font-size: 24rpx;
+  margin-top: 8px; }

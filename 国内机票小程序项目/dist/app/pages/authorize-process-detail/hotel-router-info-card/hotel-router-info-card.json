@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "date-format": "./../../../../components/date-format/date-format"
+  }
+}

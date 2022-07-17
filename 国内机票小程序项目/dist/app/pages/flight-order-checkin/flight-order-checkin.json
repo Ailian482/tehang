@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "值机申请",
+  "usingComponents": {
+    "airline-thumbnail": "./../../components/airline-thumbnail/airline-thumbnail",
+    "date-format": "./../../../components/date-format/date-format",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "dict-transform": "./../../../components/dict-transform/index",
+    "loading": "./../../../components/loading/loading"
+  }
+}

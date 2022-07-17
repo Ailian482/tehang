@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "保险详情",
+  "usingComponents": {
+    "airline-thumbnail": "./../../../components/airline-thumbnail/airline-thumbnail",
+    "dict-transform": "./../../../../components/dict-transform/index",
+    "date-format": "./../../../../components/date-format/date-format",
+    "van-popup": "./../../../../@vant/weapp/dist/popup/index"
+  }
+}

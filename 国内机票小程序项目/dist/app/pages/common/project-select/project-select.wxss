@@ -1,0 +1,5 @@
+page {
+  height: 100vh; }
+
+.project-item {
+  box-shadow: 0px 3px 12px 0px rgba(217, 226, 233, 0.5); }

@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "discount": "./../../../../../components/discount/discount",
+    "airline-thumbnail": "./../../../../../components/airline-thumbnail/airline-thumbnail",
+    "plane-type": "./../../../../../components/plane-type/plane-type",
+    "time-duration": "./../../../../../components/time-duration/time-duration",
+    "count-cross-day": "./../../../../../components/count-cross-day/count-cross-day",
+    "iconfont": "./../../../../../../components/icon-iconfont/index",
+    "date-format": "./../../../../../../components/date-format/date-format"
+  }
+}

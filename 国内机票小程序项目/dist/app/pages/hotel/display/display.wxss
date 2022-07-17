@@ -1,0 +1,283 @@
+page {
+  height: 100vh;
+  --dropdown-menu-height: 60rpx;
+  --dropdown-menu-title-font-size: 26rpx;
+  --dropdown-menu-title-text-color: #333333;
+  --cell-font-size: 28rpx; }
+  page .van-dropdown-menu {
+    box-shadow: none !important; }
+    page .van-dropdown-menu .van-dropdown-menu__title {
+      font-weight: bold; }
+      page .van-dropdown-menu .van-dropdown-menu__title.has-value {
+        color: #3642ff; }
+
+.header {
+  box-shadow: 0rpx 10rpx 24rpx 0rpx rgba(217, 226, 233, 0.5);
+  z-index: 1; }
+  .header .agreement-btn {
+    position: relative;
+    overflow: hidden; }
+    .header .agreement-btn iconfont {
+      font-size: 12rpx;
+      width: 20rpx;
+      line-height: 18rpx;
+      background: #3642ff;
+      /* box-shadow:torpx(0)torpx(5)torpx(12)torpx(0) rgba(217, 226, 233, 0.5); */
+      border-radius: 8rpx 0rpx 8rpx 0rpx;
+      color: white;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      text-align: center; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; }
+  .container .content {
+    flex: 1;
+    position: relative;
+    background: white;
+    overflow: hidden; }
+
+.search-bar {
+  padding: 0 20rpx; }
+  .search-bar .search-info {
+    height: 60rpx;
+    background: #f1f1f5;
+    border-radius: 30rpx; }
+    .search-bar .search-info .info-date {
+      font-size: 20rpx;
+      border-right: 2rpx solid #e6e5e5;
+      padding: 0 24rpx;
+      flex-direction: column;
+      font-weight: 500; }
+    .search-bar .search-info .info-keyword {
+      padding: 8rpx 24rpx; }
+
+.hotel-item {
+  padding: 20rpx 20rpx 20rpx 32rpx;
+  border-bottom: 0.1px solid #f1f1f5; }
+  .hotel-item .item-image-wrapper {
+    width: 220rpx;
+    height: 220rpx;
+    border-radius: 16rpx;
+    overflow: hidden; }
+    .hotel-item .item-image-wrapper image {
+      width: 100%;
+      height: 100%; }
+  .hotel-item .item-info-wrapper {
+    padding: 0 0 0 20rpx;
+    width: 310rpx; }
+    .hotel-item .item-info-wrapper .item-name {
+      font-size: 32rpx;
+      font-weight: 500;
+      color: #333333;
+      position: relative; }
+      .hotel-item .item-info-wrapper .item-name .agreement-image {
+        width: 28rpx;
+        height: 32rpx; }
+    .hotel-item .item-info-wrapper .item-info {
+      min-height: 176rpx; }
+      .hotel-item .item-info-wrapper .item-info .item-more {
+        width: 60%; }
+      .hotel-item .item-info-wrapper .item-info .item-address {
+        font-size: 24rpx;
+        color: #666; }
+    .hotel-item .item-info-wrapper .item-price {
+      color: #fe7800;
+      display: flex;
+      align-items: flex-end;
+      font-size: 28rpx; }
+      .hotel-item .item-info-wrapper .item-price .minprice {
+        font-weight: 500;
+        font-size: 40rpx; }
+
+.icon-star {
+  color: #fea000;
+  font-size: 24rpx;
+  margin-right: 8rpx; }
+
+.price-dropdown .title {
+  padding: 24rpx 24rpx 0 24rpx;
+  text-align: center;
+  color: #333;
+  font-size: 36rpx; }
+
+.price-dropdown .content {
+  padding: 24rpx 20rpx 0 20rpx;
+  height: 700rpx; }
+  .price-dropdown .content .price-slider-wrapper {
+    padding: 32rpx; }
+  .price-dropdown .content .price-item-wrapper {
+    margin-top: 16rpx; }
+    .price-dropdown .content .price-item-wrapper .price-item {
+      display: inline-block;
+      width: 160rpx;
+      height: 72rpx;
+      background: #f7f7fc;
+      border-radius: 8rpx;
+      text-align: center;
+      line-height: 72rpx;
+      font-size: 24rpx;
+      margin: 8rpx;
+      margin-bottom: 16rpx; }
+  .price-dropdown .content .price-priority {
+    display: inline-block;
+    width: 140px;
+    line-height: 32px;
+    background: #f7f7fc;
+    border-radius: 16px;
+    color: #666666;
+    font-size: 14px; }
+    .price-dropdown .content .price-priority.activated {
+      color: #3642ff;
+      background: #cddbff; }
+
+.price-dropdown .footer {
+  height: 132rpx;
+  box-shadow: 0rpx -10rpx 24rpx 0rpx rgba(217, 226, 233, 0.5);
+  align-items: center; }
+  .price-dropdown .footer button {
+    color: #333;
+    width: 340rpx;
+    height: 72rpx;
+    font-size: 30rpx;
+    border-radius: 36rpx;
+    border: 2rpx solid #d4d4d4; }
+    .price-dropdown .footer button.btn-clear {
+      background-color: white;
+      border: 2rpx solid #d4d4d4; }
+    .price-dropdown .footer button.btn-confirm {
+      background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+      border: 2rpx solid #3642ff;
+      color: white; }
+
+#dropdown_common .content,
+#dropdown_brand .content {
+  padding: 20rpx; }
+  #dropdown_common .content .title,
+  #dropdown_brand .content .title {
+    font-size: 26rpx;
+    color: #333;
+    margin-bottom: 16rpx; }
+  #dropdown_common .content .filter-items-wrapper .filter-item,
+  #dropdown_brand .content .filter-items-wrapper .filter-item {
+    display: inline-block;
+    width: 160rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    font-size: 24rpx;
+    background: #f7f7fc;
+    border-radius: 8rpx;
+    border: 2rpx solid #f7f7fc;
+    text-align: center;
+    margin-right: 16rpx;
+    margin-bottom: 16rpx; }
+    #dropdown_common .content .filter-items-wrapper .filter-item:nth-child(4n),
+    #dropdown_brand .content .filter-items-wrapper .filter-item:nth-child(4n) {
+      margin-right: 0; }
+    #dropdown_common .content .filter-items-wrapper .filter-item.selected,
+    #dropdown_brand .content .filter-items-wrapper .filter-item.selected {
+      color: #3642ff;
+      background: #cddbff; }
+
+#dropdown_common .footer,
+#dropdown_brand .footer {
+  height: 132rpx;
+  box-shadow: 0rpx -10rpx 24rpx 0rpx rgba(217, 226, 233, 0.5);
+  align-items: center; }
+  #dropdown_common .footer button,
+  #dropdown_brand .footer button {
+    color: #333;
+    width: 340rpx;
+    height: 72rpx;
+    font-size: 30rpx;
+    border-radius: 36rpx;
+    border: 2rpx solid #d4d4d4; }
+    #dropdown_common .footer button.btn-clear,
+    #dropdown_brand .footer button.btn-clear {
+      background-color: white;
+      border: 2rpx solid #d4d4d4; }
+    #dropdown_common .footer button.btn-confirm,
+    #dropdown_brand .footer button.btn-confirm {
+      background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+      border: 2rpx solid #3642ff;
+      color: white; }
+
+#dropdown_area .content {
+  font-size: 28rpx;
+  height: 560rpx; }
+
+#dropdown_area .categories {
+  background: #f5f5f5;
+  overflow: auto;
+  width: 196rpx; }
+  #dropdown_area .categories .item {
+    height: 84rpx;
+    line-height: 84rpx;
+    border-bottom: 2rpx solid #f1f1f5;
+    text-align: center; }
+    #dropdown_area .categories .item.activated {
+      background: white; }
+
+#dropdown_area .category-content {
+  padding-left: 36rpx; }
+  #dropdown_area .category-content .item {
+    min-height: 84rpx;
+    background: white;
+    border-bottom: 2rpx solid #f1f1f5; }
+    #dropdown_area .category-content .item.activated {
+      color: #3642ff; }
+    #dropdown_area .category-content .item.has-children {
+      padding-right: 36rpx;
+      border-bottom-color: white; }
+  #dropdown_area .category-content .station {
+    padding-left: 36rpx;
+    border-left: 2rpx solid #f1f1f5; }
+    #dropdown_area .category-content .station .item {
+      height: 84rpx;
+      line-height: 84rpx;
+      background: white;
+      border-bottom: 2rpx solid #f1f1f5; }
+      #dropdown_area .category-content .station .item.activated {
+        color: #3642ff; }
+  #dropdown_area .category-content .scroll-content {
+    height: 100%;
+    overflow: auto; }
+
+#dropdown_area .footer {
+  height: 132rpx;
+  box-shadow: 0rpx -10rpx 24rpx 0rpx rgba(217, 226, 233, 0.5);
+  align-items: center; }
+  #dropdown_area .footer button {
+    color: #333;
+    width: 340rpx;
+    height: 72rpx;
+    font-size: 30rpx;
+    border-radius: 36rpx;
+    border: 2rpx solid #d4d4d4; }
+    #dropdown_area .footer button.btn-clear {
+      background-color: white;
+      border: 2rpx solid #d4d4d4; }
+    #dropdown_area .footer button.btn-confirm {
+      background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+      border: 2rpx solid #3642ff;
+      color: white; }
+
+.no-content {
+  color: #999999;
+  text-align: center;
+  padding-top: 196rpx;
+  font-size: 26rpx; }
+  .no-content image {
+    width: 340rpx;
+    height: 312rpx; }
+
+.go-top-btn {
+  height: 120rpx;
+  width: 120rpx;
+  position: fixed;
+  bottom: 3rem;
+  right: 1rem; }

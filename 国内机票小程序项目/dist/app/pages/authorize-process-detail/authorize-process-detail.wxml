@@ -1,0 +1,116 @@
+<block wx:if="{{authorizeDetail}}">
+    <!-- 超标信息展示 -->
+    <overrun-describe authorizeDetail="{{authorizeDetail}}"></overrun-describe>
+    <!-- 审批状态展示 -->
+    <view class="authorize-status">
+        <view class="process-content">
+            <image class="process-image" src="{{authorizeStatusOps[authorizeDetail.status].processUrl}}" lazy-load="true" />
+        </view>
+        <view>
+            <view class="f-s-15 text-grey1 f-w-bold m-b-4">
+                <dict-transform dict="AuthorizeStatus" code="{{authorizeDetail.status}}"></dict-transform>
+            </view>
+            <!-- 设计图中仅有酒店才展示超标原因？ -->
+            <view class="f-s-12 d-flex" wx:if="{{authorizeDetail.hotelBo.wasOver}}">
+                <text class="text-grey3 m-r-16">超标原因</text>
+                <block wx:if="{{authorizeDetail.hotelBo}}">
+                    <text class="text-grey1">{{authorizeDetail.hotelBo.overPriceReasonText}}</text>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!-- 订单卡片信息 -->
+    <block wx:if="{{authorizeDetail.bizType === 'Hotel'}}">
+        <hotel-router-info-card hotelInfo="{{authorizeDetail.hotelBo}}" bigOrderNo="{{authorizeDetail.bigOrderNo}}"></hotel-router-info-card>
+    </block>
+    <block wx:else>
+        <flight-router-info-card flightInfo="{{authorizeDetail.flightBo}}" bigOrderNo="{{authorizeDetail.bigOrderNo}}"></flight-router-info-card>
+    </block>
+    <view class="bg-white m-t-12">
+        <view class="nav-header">
+            <view class="nav-item {{ current === 0 ? 'active' : ''}}" data-index="{{0}}" bindtap="handleChange">
+                授权信息
+            </view>
+            <view class="nav-item {{ current === 1 ? 'active' : ''}}" data-index="{{1}}" bindtap="handleChange">
+                订单信息
+            </view>
+        </view>
+        <view class="history-container" wx:if="{{current === 0}}">
+            <view class="text-grey3  m-b-18">授权流程</view>
+            <view class="history-list-content">
+                <view class="history-item" wx:for="{{authorizeDetail.authorizeHis}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
+                    <view class="tag {{index === 0 ? 'tag-first' : ''}} {{index === (authorizeDetail.authorizeHis.length-1) ? 'tag-last' : ''}} {{item.status === 'Passed' ? 'tag-passed' : '' }} {{item.status === 'WaitAuthorize' ? 'tag-wait' : '' }} {{item.status === 'Rejected' ? 'tag-rejected' : '' }}"></view>
+                    <view class="item-detail align-self-center">
+                        <view wx:if="{{item.auditLevel === 0}}" class="text-grey2">
+                            {{ item.submitEmployeeName }}  发起申请
+                        </view>
+                        <view wx:else class="d-flex">
+                            <view class="m-r-6 text-grey2">
+                                {{ item.auditEmployeeName ? item.auditEmployeeName : item.toAuditEmployeesNames }}
+                            </view>
+                            <view class="{{item.status === 'Passed' ? 'status-passed' : '' }} {{item.status === 'WaitAuthorize' ? 'status-wait' : '' }} {{item.status === 'Rejected' ? 'status-rejected' : '' }} {{item.status === 'Cancelled' ? 'status-cancelled' : '' }}">
+                                <dict-transform dict="AuthorizeStatus" code="{{item.status}}"></dict-transform>
+                            </view>
+                        </view>
+                        <view class="text-grey2 f-s-13" wx:if="{{item.auditOpinion}}">
+                            {{item.auditOpinion}}
+                        </view>
+                    </view>
+                    <view class="f-s-12 text-grey3 align-self-center">
+                        <date-format value="{{ item.auditTime }}" format="MM-dd HH:mm"></date-format>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class="history-list-content">
+                <block wx:for="{{authorizeDetail.authorizeHis}}" wx:for-item="historyItem" wx:for-index="index" wx:key="*this">
+                    <view class="history-item">
+                        <view class="d-flex flex-1 text-grey2">
+                            <view wx:if="{{historyItem.auditLevel === 0}}">
+                                {{ historyItem.submitEmployeeName }}  发起申请
+                            </view>
+                            <view wx:else>
+                                {{ historyItem.auditEmployeeName ? historyItem.auditEmployeeName : historyItem.toAuditEmployeesNames }}
+                                <dict-transform dict="AuthorizeStatus" code="{{historyItem.status}}"></dict-transform>
+                                <view wx:if="{{historyItem.auditOpinion}}">
+                                    {{historyItem.auditOpinion}}
+                                </view>
+                            </view>
+                        </view>
+                        <view class="f-s-12 text-grey3">
+                            <date-format value="{{ historyItem.auditTime }}" format="MM-dd HH:mm"></date-format>
+                        </view>
+                    </view>
+                </block>
+            </view> -->
+        </view>
+        <block wx:else>
+            <block wx:if="{{authorizeDetail.bizType === 'Hotel'}}">
+                <hotel-order-detail orderId="{{authorizeDetail.orderId}}"></hotel-order-detail>
+            </block>
+            <block wx:else>
+                <flight-order-detail orderId="{{authorizeDetail.orderId}}"></flight-order-detail>
+            </block>
+        </block>
+    </view>
+    <!-- 从「我审批的」列表页，跳转过来 且可审批 -->
+    <block wx:if="{{approvalSource === 'Other' && authorizeDetail.canAudit}}">
+        <footer-container>
+            <view class="btn-group" slot="content">
+                <view class="rejected-btn" bindtap="handleShowRejectReason">拒绝</view>
+                <view class="agree-btn" catchtap="handleAgree">同意</view>
+            </view>
+        </footer-container>
+    </block>
+</block>
+<!-- 拒绝授权时展示弹窗 -->
+<van-action-sheet show="{{ showRejectReason }}" title="填写原因" bind:close="handleCloseRejectReason" bind:click-overlay="handleCloseRejectReason">
+    <view class="reject-container">
+        <view class="p-x-24">
+            <view class="f-s-14 text-grey1">确认拒绝该授权单吗？</view>
+            <view class="textarea-content">
+                <textarea bindinput="bindTextChange" placeholder="请填写拒绝理由（非必填）" />
+            </view>
+        </view>
+        <view class="confirm-btn" bindtap="handleReject">确定</view>
+    </view>
+</van-action-sheet>

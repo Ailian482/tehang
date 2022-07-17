@@ -1,0 +1,29 @@
+<!-- 日期快速选择 -->
+<van-sticky z-index="{{stickyZIndex[0]}}" offset-top="{{ 0 }}">
+    <date-picker-bar data-index="{{0}}" currentDate="{{flightDate}}" bind:change="handleFlightDateChange" bind:showPopup="setStickyZIndex"></date-picker-bar>
+</van-sticky>
+<!-- 航班提醒 -->
+<van-sticky z-index="{{stickyZIndex[1]}}" z-index="98" offset-top="{{ 62 }}" wx:if="{{attentionList && attentionList.length}}">
+    <flight-attention data-index="{{1}}" attentions="{{attentionList}}" bind:showPopup="setStickyZIndex"></flight-attention>
+</van-sticky>
+<!-- 已选择的去程信息（仅往返程时，去程选择展示） -->
+<van-sticky z-index="{{stickyZIndex[2]}}" offset-top="{{  attentionList && attentionList.length ? 98 : 62 }}" wx:if="{{isShowFlightRoute}}">
+    <flight-route-detail data-index="{{2}}" bind:showPopup="setStickyZIndex"></flight-route-detail>
+</van-sticky>
+<block wx:if="{{showFlightList && showFlightList.length}}">
+    <view class="flight-container">
+        <view class="flight-item" wx:for="{{showFlightList}}" wx:for-item="flightItem" wx:key="id">
+            <flight-item flightItem="{{flightItem}}" data-index="{{index}}" bindtap="toFlightBunkPage"></flight-item>
+        </view>
+    </view>
+</block>
+<block wx:else>
+    <empty-list type="flight" tips="暂无符合要求的机票"></empty-list>
+</block>
+<!-- 筛选栏 -->
+<block wx:if="{{filterSource}}">
+    <flight-filter-tab-bar filterSource="{{filterSource}}" filterParams="{{filterParams}}" bind:confirmFilter="handleFilterFlights" bind:changeOrderBy="handleSortFlights"></flight-filter-tab-bar>
+</block>
+<!-- 差旅政策 -->
+<flight-travel-policy></flight-travel-policy>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

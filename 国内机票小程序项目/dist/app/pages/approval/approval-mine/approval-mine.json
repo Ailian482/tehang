@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "empty-list": "./../../../components/empty-list/empty-list",
+    "dict-transform": "./../../../../components/dict-transform/index"
+  }
+}

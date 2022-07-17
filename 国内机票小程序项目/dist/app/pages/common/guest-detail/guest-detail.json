@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "详细信息",
+  "usingComponents": {
+    "dict-transform": "./../../../../components/dict-transform/index"
+  }
+}

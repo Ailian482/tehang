@@ -1,0 +1,89 @@
+<image class="banner-image" src="{{ flightBanner }}" lazy-load="{{true}}" />
+<view class="search-container">
+    <view class="search-form">
+        <view class="header-bg">
+            <view class="router-nav">
+                <view data-roundtrip="{{false}}" bindtap="handleChangeRoundTrip" class="router-item {{isRoundTrip ? 'trip-div-active' : ''}}">
+                    <view class="trip-div trip-div-left {{!isRoundTrip ? 'trip-div-active trip-div-left-active' : ''}}">
+                        单程
+                    </view>
+                </view>
+                <view data-roundtrip="{{true}}" bindtap="handleChangeRoundTrip" class="router-item {{!isRoundTrip ? 'trip-div-active' : ''}}">
+                    <view class="trip-div trip-div-right {{isRoundTrip ? 'trip-div-active trip-div-right-active' : '' }}">
+                        往返
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="travel-type" wx:if="{{travelTypeChangeable}}">
+            <view class="d-flex">
+                <view class="flex-1 d-flex align-items-center" bindtap="handleChangeTravelType" data-type="{{travelTypeEnum.OnBusiness}}">
+                    <image class="icon-16 " src="{{ isOnBusiness ? checkboxIcons.checked: checkboxIcons.unchecked }}" />
+                    <text class="f-w-bold m-l-16 {{ isOnBusiness ? 'text-primary' : '' }}">因公</text>
+                </view>
+                <view class="flex-1 d-flex align-items-center justify-content-flex-end" bindtap="handleChangeTravelType" data-type="{{travelTypeEnum.OnPrivate}}">
+                    <image class="icon-16" src="{{ isOnBusiness ?  checkboxIcons.unchecked: checkboxIcons.checked }}" />
+                    <text class="f-w-bold m-l-16 {{ isOnBusiness ? '' : 'text-primary' }}">因私</text>
+                </view>
+            </view>
+        </view>
+        <view class="select-city d-flex align-items-center">
+            <view class="flex-1 f-s-22 f-w-bold" data-type="departure" bindtap="handleToCityPage">
+                <view class="text-grey1" wx:if="{{departureAirport}}">
+                    {{departureAirport.isCity ? departureAirport.cityName : departureAirport.name}}
+                </view>
+                <view class="text-grey4" wx:else>出发城市</view>
+            </view>
+            <image class="flight-city-switch" src="{{flightCitySwitchIcon}}" lazy-load="{{true}}" bindtap="handleSwitchCity" />
+            <view class="flex-1 f-s-22 f-w-bold text-right" data-type="arrival" bindtap="handleToCityPage">
+                <view class="text-grey1" wx:if="{{arrivalAirport}}">
+                    {{arrivalAirport.isCity ? arrivalAirport.cityName : arrivalAirport.name}}
+                </view>
+                <view class="text-grey4" wx:else>到达城市</view>
+            </view>
+        </view>
+        <view class="select-date d-flex justify-content-sp-bw align-items-center" bindtap="handleChooseDate">
+            <view>
+                <view class="f-s-16 f-w-bold text-grey4" wx:if="{{!pickedDays[0]}}">请选择日期</view>
+                <view class="text-grey1 d-flex align-items-center" wx:else>
+                    <date-format class="f-s-22 f-w-bold" value="{{pickedDays[0]}}" format="MMMdo"></date-format>
+                    <date-format class="f-s-16 m-l-10" value="{{pickedDays[0]}}" format="E" />
+                </view>
+            </view>
+            <block wx:if="{{isRoundTrip}}">
+                <view class="f-s-16 text-grey3">{{totalDays}}天</view>
+                <view class="d-flex align-items-center">
+                    <view class="f-s-16 f-w-bold text-grey4" wx:if="{{!pickedDays[1]}}">请选择日期</view>
+                    <view class="text-grey1 d-flex align-items-center" wx:else>
+                        <date-format class="f-s-22 f-w-bold " value="{{pickedDays[1]}}" format="MMMdo"></date-format>
+                        <date-format class="f-s-16 m-l-10" value="{{pickedDays[1]}}" format="E" />
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="select-bunk" bindtap="handleShowBunkSheet">
+            <view class="f-s-16 f-w-bold text-grey1">{{bunkFilter.value}}</view>
+        </view>
+        <view class="btn-group">
+            <button bindtap="handleToFlightList" class="search-btn">查 询</button>
+        </view>
+        <!-- 客服信息 -->
+        <view class="text-center service-info">
+            <image src="https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/common/call-center.svg" />
+            <text class="m-r-8">7*24小时客服</text>
+            <text>预订无忧</text>
+        </view>
+    </view>
+</view>
+<van-calendar show="{{ calenderVisible }}" type="{{isRoundTrip ? 'range' : 'single'}}" bind:select="handleDateSelect" bind:close="handleDateClose" max-date="{{maxDate}}" default-date="{{calendarDefaultDate}}" show-confirm="{{false}}" allow-same-day="{{isRoundTrip}}" />
+<!-- 舱位选择面板 -->
+<van-action-sheet show="{{ showBunkSheet }}" title="请选择舱位" bind:close="handleCloseBunkSheet" bind:click-overlay="handleCloseBunkSheet">
+    <view class="bunk-list-content">
+        <block wx:for="{{bunkOptions}}" wx:key="key">
+            <view class="bunk-item {{item.key === bunkFilter.key ? 'selected' : ''}}" data-index="{{index}}" bindtap="handleSelectBunk">
+                <view class="text-ellipsis text-center">{{item.value}}</view>
+                <iconfont icon="selected" wx:if="{{item.key === bunkFilter.key}}"></iconfont>
+            </view>
+        </block>
+    </view>
+</van-action-sheet>

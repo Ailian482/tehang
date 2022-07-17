@@ -1,0 +1,56 @@
+<view class="f-s-14 bg-grey9 p-x-10 p-y-8 h-full text-grey1">
+    <block wx:for="{{passengers}}" wx:for-item="psg" wx:key="passengerId">
+        <block wx:for-item="ticket" wx:for="{{psg.flightOrderTicketBos}}" wx:key="id">
+            <view class="p-16 box-shadow-full bg-white r-8 m-b-8" wx:for="{{ticket.insurance}}" wx:for-item="insur" wx:key="insuranceId">
+                <view class="d-flex align-items-center">
+                    <view class="{{insur.insuranceStatus==='Purchased'?'bg-linear-green':'bg-grey6'}} f-s-11 p-y-2 p-x-8 text-white r-full">
+                        <dict-transform code="{{insur.insuranceStatus}}" dict="InsuranceStatus"></dict-transform>
+                    </view>
+                    <airline-thumbnail class="w-12 h-12 d-flex m-l-10 m-r-8" airlineCode="{{ticket.segment.airline}}" />
+                    <view class="d-flex f-s-13">
+                        {{ticket.segment.airlineName}} {{ticket.segment.flightNo}}  {{ticket.segment.planeType}}
+                        <date-format value="{{ticket.segment.departureDateTime}}" />
+                    </view>
+                </view>
+                <view class="d-flex p-y-6 m-t-18 align-items-center">
+                    <view class="text-grey3 w-100">保险信息</view>
+                    <view>
+                        <dict-transform code="{{insur.insuranceName}}" dict="InsuranceType"></dict-transform>
+                        X {{insur.insuranceCount}}份
+                    </view>
+                    <view wx:if="{{insur.description}}" class="text-primary f-s-12 m-l-auto f-w-bold" bindtap="throttleShowDesc" data-insur="{{insur}}">
+                        赔付说明
+                    </view>
+                </view>
+                <view class="d-flex p-y-6">
+                    <view class="text-grey3 w-100">被保人</view>
+                    <view>{{psg.passengerName}}</view>
+                </view>
+                <view class="d-flex p-y-6">
+                    <view class="text-grey3 w-100">证件类型</view>
+                    <view>
+                        <dict-transform dict="DocType" code="{{psg.docType}}"></dict-transform>
+                    </view>
+                </view>
+                <view class="d-flex p-y-6">
+                    <view class="text-grey3 w-100">证件号码</view>
+                    <view>
+                        <view>{{psg.docNo}}</view>
+                    </view>
+                </view>
+                <view class="d-flex p-y-6" wx:if="{{insur.insuranceNumbers}}">
+                    <view class="text-grey3 w-100">保单号</view>
+                    <view>{{insur.insuranceNumbers}}</view>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>
+<van-popup show="{{ descPopupVis }}" custom-style="max-height: 70%;" round position="bottom" bind:close="throttleCloseDesc" closeable>
+    <view class="d-flex flex-direction-column f-s-14 text-grey1 h-full">
+        <view class="f-s-14 f-w-bold text-center p-t-24 m-b-30">赔付说明</view>
+        <view class="flex-1 h-1 p-x-10 f-s-13 text-grey2 ">
+            <view class="p-10 bg-grey11 h-335 overflow-auto r-t-l-4 r-t-r-4">{{description}}</view>
+        </view>
+    </view>
+</van-popup>

@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "机票查询",
+  "usingComponents": {
+    "empty-list": "./../../../components/empty-list/empty-list",
+    "date-picker-bar": "./../../../components/date-picker-bar/date-picker-bar",
+    "flight-travel-policy": "./../../../components/flight-travel-policy/flight-travel-policy",
+    "flight-item": "./components/flight-item/flight-item",
+    "flight-attention": "./components/flight-attention/flight-attention",
+    "flight-route-detail": "./components/flight-route-detail/flight-route-detail",
+    "flight-filter-tab-bar": "./components/flight-filter-tab-bar/flight-filter-tab-bar",
+    "van-sticky": "./../../../../@vant/weapp/dist/sticky/index",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

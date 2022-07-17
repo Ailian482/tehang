@@ -1,0 +1,71 @@
+.nav-header-placeholder,
+.nav-header {
+  width: 100vw;
+  height: 72rpx;
+  line-height: 72rpx;
+  background: white; }
+
+.nav-header {
+  position: fixed;
+  top: 84rpx;
+  font-size: 28rpx;
+  color: #666666;
+  display: flex;
+  z-index: 1; }
+  .nav-header .nav-item {
+    flex: 1;
+    text-align: center;
+    position: relative; }
+  .nav-header .nav-item.active {
+    font-weight: bold;
+    color: #3642ff; }
+  .nav-header .nav-item.active::after {
+    position: absolute;
+    content: '';
+    width: 84rpx;
+    height: 4rpx;
+    background: linear-gradient(90deg, #3642ff 0%, #6ba2fe 100%);
+    border-radius: 4rpx;
+    left: 50%;
+    margin-left: -42rpx;
+    bottom: 0; }
+
+.approval-list-content {
+  padding: 0 20rpx; }
+  .approval-list-content .list-item {
+    font-size: 28rpx;
+    margin-top: 20rpx;
+    padding: 34rpx 30rpx;
+    background: #ffffff;
+    box-shadow: 0px -10rpx 24rpx 0 rgba(217, 226, 233, 0.5);
+    border-radius: 16rpx;
+    position: relative; }
+    .approval-list-content .list-item .detail-row {
+      display: flex;
+      margin-bottom: 16rpx; }
+      .approval-list-content .list-item .detail-row .label {
+        width: 140rpx;
+        margin-right: 28rpx;
+        color: #999999; }
+      .approval-list-content .list-item .detail-row .value {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+    .approval-list-content .list-item .status-operate {
+      display: flex;
+      justify-content: space-between; }
+    .approval-list-content .list-item .status-watermark {
+      position: absolute;
+      top: 0;
+      right: 0; }
+      .approval-list-content .list-item .status-watermark .status-image {
+        width: 200rpx;
+        height: 172rpx; }
+
+.operate-btn {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  color: #3642ff;
+  border: 1px solid #3642ff;
+  border-radius: 8rpx; }

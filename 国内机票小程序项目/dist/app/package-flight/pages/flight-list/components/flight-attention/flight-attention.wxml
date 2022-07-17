@@ -1,0 +1,36 @@
+<!-- 提示预览nav -->
+<view class="attention-tips" wx:if="{{attentionList && attentionList.length}}" bindtap="handleShowPopup">
+    <view class="d-flex align-items-center flex-1">
+        <view class="d-flex align-items-center">
+            <image src="{{tipIcon}}" class="tip-icon" />
+            <view class="text-orange1 f-w-b">出行提醒：{{attentionList.length}}条公告</view>
+        </view>
+        <view class="text-grey3 m-l-12 flex-1">
+            <text decode="true" class="text-limit-ellipsis">
+                <block wx:for="{{attentionList}}" wx:key="id">·{{item.title}}&emsp;</block>
+            </text>
+        </view>
+    </view>
+    <iconfont icon="arrow-right" class="f-s-10 text-grey3"></iconfont>
+</view>
+<!-- 弹窗提示详情 -->
+<van-popup show="{{ showPopup }}" round position="bottom" custom-style="max-height: 70%;" lock-scroll="true" bind:close="handleClosePopup">
+    <view class="attention-popup-header-container">
+        <view class="popup-header">
+            <view>出行提醒</view>
+            <iconfont icon="close" class="f-s-14 text-grey10" bindtap="handleClosePopup"></iconfont>
+        </view>
+    </view>
+    <view class="attention-content">
+        <view wx:for="{{showAttentionList}}" wx:key="id" class="attention-item">
+            <view class="d-flex align-items-center justify-content-sp-bw m-b-10">
+                <view class="f-s-14 f-b-bold text-orange1 m-l-10">{{item.title}}</view>
+                <view class="f-s-12 text-grey3">
+                    更新时间：
+                    <date-format value="{{item.updateTime}}" format="yyyy年MM月dd日"></date-format>
+                </view>
+            </view>
+            <view class="attention-detail">{{item.content}}</view>
+        </view>
+    </view>
+</van-popup>

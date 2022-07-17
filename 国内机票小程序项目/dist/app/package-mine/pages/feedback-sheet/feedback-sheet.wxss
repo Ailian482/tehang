@@ -1,0 +1,86 @@
+.form-group {
+  font-size: 28rpx;
+  background: white; }
+  .form-group .form-item {
+    display: flex;
+    margin-left: 32rpx;
+    border-bottom: 2rpx solid #f1f1f5;
+    align-items: center; }
+    .form-group .form-item.has-error {
+      border-color: #fb0101; }
+      .form-group .form-item.has-error .error {
+        display: block !important; }
+      .form-group .form-item.has-error .label {
+        color: #fb0101;
+        padding-bottom: 48rpx; }
+      .form-group .form-item.has-error .control .content {
+        padding-bottom: 48rpx; }
+      .form-group .form-item.has-error .suffix {
+        padding-bottom: 48rpx; }
+    .form-group .form-item .label {
+      flex: 2;
+      color: #666666;
+      padding-top: 28rpx;
+      padding-bottom: 24rpx; }
+    .form-group .form-item .control {
+      flex: 6;
+      position: relative;
+      padding-right: 24rpx; }
+      .form-group .form-item .control .content {
+        display: flex;
+        align-items: center;
+        padding-top: 28rpx;
+        padding-bottom: 24rpx; }
+        .form-group .form-item .control .content iconfont {
+          color: #999999;
+          font-size: 24rpx;
+          padding-left: 16rpx; }
+      .form-group .form-item .control .error {
+        display: none;
+        font-size: 20rpx;
+        color: #fb0101;
+        position: absolute;
+        bottom: 12rpx; }
+    .form-group .form-item .suffix {
+      flex: 2;
+      color: #999999;
+      padding-top: 28rpx;
+      padding-bottom: 24rpx;
+      text-align: right; }
+  .form-group .form-item.vertical {
+    flex-direction: column;
+    align-items: start; }
+    .form-group .form-item.vertical .label {
+      padding-bottom: 0;
+      margin-bottom: 20rpx; }
+    .form-group .form-item.vertical .control .content {
+      padding: 0; }
+      .form-group .form-item.vertical .control .content textarea {
+        height: 96rpx; }
+  .form-group .form-item:last-child {
+    border-bottom: none; }
+
+.textarea-placeholder {
+  color: #cbcbcb; }
+
+page {
+  box-sizing: border-box;
+  background: #f9f9f9; }
+
+textarea {
+  height: 220rpx !important; }
+
+.width-100 {
+  width: 100%; }
+
+.submit-btn {
+  color: white;
+  width: calc(100vw - 20px);
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30rpx;
+  margin: 30rpx auto 0;
+  padding: 18rpx 0;
+  background: linear-gradient(315deg, #6677ff 0%, #3642ff 100%);
+  border-radius: 42rpx; }

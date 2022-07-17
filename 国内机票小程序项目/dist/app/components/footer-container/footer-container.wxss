@@ -1,0 +1,11 @@
+.footer-placeholder,
+.footer {
+  width: 100vw;
+  height: 144rpx; }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0px -5px 12px 0px rgba(217, 226, 233, 0.5);
+  background: white;
+  z-index: 1; }

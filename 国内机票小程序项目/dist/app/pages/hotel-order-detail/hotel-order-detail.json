@@ -1,0 +1,19 @@
+{
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "room-detail-popup": "./../../components/room-detail-popup/index",
+    "top-bar": "./../../components/top-bar/top-bar",
+    "pay-center": "./../../components/pay-center/pay-center",
+    "hotel-order-fee-popup": "./hotel-order-fee-popup/hotel-order-fee-popup",
+    "dict-transform": "./../../../components/dict-transform/index",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "date-format": "./../../../components/date-format/date-format",
+    "van-icon": "./../../../@vant/weapp/dist/icon/index",
+    "number-encrypt": "./../../../components/number-encrypt/number-encrypt",
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "loading": "./../../../components/loading/loading"
+  }
+}

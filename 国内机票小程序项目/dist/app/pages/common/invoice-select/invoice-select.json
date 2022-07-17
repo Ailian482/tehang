@@ -1,0 +1,13 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "top-bar": "./../../../components/top-bar/top-bar",
+    "dict-transform": "./../../../../components/dict-transform/index",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "teh-input": "./../../../../components/teh-input/teh-input",
+    "van-popup": "./../../../../@vant/weapp/dist/popup/index",
+    "loading": "./../../../../components/loading/loading",
+    "van-dialog": "./../../../../@vant/weapp/dist/dialog/index"
+  }
+}

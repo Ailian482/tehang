@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "room-detail-popup": "./../common/room-detail-popup/index",
+    "room-list": "./room-list/room-list",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "date-format": "./../../../../components/date-format/date-format",
+    "van-calendar": "./../../../../@vant/weapp/dist/calendar/index",
+    "van-action-sheet": "./../../../../@vant/weapp/dist/action-sheet/index",
+    "van-popup": "./../../../../@vant/weapp/dist/popup/index"
+  }
+}

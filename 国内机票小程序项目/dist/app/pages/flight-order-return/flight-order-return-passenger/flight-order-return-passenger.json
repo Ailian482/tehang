@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "选择退票乘客",
+  "usingComponents": {
+    "airline-thumbnail": "./../../../components/airline-thumbnail/airline-thumbnail",
+    "bunk-policies-and-baggage": "./../../../components/bunk-policies-and-baggage/bunk-policies-and-baggage",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "date-format": "./../../../../components/date-format/date-format"
+  }
+}

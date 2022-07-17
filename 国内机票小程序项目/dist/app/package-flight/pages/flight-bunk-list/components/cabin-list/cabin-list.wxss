@@ -1,0 +1,71 @@
+.bunk-list {
+  padding: 0 20rpx; }
+  .bunk-list .bunk-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32rpx 26rpx 42rpx 32rpx;
+    margin-top: 16rpx;
+    background: white;
+    box-shadow: 0px -10rpx 24rpx 0 rgba(217, 226, 233, 0.5);
+    border-radius: 12rpx; }
+    .bunk-list .bunk-item .protocol-tag,
+    .bunk-list .bunk-item .price-tag {
+      font-size: 18rpx;
+      font-weight: bold;
+      border-radius: 4rpx;
+      padding: 0 4rpx; }
+    .bunk-list .bunk-item .booking-btn {
+      width: 68px;
+      color: white;
+      font-size: 32rpx;
+      font-weight: bold;
+      text-align: center;
+      line-height: 64rpx;
+      background: #d8d8d8 linear-gradient(270deg, #fe7800 0%, #fea000 100%);
+      border-radius: 34rpx;
+      position: relative; }
+      .bunk-list .bunk-item .booking-btn .count-tips {
+        position: absolute;
+        left: -2rpx;
+        top: -20rpx;
+        background: white;
+        padding: 2rpx; }
+        .bunk-list .bunk-item .booking-btn .count-tips .tips {
+          height: 24rpx;
+          line-height: 24rpx;
+          background: #f75e53;
+          border-radius: 7px 7px 0px 7px;
+          font-size: 16rpx;
+          display: flex;
+          align-items: center;
+          padding: 0 8rpx; }
+  .bunk-list .show-more {
+    border-radius: 12rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24rpx;
+    background: white;
+    margin-top: 16rpx;
+    padding: 20rpx 0; }
+
+.tag-blue {
+  border: 2rpx solid rgba(98, 108, 255, 0.5);
+  color: #626cff; }
+
+.tag-cyan {
+  border: 2rpx solid rgba(3, 187, 146, 0.5);
+  color: #03bb92; }
+
+.tag-orange {
+  border: 2rpx solid rgba(254, 120, 0, 0.5);
+  color: #fe7800; }
+
+.tag-red {
+  border: 2rpx solid rgba(247, 94, 83, 0.5);
+  color: #f75e53; }
+
+.tag-grey {
+  border: 2rpx solid rgba(153, 153, 153, 0.5);
+  color: #999999; }

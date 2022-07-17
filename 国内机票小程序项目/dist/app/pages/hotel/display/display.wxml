@@ -1,0 +1,248 @@
+<view class="container">
+    <view class="header">
+        <view class="search-bar" bindtap="throttleCloseDropdown">
+            <view class="search-info d-flex">
+                <view class="info-date d-flex" bindtap="throttleChooseDate">
+                    <view class="flex-1">
+                        <text class="m-r-2">住</text>
+                        <date-format format="MM-dd" value="{{formData.checkInDate}}" class="text-primary" />
+                    </view>
+                    <view class="flex-1">
+                        <text class="m-r-2">离</text>
+                        <date-format format="MM-dd" value="{{formData.checkOutDate}}" class="text-primary" />
+                    </view>
+                </view>
+                <view class="info-keyword flex-1 d-flex align-items-center">
+                    <view class="flex-1 d-flex align-items-center" bindtap="throttleChooseCondition">
+                        <iconfont icon="search" class="text-grey3" />
+                        <text class="flex-1 f-s-14 p-l-4">
+                            <text wx:if="{{keyword}}">{{keyword}}</text>
+                            <text wx:else class="input-placeholder">关键字/位置/酒店名</text>
+                        </text>
+                    </view>
+                    <iconfont icon="delete" class="text-graycb" wx:if="{{keyword}}" bindtap="throttleClearKeyword" />
+                </view>
+            </view>
+        </view>
+        <view class="m-y-8">
+            <van-dropdown-menu>
+                <van-dropdown-item title="{{orderByDesc||options[0].text}}" options="{{options}}" bind:change="throttleOrderChange" title-class="{{orderByHasValue?'has-value':''}}" value="{{formData.orderBy}}"></van-dropdown-item>
+                <van-dropdown-item title="{{priceRangeDesc||'价格/星级'}}" title-class="{{priceHasValue?'has-value':''}}" class="price-dropdown" id="dropdown_price" bind:open="throttleOpenPrice">
+                    <view class="content text-grey1">
+                        <view class="price-slider-wrapper">
+                            <view class="m-b-20 f-s-14 f-w-bold">
+                                <text class="text-grey1">价格</text>
+                                <text class="m-l-12 text-primary">{{priceRangeDescInPopup}}</text>
+                            </view>
+                            <view>
+                                <view class="d-flex m-b-12 f-s-12">
+                                    <text class="flex-1">¥ 0</text>
+                                    <text class="flex-1 text-right">¥ 1000以上</text>
+                                </view>
+                                <van-slider bind:drag="handlePriceDrag" min="0" max="1000" value="{{ [_minPrice, _maxPrice ] }}" range step="50" />
+                            </view>
+                        </view>
+                        <view class="price-item-wrapper">
+                            <text class="price-item {{pricePickerModule.getItemActivated(item,_minPrice,_maxPrice)?'bg-blue4 text-primary':''}}" data-price="{{item}}" bindtap="handleChoosePriceItem" wx:for="{{priceItems}}" wx:key="desc">
+                                <text>{{item.desc}}</text>
+                            </text>
+                        </view>
+                        <view class="m-t-16">
+                            <view class="m-b-20 f-s-14 d-flex align-items-center">
+                                <text class="text-grey1 f-w-bold">星级</text>
+                                <view class="m-l-auto text-primary f-s-12" bindtap="throttleToLevelExplain">
+                                    <text class="m-r-6">星级/钻级说明</text>
+                                    <iconfont icon="arrow-right"></iconfont>
+                                </view>
+                            </view>
+                            <view class="d-flex">
+                                <view class="flex-1 r-4 m-x-6 text-center p-y-8 {{levelsModule.getLevelItemActivated(item.value,levelsInPopup)?'bg-blue4 text-primary':'bg-grey8 text-grey1'}}" data-level="{{item.value}}" bindtap="handleChooseLevelItem" wx:for="{{levelOptions}}" wx:key="value">
+                                    <text class="f-s-12">{{item.text}}</text>
+                                    <view class="{{levelsModule.getLevelItemActivated(item.value,levelsInPopup)?'':'text-grey3'}} f-s-10">
+                                        {{item.tip}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="footer d-flex">
+                        <view class="flex-1">
+                            <button bindtap="throttlePriceClear" class="btn-clear">清空</button>
+                        </view>
+                        <view class="flex-1">
+                            <button bindtap="throttlePriceConfirm" class="btn-confirm">确定</button>
+                        </view>
+                    </view>
+                </van-dropdown-item>
+                <van-dropdown-item title="{{areaStr||'区域位置'}}" title-class="{{areaStr?'has-value':''}}" id="dropdown_area" bind:open="throttleOpenArea">
+                    <view class="content d-flex">
+                        <view class="categories">
+                            <view class="item relative {{item.activated?'activated':''}}" wx:for="{{cityBaseInfoCats}}" wx:key="type" data-index="{{index}}" bindtap="handleChangeArea">
+                                <view>{{item.name}}</view>
+                                <view wx:if="{{item.selected}}" class="absolute-align-center bg-primary d-inline-block w-6 h-6 r-full" style="left:28rpx"></view>
+                            </view>
+                        </view>
+                        <view class="category-content d-flex flex-1">
+                            <view class="{{ metroStations?'':'flex-1'}} scroll-content">
+                                <view class="item d-flex align-items-center {{metroStations?'has-children':''}} {{item.activated?'activated':''}}" wx:for="{{catActivatedChildren}}" wx:key="code" data-index="{{index}}" bindtap="handleChangeAreaChild">
+                                    <view class="relative flex-1 p-r-32">
+                                        <text>{{item.name}}</text>
+                                        <iconfont wx:if="{{item.selected}}" icon="selected" class="absolute-align-center f-s-10 text-primary h-12" style="right:24rpx;" />
+                                    </view>
+                                </view>
+                            </view>
+                            <view wx:if="{{metroStations}}" class="flex-1 station scroll-content">
+                                <view class="item {{item.activated?'activated':''}}" wx:for="{{metroStations}}" wx:key="index" data-index="{{index}}" bindtap="throttleChangeMetroStation">
+                                    <text>{{item.name}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="footer d-flex">
+                        <view class="flex-1">
+                            <button bindtap="throttleAreaClear" class="btn-clear">清空</button>
+                        </view>
+                        <view class="flex-1">
+                            <button bindtap="throttleAreaConfirm" class="btn-confirm">确定</button>
+                        </view>
+                    </view>
+                </van-dropdown-item>
+                <van-dropdown-item title="{{brandStr||'酒店品牌'}}" title-class="{{brandStr?'has-value':''}}" id="dropdown_brand" bind:open="throttleOpenBrand">
+                    <view class="content">
+                        <view class="filter m-b-8">
+                            <view class="filter-items-wrapper">
+                                <text class="filter-item {{item.selected?'selected':''}}" wx:for="{{brands}}" wx:key="name" bindtap="handleBrandSelect" data-index="{{index}}">
+                                    <text>{{item.name}}</text>
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="footer d-flex">
+                        <view class="flex-1">
+                            <button bindtap="throttleBrandClear" class="btn-clear">清空</button>
+                        </view>
+                        <view class="flex-1">
+                            <button bindtap="throttleBrandConfirm" class="btn-confirm">确定</button>
+                        </view>
+                    </view>
+                </van-dropdown-item>
+                <!-- <van-dropdown-item title-class="{{filterStr?'has-value':''}}" title="{{filterStr||'综合筛选'}}" id="dropdown_common">
+                <view class="content">
+                    <view class="filter m-b-8" wx:for="{{filterList}}" wx:for-index="idx" wx:key="index">
+                        <view class="title">{{item.title}}</view>
+                        <view class="filter-items-wrapper">
+                            <text class="filter-item {{item.selected?'selected':''}}" wx:for="{{item.data}}" wx:key="index" bindtap="throttleCommonFilter" data-index="{{index}}" data-pindex="{{idx}}">
+                                <text>{{item.value}}</text>
+                            </text>
+                        </view>
+                    </view>
+                </view>
+                <view class="footer d-flex">
+                    <view class="flex-1">
+                        <button bindtap="throttleCommonFilterClear" class="btn-clear">清空</button>
+                    </view>
+                    <view class="flex-1">
+                        <button bindtap="throttleCommonFilterConfirm" class="btn-confirm">
+                            确定
+                        </button>
+                    </view>
+                </view>
+            </van-dropdown-item> -->
+            </van-dropdown-menu>
+        </view>
+        <view class="p-l-10" wx:if="{{hasContractHotel}}">
+            <view bindtap="handleOnlyAgreement" class="agreement-btn p-x-16 p-y-6 f-s-12 d-inline-block r-4 {{onlyAgreement?'bg-blue4 text-primary':'text-grey1 bg-grey8'}}">
+                <text>协议酒店</text>
+                <iconfont icon="selected" wx:if="{{onlyAgreement}}" />
+            </view>
+        </view>
+    </view>
+    <view class="content" id="content">
+        <block wx:if="{{list}}">
+            <!-- 必须设置 height -->
+            <recycle-view wx:if="{{list.length}}" height="{{contentHeight}}" enable-back-to-top="{{true}}" scroll-y bindscrolltolower="throttlescrolltolower" scroll-top="{{scrollTop}}" bindscroll="handleScroll">
+                <recycle-item wx:for="{{list}}" wx:key="index" class="d-block">
+                    <view class="hotel-item d-flex" bindtap="throttleChooseHotel" data-hotelid="{{item.hotelId}}">
+                        <view class="item-image-wrapper">
+                            <teh-image src="{{item.mainPictureUrl}}" defaultSrc=" {{defaultHotelImageUrl}}" />
+                        </view>
+                        <view class="flex-1 item-info-wrapper">
+                            <view class="item-name  d-flex">
+                                <text class="text-ellipsis">{{item.hotelName}}</text>
+                                <view class="flex-1 d-flex align-items-center p-l-4" wx:if="{{item.protocolCode}}">
+                                    <image class="agreement-image" src="{{OSSPrefix}}/hotel/contract-tag.svg" />
+                                </view>
+                            </view>
+                            <view class="item-info d-flex">
+                                <view class="item-more flex-1">
+                                    <view>
+                                        <iconfont icon="star" class="icon-star" wx:for="{{item.stars}}" wx:key="index"></iconfont>
+                                    </view>
+                                    <view class="text-primary" wx:if="{{!!item.comments.point}}">
+                                        <view class="d-inline-block f-s-16" wx:if="{{item.scoreInfo.scoreDesc.length > 0}}">
+                                            <text>{{ item.scoreInfo.scoreDesc }}</text>
+                                            <text>分</text>
+                                        </view>
+                                        <view class="d-inline-block f-s-14 m-l-4">
+                                            {{ item.scoreInfo.extDesc }}
+                                        </view>
+                                    </view>
+                                    <view wx:if="{{item.distance}}" class="f-s-12 text-grey2 m-y-2">
+                                        {{item.distance}}
+                                    </view>
+                                    <view class="item-address text-ellipsis" catchtap="throttleOpenLocation" data-item="{{item}}">
+                                        <iconfont icon="address" class="text-primary m-r-4"></iconfont>
+                                        <text>{{item.district}} {{item.address}}</text>
+                                    </view>
+                                </view>
+                                <view class="item-price">
+                                    <view>
+                                        <text class="m-r-2">¥</text>
+                                        <text class="minprice m-r-2">{{ item.minPrice }}</text>
+                                        <text>起</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </recycle-item>
+            </recycle-view>
+            <view class="no-content" wx:else>
+                <view class="m-b-12">
+                    <image src="{{OSSPrefix}}/hotel/hotel-empty.png" />
+                </view>
+                <text>暂无符合要求的酒店</text>
+            </view>
+        </block>
+        <block wx:else>
+            <block wx:for="{{skeletonList}}" wx:key="index">
+                <view class="p-10">
+                    <van-skeleton title avatar avatar-shape="square" avatar-size="110px" row="2" />
+                </view>
+            </block>
+        </block>
+    </view>
+</view>
+<van-calendar show="{{ calenderVisible }}" type="range" bind:confirm="throttleDateConfirm" bind:close="throttleDateClose" formatter="{{ formatter }}" max-date="{{maxdate}}" default-date="{{calendarDefaultDate}}" show-confirm="{{false}}" />
+<wxs module="baseInfoModule">
+
+ function getItemsByType(type,group) {
+    return group[type]
+  }
+
+module.exports.getItemsByType = getItemsByType;
+</wxs>
+<wxs module="pricePickerModule">
+   function getItemActivated(item,min,max) {
+    return item.min===min&&item.max===max
+  }
+module.exports.getItemActivated = getItemActivated;
+</wxs>
+<wxs module="levelsModule">
+  function getLevelItemActivated(level,levels){
+    return levels.indexOf(level)!==-1
+  }
+module.exports.getLevelItemActivated = getLevelItemActivated;
+</wxs>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />
+<image class="go-top-btn" src="https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/common/go-top.svg" wx:if="{{goTopBtnVisible}}" bindtap="throttleGoTop" />

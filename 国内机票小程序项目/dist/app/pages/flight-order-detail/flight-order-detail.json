@@ -1,0 +1,18 @@
+{
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "airline-thumbnail": "./../../components/airline-thumbnail/airline-thumbnail",
+    "bunk-policies-and-baggage": "./../../components/bunk-policies-and-baggage/bunk-policies-and-baggage",
+    "top-bar": "./../../components/top-bar/top-bar",
+    "duration": "./../../../components/duration/duration",
+    "dict-transform": "./../../../components/dict-transform/index",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "date-format": "./../../../components/date-format/date-format",
+    "van-icon": "./../../../@vant/weapp/dist/icon/index",
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "loading": "./../../../components/loading/loading"
+  }
+}

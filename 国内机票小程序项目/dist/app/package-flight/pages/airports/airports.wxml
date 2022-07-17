@@ -1,0 +1,78 @@
+<!-- <view class="city-list-content">
+    <view class="city-letter-header">
+        <view></view>
+    </view>
+    <view class="city-item"></view>
+</view> -->
+<!-- 关键字搜索 -->
+<van-sticky>
+    <view class="keyword-search" id="keyword-search">
+        <van-search value="{{ keyword }}" placeholder="请输入搜索关键词" show-action bind:change="handleKeywordInput" bind:search="handleSearch" bind:cancel="handleCancel" />
+    </view>
+</van-sticky>
+<block wx:if="{{isSearchMode}}">
+    <block wx:if="{{searchResultList && searchResultList.length}}">
+        <block wx:for="{{searchResultList}}" wx:key="code">
+            <view class="search-item" data-index="{{index}}" bindtap="handleSelectSearchCity">
+                <view class="d-flex align-items-center f-s-14" wx:if="{{item.isCity}}">
+                    <view class="tag-city">城市</view>
+                    <view class="p-x-12 text-orange1">{{item.cityName}}</view>
+                    <view>{{item.cityCode}}</view>
+                </view>
+                <view class="d-flex align-items-center f-s-14" wx:else>
+                    <view class="tag-airport">机场</view>
+                    <view class="p-x-12 text-grey1">{{item.name}}</view>
+                    <view class="text-grey3">{{item.code}}</view>
+                </view>
+            </view>
+        </block>
+    </block>
+    <block wx:else>
+        <empty-list tips="暂无搜索结果"></empty-list>
+    </block>
+</block>
+<block wx:else>
+    <!-- 城市选择历史 -->
+    <view class="hot-city-container" wx:if="{{historyList && historyList.length}}">
+        <view class="city-header">历史选择</view>
+        <view class="hot-city-list">
+            <block wx:for="{{historyList}}" wx:for-item="historyCity" wx:key="cityCode">
+                <view class="city-item" data-index="{{index}}" bindtap="handleSelectHistoryCity">
+                    {{historyCity.cityName}}
+                </view>
+            </block>
+        </view>
+    </view>
+    <!-- 热门城市 -->
+    <view class="hot-city-container">
+        <view class="city-header">热门城市</view>
+        <view class="hot-city-list">
+            <block wx:for="{{hotCityList}}" wx:for-item="hotCity" wx:key="cityCode">
+                <view class="city-item" data-index="{{index}}" bindtap="handleSelectHotCity">
+                    {{hotCity.cityName}}
+                </view>
+            </block>
+        </view>
+    </view>
+    <!-- 字母索引 -->
+    <van-sticky offset-top="{{ keywordSearchNodeHeight }}">
+        <view class="city-letter-container" id="city-letter-container">
+            <view class="letter-header">字母索引</view>
+            <view class="letter-list">
+                <view class="letter-item" wx:for="{{letterList}}" wx:for-item="letter" wx:key="*this" data-anchor="{{letter}}" bindtap="handleSelectedLetter">
+                    {{letter}}
+                </view>
+            </view>
+        </view>
+    </van-sticky>
+    <!-- 城市分类列表 -->
+    <van-index-bar index-list="{{ letterList }}" sticky-offset-top="{{cityLetterNodeHeight + keywordSearchNodeHeight}}" highlight-color="#3642ff">
+        <view wx:for="{{sortCityList}}" wx:for-index="sortIndex" wx:key="*this">
+            <van-index-anchor index="{{item[0]}}" id="anchor-{{item[0]}}" />
+            <block wx:for="{{item[1]}}" wx:for-item="city" wx:for-index="cityIndex" wx:key="cityCode">
+                <van-cell title="{{city.cityName}}" data-current="{{[sortIndex, cityIndex]}}" bindtap="handleSelectSortCity" />
+            </block>
+        </view>
+    </van-index-bar>
+</block>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

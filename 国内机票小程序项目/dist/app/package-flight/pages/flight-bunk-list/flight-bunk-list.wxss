@@ -1,0 +1,69 @@
+page {
+  background: #f9f9f9;
+  color: #333333; }
+
+.flight-bunk-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; }
+
+.flight-detail-container {
+  padding: 28rpx 0;
+  background: white; }
+  .flight-detail-container .route-type {
+    padding: 0 20rpx;
+    font-size: 22rpx;
+    line-height: 40rpx;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(270deg, #6677ff 0%, #3642ff 100%);
+    border-radius: 20rpx; }
+  .flight-detail-container .airline-thumbnail {
+    width: 24rpx;
+    height: 24rpx;
+    display: flex; }
+  .flight-detail-container .route-arrow {
+    width: 100rpx;
+    height: 10rpx; }
+  .flight-detail-container .stop-tip {
+    font-size: 20rpx;
+    color: #626cff;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center; }
+
+.bunks-container .tab-item {
+  font-size: 32rpx;
+  color: #666666; }
+
+.bunks-container .van-tabs__line {
+  width: 98rpx !important;
+  height: 8rpx !important;
+  background: linear-gradient(90deg, #3642ff 0%, #6ba2fe 100%);
+  border-radius: 4rpx !important; }
+
+.p-x-50 {
+  padding: 0 76rpx; }
+
+.flight-ad-footer {
+  text-align: center;
+  padding-top: 60rpx;
+  padding-bottom: 76rpx; }
+  .flight-ad-footer .flight-ad {
+    width: 630rpx;
+    height: 222rpx; }
+
+.cross-day {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #ff474d; }
+
+.baggage--tab-item {
+  font-size: 32rpx;
+  color: #666666;
+  font-weight: bold; }
+
+.baggage--tab-item-active {
+  color: #3642ff !important; }

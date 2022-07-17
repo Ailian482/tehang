@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "dict-transform": "./../../../components/dict-transform/index"
+  }
+}

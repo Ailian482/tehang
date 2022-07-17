@@ -1,0 +1,7 @@
+.footer {
+  z-index: 1; }
+  .footer button {
+    line-height: 84rpx;
+    background: linear-gradient(270deg, #fe7800 0%, #fea000 100%);
+    border-radius: 42rpx;
+    color: white; }

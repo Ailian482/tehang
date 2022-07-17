@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "差旅政策",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "iconfont": "./../../../../components/icon-iconfont/index"
+  }
+}

@@ -1,0 +1,16 @@
+<view class="flex-direction-column d-flex h-full container">
+    <view class="flex-1 h-1">
+        <scroll-view wx:if="{{listHasContent}}" scroll-y="{{true}}" class="h-full" bindscrolltolower="handleScrollToLower" scroll-top="{{scrollTop}}">
+            <view wx:for="{{list}}" wx:key="id" class="history-item" data-id="{{item.id}}" bindtap="toFeedbackDetail">
+                <view class="f-s-14 text-grey3">
+                    <date-format value="{{item.createDateTime}}" format="yyyy-MM-dd HH:mm"></date-format>
+                </view>
+                <view class="f-s-14 text-grey1 m-t-8">{{item.description}}</view>
+                <image wx:if="{{item.accepted}}" class="accepted-bg" src="{{acceptedImageUrl}}" lazy-load="true" />
+            </view>
+        </scroll-view>
+        <view wx:else class="h-full overflow-auto">
+            <empty-list tips="暂无反馈记录"></empty-list>
+        </view>
+    </view>
+</view>

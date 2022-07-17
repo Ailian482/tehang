@@ -1,0 +1,167 @@
+.policy-hang-btn {
+  width: 112rpx;
+  height: 112rpx;
+  position: fixed;
+  right: 34rpx;
+  bottom: 144rpx;
+  background: white;
+  color: #3642ff;
+  font-size: 24rpx;
+  box-shadow: 0 0 24rpx 0 rgba(199, 209, 216, 0.5);
+  border-radius: 50%;
+  margin-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.popup-header-container {
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2; }
+  .popup-header-container .popup-header {
+    padding-top: 46rpx;
+    padding-bottom: 36rpx;
+    text-align: center;
+    font-size: 32rpx;
+    font-weight: bold;
+    position: relative; }
+    .popup-header-container .popup-header iconfont {
+      position: absolute;
+      right: 26rpx;
+      top: 26rpx;
+      font-size: 24rpx;
+      color: #d8d8d8; }
+
+.travel-policy-container .approve-policy,
+.travel-policy-container .authorize-policy,
+.travel-policy-container .notify-policy {
+  padding: 0 32rpx; }
+  .travel-policy-container .approve-policy .header,
+  .travel-policy-container .authorize-policy .header,
+  .travel-policy-container .notify-policy .header {
+    display: flex;
+    align-items: center; }
+    .travel-policy-container .approve-policy .header .title,
+    .travel-policy-container .authorize-policy .header .title,
+    .travel-policy-container .notify-policy .header .title {
+      font-size: 32rpx;
+      font-weight: bold;
+      color: #333333;
+      margin-left: 12rpx; }
+  .travel-policy-container .approve-policy .content,
+  .travel-policy-container .authorize-policy .content,
+  .travel-policy-container .notify-policy .content {
+    font-size: 28rpx;
+    margin-top: 40rpx;
+    padding: 0 44rpx; }
+    .travel-policy-container .approve-policy .content .policy-item,
+    .travel-policy-container .authorize-policy .content .policy-item,
+    .travel-policy-container .notify-policy .content .policy-item {
+      margin-top: 40rpx;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between; }
+      .travel-policy-container .approve-policy .content .policy-item .policy-item-label,
+      .travel-policy-container .authorize-policy .content .policy-item .policy-item-label,
+      .travel-policy-container .notify-policy .content .policy-item .policy-item-label {
+        font-weight: bold; }
+      .travel-policy-container .approve-policy .content .policy-item .policy-item-value,
+      .travel-policy-container .authorize-policy .content .policy-item .policy-item-value,
+      .travel-policy-container .notify-policy .content .policy-item .policy-item-value {
+        flex: 1;
+        text-align: right;
+        justify-content: flex-end; }
+
+.travel-policy-container .approve-policy {
+  margin-top: 36rpx; }
+  .travel-policy-container .approve-policy .content .approval-item {
+    margin-bottom: 40rpx; }
+    .travel-policy-container .approve-policy .content .approval-item .rule-info {
+      line-height: 48rpx; }
+
+.travel-policy-container .authorize-policy {
+  margin-top: 48rpx; }
+  .travel-policy-container .authorize-policy .policy-name {
+    color: #ffffff;
+    padding: 0 40rpx;
+    line-height: 56rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36rpx;
+    background: linear-gradient(270deg, #be9471 0%, #e9d6b6 100%);
+    border-radius: 200rpx 200rpx 200rpx 0; }
+  .travel-policy-container .authorize-policy .flight-policy,
+  .travel-policy-container .authorize-policy .hotel-policy {
+    margin-top: 40rpx;
+    padding: 0 40rpx;
+    border-radius: 5px;
+    box-shadow: 0 2rpx 12rpx 0 rgba(214, 213, 213, 0.5); }
+    .travel-policy-container .authorize-policy .flight-policy .policy-header,
+    .travel-policy-container .authorize-policy .hotel-policy .policy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .travel-policy-container .authorize-policy .flight-policy .policy-header .prefix-area,
+      .travel-policy-container .authorize-policy .flight-policy .policy-header .postfix-area,
+      .travel-policy-container .authorize-policy .hotel-policy .policy-header .prefix-area,
+      .travel-policy-container .authorize-policy .hotel-policy .policy-header .postfix-area {
+        width: 174rpx;
+        height: 16rpx; }
+      .travel-policy-container .authorize-policy .flight-policy .policy-header .policy-title,
+      .travel-policy-container .authorize-policy .hotel-policy .policy-header .policy-title {
+        flex: none;
+        padding: 0 32rpx;
+        color: #d8d8d8;
+        font-weight: bold;
+        font-size: 32rpx;
+        background: linear-gradient(90deg, #3642ff 0%, #6ba2fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; }
+  .travel-policy-container .authorize-policy .flight-policy {
+    padding-top: 22rpx;
+    padding-bottom: 44rpx; }
+    .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table {
+      font-size: 28rpx;
+      margin-top: 40rpx;
+      border-radius: 4px;
+      border: 1px solid #f1f1f5; }
+      .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .table-row {
+        display: flex; }
+        .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .table-row .col-item {
+          padding: 22rpx 32rpx;
+          display: flex;
+          align-items: center; }
+        .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .table-row .col-label {
+          border-right: 1px solid #f1f1f5; }
+        .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .table-row .col-value {
+          flex: 1; }
+      .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .border-b {
+        border-bottom: 1px solid #f1f1f5; }
+      .travel-policy-container .authorize-policy .flight-policy .flight-policy-detail-table .border-t {
+        border-top: 1px solid #f1f1f5; }
+    .travel-policy-container .authorize-policy .flight-policy .travel-requirement {
+      font-size: 28rpx;
+      margin-top: 42rpx;
+      display: flex; }
+  .travel-policy-container .authorize-policy .hotel-policy {
+    padding-top: 26rpx;
+    padding-bottom: 48rpx; }
+    .travel-policy-container .authorize-policy .hotel-policy .price-policies {
+      font-size: 28rpx; }
+      .travel-policy-container .authorize-policy .hotel-policy .price-policies .rule-item {
+        margin-top: 36rpx;
+        display: flex;
+        justify-content: space-between; }
+
+.travel-policy-container .notify-policy {
+  margin-top: 52rpx;
+  padding-bottom: 70rpx; }
+
+.travel-policy-container .text-gradient {
+  background: linear-gradient(90deg, #3642ff 0%, #6ba2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }

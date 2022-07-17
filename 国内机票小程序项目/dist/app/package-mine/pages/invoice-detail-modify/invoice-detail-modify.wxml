@@ -1,0 +1,54 @@
+<view class="form-group m-t-8">
+    <view class="form-item {{ errMsgs.type ? 'has-error' : ''}}">
+        <view class="label">抬头类型</view>
+        <view class="control">
+            <view class="content" bindtap="handleShowPicker">
+                <view class="flex-1 d-flex">
+                    <view class="radio {{formData.type === InvoiceType.Corporation ? 'radio-active' : ''}}" bindtap="handleChangeType" data-type="{{InvoiceType.Corporation}}">
+                        <iconfont icon="{{formData.type === InvoiceType.Corporation ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                        企业
+                    </view>
+                    <view class="m-l-16 radio {{formData.type === InvoiceType.NonEnterpriseEntity ? 'radio-active' : ''}}" bindtap="handleChangeType" data-type="{{InvoiceType.NonEnterpriseEntity}}">
+                        <iconfont icon="{{formData.type === InvoiceType.NonEnterpriseEntity ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                        非企业单位
+                    </view>
+                    <view class="m-l-16 radio {{formData.type === InvoiceType.Personal ? 'radio-active' : ''}}" bindtap="handleChangeType" data-type="{{InvoiceType.Personal}}">
+                        <iconfont icon="{{formData.type === InvoiceType.Personal ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                        个人
+                    </view>
+                </view>
+            </view>
+            <view class="error">{{errMsgs.type}}</view>
+        </view>
+    </view>
+    <view class="form-item {{ errMsgs.title ? 'has-error' : ''}}">
+        <view class="label">发票抬头</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="请输入抬头名称" value="{{formData.title}}" class="flex-1" data-name="title" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.title}}</view>
+        </view>
+    </view>
+    <block wx:if="{{formData.type !== InvoiceType.Personal}}">
+        <view class="form-item {{ errMsgs.registrationNo ? 'has-error' : ''}}">
+            <view class="label">发票税号</view>
+            <view class="control">
+                <view class="content">
+                    <input type="text" placeholder="请输入发票税号({{formData.type === InvoiceType.Corporation ? '必填' : '选填'}})" value="{{formData.registrationNo}}" class="flex-1" data-name="registrationNo" bindinput="handleInput" />
+                </view>
+                <view class="error">{{errMsgs.registrationNo}}</view>
+            </view>
+        </view>
+    </block>
+</view>
+<view class="bg-white p-y-6 p-x-16 f-s-14 d-flex justify-content-sp-bw align-items-center m-t-10">
+    <view class="text-grey2">设为默认发票抬头</view>
+    <van-switch checked="{{ formData.defaulted }}" bind:change="handleSwitchDefaulted" />
+</view>
+<!-- 底部 -->
+<footer-container>
+    <view class="submit-btn" slot="content" bindtap="handleSubmit">保存</view>
+</footer-container>
+<van-dialog id="van-dialog" confirm-button-color="#3642ff" />
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

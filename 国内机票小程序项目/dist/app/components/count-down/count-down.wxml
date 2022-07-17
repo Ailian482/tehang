@@ -1,0 +1,8 @@
+<block wx:if="!!expireTimeDays">
+    <text class="text-red2 f-w-bold f-s-18">{{expireTimeDays}}</text>
+    天
+</block>
+<block wx:if="!!expireTimeHours">
+    <text class="text-red2 f-w-bold f-s-18">{{expireTimeHours}}</text>
+    小时
+</block>

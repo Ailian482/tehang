@@ -1,0 +1,96 @@
+<view class="bg-grey9 text-grey1 f-s-14 h-full">
+    <view>
+        <swiper indicator-dots="{{false}}" autoplay="{{true}}" class="h-140">
+            <block wx:for="{{banners}}" wx:key="item">
+                <swiper-item class="r-b-l-24 r-b-r-24">
+                    <image src="{{item}}" class="w-full" mode="widthFix" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <view class="p-x-16">
+        <view class="f-s-12">
+            <view class="p-x-48 p-t-18 p-b-10 d-flex justify-content-sp-bw">
+                <view bindtap="throttleToHotelSearch" class="w-72 h-72 r-18 text-center d-flex justify-content-center flex-direction-column align-items-center" style="box-shadow: 0px 2px 4px 0px rgba(214, 213, 213, 0.5);">
+                    <iconfont icon="hotel" class="icon-30" style="color:#E72929;" />
+                    <view>酒店</view>
+                </view>
+                <view bindtap="throttleToFlightSearch" class="w-72 h-72 r-18 text-center d-flex justify-content-center flex-direction-column align-items-center box-shadow-full" style="box-shadow: 0px 2px 4px 0px rgba(214, 213, 213, 0.5);">
+                    <iconfont icon="flight" class="icon-30" style="color:#2C5793" />
+                    <view>机票</view>
+                </view>
+            </view>
+            <button bindtap="handleToLogin" class="b-1 b-primary bg-white text-primary r-8 w-140 l-h-38 h-38 p-x-0 f-s-16 m-t-80" wx:if="{{!employee}}">
+                请先登录/注册
+            </button>
+            <view class="p-x-16 p-t-16 p-b-20 r-6 bg-white f-s-12" wx:else>
+                <view class="d-flex">
+                    <view>{{today}}</view>
+                    <view class="m-l-auto">
+                        您好！
+                        <employee-name employeeInfo="{{employee}}"></employee-name>
+                    </view>
+                </view>
+                <view class="f-w-bold m-t-12">{{employee.corpConfig.nameCn}}</view>
+            </view>
+        </view>
+        <view wx:if="{{approvalList.length || authorizeList.length}}">
+            <view class="f-w-bold p-y-10">待您处理（{{approvalList.length+authorizeList.length}}）</view>
+            <scroll-view class="scroll-container" scroll-with-animation="{{true}}" scroll-x="{{true}}" style="white-space:nowrap;">
+                <view class="p-y-12 p-x-16 r-4 bg-white box-shadow-full w-300 d-inline-block m-r-10" wx:for="{{approvalList}}" wx:key="id">
+                    <view>
+                        <text class="text-grey3">出差人：</text>
+                        <text>
+                            <block wx:for="{{item.employees}}" wx:for-item="emp">
+                                <text>{{emp.name}}</text>
+                            </block>
+                        </text>
+                    </view>
+                    <view class="m-y-8">
+                        <text class="text-grey3">出差事由：</text>
+                        <text>{{item.travelReason}}</text>
+                    </view>
+                    <view>
+                        <text class="text-grey3">出差时间：</text>
+                        <text wx:for="{{item.routes}}" wx:for-item="route">
+                            <text>{{route.travelDateStart}}至{{route.travelDateEnd}}</text>
+                        </text>
+                    </view>
+                    <view class="text-right m-t-22">
+                        <button class="b-1 b-primary bg-white text-primary r-4 p-x-8 f-s-12 d-inline-block l-h-22 m-r-16">
+                            拒绝
+                        </button>
+                        <button class="b-1 b-primary bg-white text-primary r-4 p-x-8 f-s-12 d-inline-block l-h-22">
+                            同意
+                        </button>
+                    </view>
+                </view>
+                <view class="p-y-12 p-x-16 r-4 bg-white box-shadow-full w-300 d-inline-block m-r-10" wx:for="{{authorizeList}}" wx:key="id">
+                    <view>
+                        <text class="text-grey3">出差人：</text>
+                        <text>{{item.travellerName}}</text>
+                    </view>
+                    <view class="m-y-8">
+                        <text class="text-grey3">出发时间：</text>
+                        <date-format value="{{item.travelDate}}" />
+                    </view>
+                    <view>
+                        <text class="text-grey3">创建时间：</text>
+                        <date-format value="{{item.createTime}}" format="yyyy-MM-dd HH:mm" />
+                    </view>
+                    <view class="text-right m-t-22">
+                        <button class="b-1 b-primary bg-white text-primary r-4 p-x-8 f-s-12 d-inline-block l-h-22 m-r-16">
+                            拒绝
+                        </button>
+                        <button class="b-1 b-primary bg-white text-primary r-4 p-x-8 f-s-12 d-inline-block l-h-22">
+                            同意
+                        </button>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<tab-bar active="{{tabBarIndex}}"></tab-bar>
+<!-- 邀请处理弹窗 -->
+<invitations-popup showPopup="{{showInvitations}}"></invitations-popup>

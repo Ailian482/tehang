@@ -1,0 +1,49 @@
+<view class="container">
+  <block wx:if="{{currentCity}}">
+    <view class="title">
+      <text>当前</text>
+    </view>
+    <view class='cur-content' bindtap="throttleChoose" data-city="{{currentCity}}">
+      <iconfont icon="landmark" class="m-r-8"></iconfont>
+      <text>{{currentCity.name}}</text>
+    </view>
+  </block>
+  <view class="title">
+    <text>热门城市</text>
+  </view>
+  <view class="hot-content">
+    <text class="hot-item" wx:for="{{hotCities}}" wx:key="index" bindtap="throttleChoose" data-city="{{item}}">
+      <text class="hot-text">{{item.name}}</text>
+    </text>
+  </view>
+  <view id="letter_index">
+    <view class="title">
+      <text>字母索引</text>
+    </view>
+    <view class="letters-content">
+      <text class="letters-item" wx:for="{{letters}}" wx:key="item" data-id="#letter_{{item}}" bindtap="throttleScrollToLetter">
+        <text class="letters-text">
+          <text>{{item}}</text>
+        </text>
+      </text>
+    </view>
+  </view>
+  <view wx:for="{{letters}}" wx:key="index">
+    <view class="title" id="letter_{{item}}">
+      <text>{{item}}</text>
+    </view>
+    <view bindtap="throttleChoose" class="letter-group-content" data-city="{{item}}" wx:for="{{citiesByLetterModule.getCitiesByLetter(item,groupByLetter)}}" wx:key="index">
+      {{item.name}}
+    </view>
+  </view>
+</view>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />
+<wxs module="citiesByLetterModule">
+
+ function getCitiesByLetter(letter,groupByLetter) {
+    return groupByLetter[letter]
+  }
+
+module.exports.getCitiesByLetter = getCitiesByLetter;
+</wxs>
+<image class="go-top-btn" src="https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/common/go-top.svg" wx:if="{{goTopBtnVisible}}" bindtap="throttleGoTop" />

@@ -1,0 +1,119 @@
+<!-- 入住信息 -->
+<view class="bg-white">
+    <view class="b-b-1 b-grey7 p-x-16 p-y-12 d-flex align-items-center">
+        <text class="f-w-bold">入住信息</text>
+        <view class="flex-1 f-s-12 p-l-10">
+            <iconfont icon="tip" class="text-grey3 m-r-4" />
+            <text text-grey2>入住请携带有效证件，姓名与证件保持一致</text>
+        </view>
+    </view>
+    <!-- 房间数 -->
+    <view class="b-b-1 b-grey7 p-x-16 p-y-12 d-flex align-items-center text-grey2">
+        <text class="flex-1">房间数</text>
+        <view class="flex-3 d-flex align-items-center" bindtap="handleToggleRoomCountOptions">
+            <view class="flex-1">
+                <text class="f-w-bold m-r-4">{{roomCount}}间</text>
+                <text class="f-s-12">每间最多住2人</text>
+            </view>
+            <iconfont icon="arrow-down" class="f-s-12 text-grey3" wx:if="{{!roomCountOptionsVisible}}" />
+            <iconfont icon="arrow-up" class="f-s-12 text-grey3" wx:else />
+        </view>
+    </view>
+    <view class="d-flex bg-grey9 justify-content-sp-bw p-12 text-grey2" wx:if="{{roomCountOptionsVisible}}">
+        <view bindtap="throttleChangeRoomCount" data-count="{{item}}" wx:for="{{roomCountOptions}}" wx:key="index" class=" r-full p-x-24 p-y-6 {{item===roomCount?'bg-primary text-white':'bg-grey7'}}">
+            <text>{{item}}</text>
+        </view>
+    </view>
+    <!-- 入住人 -->
+    <view class="b-b-1 b-grey7 p-x-16 d-flex align-items-center text-grey2">
+        <view class="flex-1">
+            <view class="d-flex p-t-12" wx:for="{{travelers}}" wx:key="index">
+                <view class="flex-1 d-flex">
+                    <text class="flex-1">房间{{index+1}}</text>
+                </view>
+                <view class="flex-3 f-s-12 p-b-16 relative {{index===travelers.length-1?'':'b-b-1 b-grey7'}}">
+                    <block wx:if="{{item.referenceId}}">
+                        <iconfont icon="remove-people" class="text-red2 absolute m-r-8" style="right:100%" bindtap="throttleClearTraveler" data-index="{{index}}" />
+                        <view bindtap="throttleEditFrequentTraveller" data-index="{{index}}">
+                            <view class="d-flex align-items-baseline">
+                                <view class="text-grey1 f-s-14">
+                                    <employee-name employeeInfo="{{item.employee}}"></employee-name>
+                                </view>
+                                <text class="m-l-8">{{item.department.name}}</text>
+                            </view>
+                        </view>
+                    </block>
+                    <view wx:else class="text-grey4 f-s-14" bindtap="throttleSelectFrequentTraveller">
+                        <view>每间需填1位入住人姓名</view>
+                        <view class="text-red1 absolute f-s-10" wx:if="{{personalErrMsgs.travelers[index].referenceId}}">
+                            <text>请选择入住人</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="text-center text-primary p-l-12" bindtap="throttleSelectFrequentTraveller">
+            <iconfont icon="add-people" />
+        </view>
+    </view>
+</view>
+<!-- 预计到店 -->
+<view class="p-y-12 p-x-16 bg-white d-flex">
+    <view class="flex-1">预计到店</view>
+    <view class="flex-3 text-grey2 d-flex align-items-center" bindtap="throttleOpenLatestTimes">
+        <view class="flex-1">{{personalFormData.latestArrivalTime||''}}</view>
+        <iconfont icon="arrow-right" class="f-s-12 text-grey3" />
+    </view>
+</view>
+<!-- 联系人信息 -->
+<view class="form m-y-8">
+    <view class="form-item  {{ personalErrMsgs.contact.name?'has-error':''}}">
+        <view class="label">联系人</view>
+        <view class="control">
+            <view class="content">
+                <teh-input type="text" placeholder="请输入联系人姓名" value="{{personalFormData.contact.name}}" class="flex-1" data-name='contact.name' bind:input="handleInput" />
+            </view>
+            <view class="error">{{personalErrMsgs.contact.name}}</view>
+        </view>
+    </view>
+    <view class="form-item  {{ personalErrMsgs.contact.mobile?'has-error':''}}">
+        <view class="label">联系手机</view>
+        <view class="control">
+            <view class="content">
+                <teh-input type="text" placeholder="请输入手机号码" value="{{personalFormData.contact.mobile}}" class="flex-1" data-name='contact.mobile' bind:input="handleInput" />
+            </view>
+            <view class="error">{{personalErrMsgs.contact.mobile}}</view>
+        </view>
+    </view>
+    <view class="form-item b-white  {{ personalErrMsgs.contact.email?'has-error':''}}">
+        <view class="label">联系邮箱</view>
+        <view class="control">
+            <view class="content">
+                <teh-input type="text" placeholder="请输入邮箱" value="{{personalFormData.contact.email}}" class="flex-1" data-name='contact.email' bind:input="handleInput" />
+            </view>
+            <view class="error">{{personalErrMsgs.contact.email}}</view>
+        </view>
+    </view>
+    <view class="form-item b-white {{ personalErrMsgs.specialNotes?'has-error':''}} m-t-8" wx:if="{{personalFormData.needInvoice}}">
+        <view class="label">发票信息</view>
+        <view class="control">
+            <view class="content" bindtap="throttleSelectInvoice">
+                <view class="flex-1">
+                    <view wx:if="{{!personalFormData.invoice}}">不开发票</view>
+                    <view class="text-primary" wx:else>查看开票信息</view>
+                </view>
+                <iconfont icon="arrow-right" />
+            </view>
+            <view class="error">{{personalErrMsgs.specialNotes}}</view>
+        </view>
+    </view>
+    <view class="form-item b-white {{ personalErrMsgs.specialNotes?'has-error':''}} m-t-8">
+        <view class="label">入住偏好</view>
+        <view class="control">
+            <view class="content">
+                <teh-input type="text" placeholder="填写您的入住偏好" value="{{personalFormData.specialNotes}}" class="flex-1" data-name='specialNotes' bind:input="handleInput" />
+            </view>
+            <view class="error">{{personalErrMsgs.specialNotes}}</view>
+        </view>
+    </view>
+</view>

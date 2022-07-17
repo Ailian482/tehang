@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "选择常用旅客",
+  "disableScroll": true,
+  "usingComponents": {
+    "employee-name": "./../../../components/employee-name/employee-name",
+    "van-swipe-cell": "./../../../../@vant/weapp/dist/swipe-cell/index",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "van-dialog": "./../../../../@vant/weapp/dist/dialog/index",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

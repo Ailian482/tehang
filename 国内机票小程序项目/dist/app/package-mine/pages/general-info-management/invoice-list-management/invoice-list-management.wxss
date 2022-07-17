@@ -1,0 +1,27 @@
+.invoice-list {
+  padding: 0 20rpx; }
+  .invoice-list .invoice-item {
+    padding: 24rpx 32rpx;
+    background: white;
+    margin-top: 24rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 4px; }
+  .invoice-list .default-tag {
+    padding: 2rpx 8rpx;
+    border-radius: 12rpx;
+    color: #3642ff;
+    background: #cddbff;
+    font-size: 16rpx;
+    margin-left: 28rpx;
+    height: 24rpx; }
+  .invoice-list .delete-btn {
+    color: #fb0101;
+    text-align: center;
+    font-size: 24rpx;
+    width: 196rpx;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+    .invoice-list .delete-btn iconfont {
+      font-size: 36rpx; }

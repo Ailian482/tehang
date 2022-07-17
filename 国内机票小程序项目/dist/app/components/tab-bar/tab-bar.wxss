@@ -1,0 +1,9 @@
+.image {
+  width: 44rpx;
+  height: 44rpx; }
+
+.van-tabbar-placeholder {
+  width: 100vw;
+  padding-bottom: env(safe-area-inset-bottom); }
+  .van-tabbar-placeholder view {
+    height: var(--tabbar-height, 50px); }

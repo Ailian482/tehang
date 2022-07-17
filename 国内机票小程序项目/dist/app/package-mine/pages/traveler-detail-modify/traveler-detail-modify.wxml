@@ -1,0 +1,156 @@
+<view class="form-group">
+    <view class="bg-grey9 f-s-15 p-l-16 text-grey2 p-y-8">旅客姓名</view>
+    <view class="form-item {{ errMsgs.nameAll ? 'has-error' : ''}}">
+        <view class="label">中文姓名</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="请与证件姓名一致" value="{{formData.nameAll}}" class="flex-1" data-name="nameAll" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.nameAll}}</view>
+        </view>
+    </view>
+    <view class="form-item {{ errMsgs.surnameEn ? 'has-error' : ''}}">
+        <view class="label">英文姓</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="拼音姓/Surname (例：WANG）" value="{{formData.surnameEn}}" class="flex-1" data-name="surnameEn" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.surnameEn}}</view>
+        </view>
+    </view>
+    <view class="form-item {{ errMsgs.givenNameEn ? 'has-error' : ''}}">
+        <view class="label">英文名</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="拼音名/Given name (例：HUAHUA）" value="{{formData.givenNameEn}}" class="flex-1" data-name="givenNameEn" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.givenNameEn}}</view>
+        </view>
+    </view>
+</view>
+<view class="form-group">
+    <view class="bg-grey9 f-s-15 p-l-16 text-grey2 p-y-8">证件</view>
+    <block wx:for="{{formData.docs}}" wx:key="*this">
+        <view class="form-item {{ errMsgs.docs[index].docType ? 'has-error' : ''}}">
+            <view class="label">证件类型</view>
+            <view class="control">
+                <view class="content" data-index="{{index}}" data-key="doctype" bindtap="showPicker">
+                    <view class="flex-1" wx:if="{{formData.docs[index].docType}}">
+                        <dict-transform code="{{formData.docs[index].docType}}" dict="DocType"></dict-transform>
+                    </view>
+                    <view class="flex-1 text-grey4" wx:else>请选择证件类型</view>
+                    <iconfont icon="trash" class="text-primary f-s-14" data-index="{{index}}" catchtap="handleRemoveDoc" />
+                </view>
+                <view class="error">{{errMsgs.docs[index].docType}}</view>
+            </view>
+        </view>
+        <view class="form-item {{ errMsgs.docs[index].docNo ? 'has-error' : ''}}">
+            <view class="label">证件号码</view>
+            <view class="control">
+                <view class="content">
+                    <input type="text" placeholder="请输入证件号码" value="{{item.docNo}}" class="flex-1" data-index="{{index}}" data-name="docNo" bindinput="handleDocNoInput" />
+                </view>
+                <view class="error">{{errMsgs.docs[index].docNo}}</view>
+            </view>
+        </view>
+        <view class="form-item {{ errMsgs.docs[index].expiredDate ? 'has-error' : ''}}">
+            <view class="label">有效期至</view>
+            <view class="control">
+                <view class="content" data-index="{{index}}" data-key="expired" bindtap="showPicker">
+                    <view class="flex-1" wx:if="{{formData.docs[index].expiredDate}}">
+                        {{formData.docs[index].expiredDate}}
+                    </view>
+                    <view class="flex-1 text-grey4" wx:else>请选择日期</view>
+                    <iconfont icon="arrow-right" />
+                </view>
+                <view class="error">{{errMsgs.docs[index].expiredDate}}</view>
+            </view>
+        </view>
+    </block>
+    <view class="text-center text-primary f-s-15 p-y-12" bindtap="handleAddDoc">
+        <iconfont icon="add" class="m-r-12" />
+        添加证件
+    </view>
+</view>
+<view class="form-group m-b-10">
+    <view class="bg-grey9 f-s-15 p-l-16 text-grey2 p-y-8">其他信息</view>
+    <view class="form-item">
+        <view class="label">性别</view>
+        <view class="control">
+            <view class="content">
+                <view class="d-flex">
+                    <view class="radio {{formData.gender === Gender.Male ? 'radio-active' : ''}}" bindtap="handleChangeGender" data-gender="{{Gender.Male}}">
+                        <iconfont icon="{{formData.gender === Gender.Male ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                        男
+                    </view>
+                    <view class="m-l-16 radio {{formData.gender === Gender.Female ? 'radio-active' : ''}}" bindtap="handleChangeGender" data-gender="{{Gender.Female}}">
+                        <iconfont icon="{{formData.gender === Gender.Female ? 'radio-selected' : 'radio-unselected'}}"></iconfont>
+                        女
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="form-item">
+        <view class="label">国籍</view>
+        <view class="control">
+            <view class="content" data-key="nationality" bindtap="showPicker">
+                <view class="flex-1" wx:if="{{formData.nationality}}">
+                    <dict-transform code="{{formData.nationality}}" dict="Country"></dict-transform>
+                </view>
+                <view class="flex-1 text-grey4" wx:else>请选择国籍</view>
+                <iconfont icon="arrow-right" />
+            </view>
+        </view>
+    </view>
+    <view class="form-item">
+        <view class="label">出生日期</view>
+        <view class="control">
+            <view class="content" data-key="birthday" bindtap="showPicker">
+                <view class="flex-1" wx:if="{{formData.birthday}}">{{formData.birthday}}</view>
+                <view class="flex-1 text-grey4" wx:else>请选择出生日期</view>
+                <iconfont icon="arrow-right" />
+            </view>
+        </view>
+    </view>
+    <view class="form-item {{ errMsgs.mobile ? 'has-error' : ''}}">
+        <view class="label">手机号</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="请输入手机号" value="{{formData.mobile}}" class="flex-1" data-name="mobile" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.mobile}}</view>
+        </view>
+    </view>
+    <view class="form-item{{ errMsgs.email ? 'has-error' : ''}}">
+        <view class="label">电子邮箱</view>
+        <view class="control">
+            <view class="content">
+                <input type="text" placeholder="请输入电子邮箱" value="{{formData.email}}" class="flex-1" data-name="email" bindinput="handleInput" />
+            </view>
+            <view class="error">{{errMsgs.email}}</view>
+        </view>
+    </view>
+</view>
+<!-- 底部 -->
+<footer-container>
+    <view class="submit-btn" slot="content" bindtap="handleSubmit">保存</view>
+</footer-container>
+<!-- 证件类型选择 -->
+<van-popup z-index="99999" show="{{ showDocTypePicker }}" position="bottom" bind:close="handleClosePicker" data-key="doctype">
+    <dict-picker title="请选择证件类型" pickerKey="doctype" dict="DocType" bind:confirm="handleConfirmDocType" bind:closePicker="handleClosePicker"></dict-picker>
+</van-popup>
+<!-- 国籍选择 -->
+<van-popup z-index="99999" show="{{ showNationalityPicker }}" position="bottom" bind:close="handleClosePicker" data-key="nationality">
+    <dict-picker title="请选择国家或地区" pickerKey="nationality" dict="Country" bind:confirm="handleConfirmNationality" bind:closePicker="handleClosePicker"></dict-picker>
+</van-popup>
+<!-- 有效期选择 -->
+<van-popup z-index="99999" show="{{ showExpiredDatePicker }}" position="bottom" bind:close="handleClosePicker" data-key="expired">
+    <van-datetime-picker data-key="expired" type="date" min-date="{{expiredDatePickerOptions.minDate }}" max-date="{{ expiredDatePickerOptions.maxDate }}" value="{{ expiredDatePickerOptions.currentDate }}" bind:confirm="handleConfirmExpiredDate" bind:cancel="handleClosePicker" />
+</van-popup>
+<!-- 生日选择 -->
+<van-popup z-index="99999" show="{{ showBirthdayPicker }}" position="bottom" bind:close="handleClosePicker" data-key="birthday">
+    <van-datetime-picker data-key="birthday" type="date" min-date="{{birthdayPickerOptions.minDate }}" max-date="{{ birthdayPickerOptions.maxDate }}" value="{{ birthdayPickerOptions.currentDate }}" bind:confirm="handleConfirmBirthday" bind:cancel="handleClosePicker" />
+</van-popup>
+<van-dialog id="van-dialog" confirm-button-color="#3642ff" />
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />

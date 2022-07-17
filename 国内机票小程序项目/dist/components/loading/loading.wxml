@@ -1,0 +1,5 @@
+<view class="mask">
+    <view class="wrapper">
+        <van-loading vertical>{{title ||'加载中'}}</van-loading>
+    </view>
+</view>

@@ -1,0 +1,14 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "新增配送地址",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "footer-container": "./../../../components/footer-container/footer-container",
+    "area-picker": "./../../../components/area-picker/area-picker",
+    "iconfont": "./../../../../components/icon-iconfont/index",
+    "van-switch": "./../../../../@vant/weapp/dist/switch/index",
+    "van-popup": "./../../../../@vant/weapp/dist/popup/index",
+    "van-dialog": "./../../../../@vant/weapp/dist/dialog/index",
+    "loading": "./../../../../components/loading/loading"
+  }
+}

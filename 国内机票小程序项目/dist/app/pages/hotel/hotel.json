@@ -1,0 +1,12 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "tab-bar": "./../../components/tab-bar/tab-bar",
+    "invitations-popup": "./../../components/invitations-popup/invitations-popup",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "date-format": "./../../../components/date-format/date-format",
+    "van-calendar": "./../../../@vant/weapp/dist/calendar/index",
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "van-slider": "./../../../@vant/weapp/dist/slider/index"
+  }
+}

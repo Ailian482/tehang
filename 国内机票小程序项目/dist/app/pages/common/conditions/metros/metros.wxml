@@ -1,0 +1,12 @@
+<view class="f-s-14 d-flex container">
+    <view class="scroll-content lines-wrapper">
+        <view class="line {{item.code === lineCode?'activated':''}}" wx:for="{{metros}}" wx:key="index" data-code="{{item.code}}" bindtap="throttleChangeLine">
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <view class="flex-1 stations-wrapper scroll-content">
+        <view class="station {{item.activated?'activated':''}}" wx:for="{{stations}}" wx:key="index" data-item="{{item}}" bindtap="throttleChooseStation">
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</view>

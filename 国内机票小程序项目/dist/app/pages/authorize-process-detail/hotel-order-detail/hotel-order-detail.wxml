@@ -1,0 +1,80 @@
+<view class="order-detail">
+    <view class="customer-info">
+        <view class="d-flex justify-content-sp-bw">
+            <view class="d-flex align-items-center">
+                <view class="f-s-14 f-w-bold">房间信息</view>
+                <view class="f-s-12 text-orange1 m-l-16" wx:if="{{orderDetail.latestArrivalTime}}">
+                    最晚到店：{{orderDetail.latestArrivalTime}}（当天）
+                </view>
+            </view>
+            <view class="d-flex align-items-center" bindtap="handleToggleGuestList">
+                <view class="f-s-12 text-grey3 m-r-10">{{showGuestList ? '收起' : '展开'}}</view>
+                <view class="{{showGuestList ? 'triangle-up' : 'triangle-down'}}"></view>
+            </view>
+        </view>
+        <view class="customer-list" wx:if="{{showGuestList}}">
+            <block wx:for="{{orderDetail.guests}}" wx:for-item="guest" wx:key="*this">
+                <view class="customer-item f-s-12" data-index="{{index}}" bindtap="handleToGuestDetailPage">
+                    <view class="d-flex align-items-center">
+                        <view class="f-w-bold">房间1</view>
+                        <view class="m-l-32">
+                            <view>{{guest.guestName}} {{guest.belongedDeptName}}</view>
+                            <view class="text-grey3">入住请携带本人有效证件</view>
+                        </view>
+                    </view>
+                    <view>
+                        <van-icon name="arrow" color="#999999" />
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="contact-info m-t-8 f-s-14">
+        <view class="f-w-bold m-b-12">联系人信息</view>
+        <view class="cell m-b-10">
+            <view class="label f-w-bold">{{orderDetail.contactInfo.name}}</view>
+            <view>
+                <number-encrypt value="{{orderDetail.contactInfo.mobile}}" encryptType="Mobile"></number-encrypt>
+            </view>
+        </view>
+        <view class="cell">
+            <view class="label f-s-12">下单时间</view>
+            <view>
+                <date-format value="{{orderDetail.bookingTime}}" format="yyyy-MM-dd HH:mm" />
+            </view>
+        </view>
+    </view>
+    <view class="other-info">
+        <view class="special" wx:if="{{orderDetail.specialNotes}}">
+            <view class="f-s-14 f-w-bold m-b-8">入住偏好</view>
+            <view class="f-s-12 text-grey2">{{orderDetail.specialNotes}}</view>
+        </view>
+        <view class="invoice-content" wx:if="{{orderDetail.invoice}}">
+            <view class="f-w-bold m-b-12 f-s-14">发票信息</view>
+            <view class="invoice-detail">
+                <view class="invoice-item">
+                    <view class="title">发票抬头</view>
+                    <view class="value">{{orderDetail.invoice.title}}</view>
+                </view>
+                <view class="invoice-item">
+                    <view class="title">税号</view>
+                    <view class="value">{{orderDetail.invoice.registrationNo}}</view>
+                </view>
+                <view class="invoice-item">
+                    <view class="title">收件邮箱</view>
+                    <view class="value">{{orderDetail.invoice.email}}</view>
+                </view>
+                <view class="show-btn">查看电子发票</view>
+            </view>
+        </view>
+        <view class="payment-info">
+            <view class="f-s-14 f-w-bold m-b-12">支付信息</view>
+            <view class="cell f-s-12">
+                <view class="label text-grey3">支付方式</view>
+                <view>
+                    <dict-transform dict="CorpPayMode" code="{{orderDetail.payMode}}"></dict-transform>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

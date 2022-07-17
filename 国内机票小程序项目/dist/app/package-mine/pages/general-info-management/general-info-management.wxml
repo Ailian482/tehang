@@ -1,0 +1,23 @@
+<view class="header-nav">
+    <view class="{{selectedIndex === 0 ? 'nav-item-active' : 'nav-item'}}" bindtap="handleChangeTab" data-index="{{0}}">
+        旅客
+    </view>
+    <view class="{{selectedIndex === 1 ? 'nav-item-active' : 'nav-item'}}" bindtap="handleChangeTab" data-index="{{1}}">
+        地址
+    </view>
+    <view class="{{selectedIndex === 2 ? 'nav-item-active' : 'nav-item'}}" bindtap="handleChangeTab" data-index="{{2}}">
+        发票
+    </view>
+</view>
+<block wx:if="{{selectedIndex === 0}}">
+    <traveler-list-management></traveler-list-management>
+</block>
+<block wx:if="{{selectedIndex === 1}}">
+    <address-list-management></address-list-management>
+</block>
+<block wx:if="{{selectedIndex === 2}}">
+    <invoice-list-management></invoice-list-management>
+</block>
+<view class="add-btn" bindtap="toAddPage">
+    <image mode="aspectFit" src="{{addBtnUrl}}"></image>
+</view>

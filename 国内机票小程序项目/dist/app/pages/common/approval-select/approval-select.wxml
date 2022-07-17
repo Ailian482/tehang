@@ -1,0 +1,42 @@
+<scroll-view class="h-full bg-grey9 f-s-14 text-grey1 p-y-8 p-x-10" scroll-y="{{true}}" bindscrolltolower="throttlescrolltolower" wx:if="{{hasContent}}">
+    <view class="bg-white p-18 r-8 m-b-8 project-item" wx:for="{{list}}" wx:key="index" bindtap="throttleSelect" data-approval="{{item}}">
+        <view class="d-flex m-b-12">
+            <view class="flex-2 text-grey3">审批单号：</view>
+            <view class="flex-6">{{item.approvalNo}}</view>
+        </view>
+        <view class="d-flex m-b-12">
+            <view class="flex-2 text-grey3">行程：</view>
+            <view class="flex-6">
+                <view wx:for="{{item.travelPlaces}}" wx:for-item="travelPlace" wx:key="*this">
+                    {{travelPlace}}
+                </view>
+            </view>
+        </view>
+        <view class="d-flex m-b-12">
+            <view class="flex-2 text-grey3">出差时间：</view>
+            <view class="flex-6">
+                <view wx:for="{{item.travelDates}}" wx:for-item="travelDate" wx:key="*this">
+                    {{travelDate}}
+                </view>
+            </view>
+        </view>
+        <view class="d-flex m-b-12">
+            <view class="flex-2 text-grey3">交通工具：</view>
+            <view class="flex-6">
+                <view wx:for="{{item.transports}}" wx:for-item="transport" wx:key="*this">
+                    {{transport}}
+                </view>
+            </view>
+        </view>
+        <view class="d-flex">
+            <view class="{{item.status===approvalStatuses.Passed?'text-primary':''}}">
+                <dict-transform dict="ApprovalStatus" code="{{item.status}}" />
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<block wx:else>
+    <view class="h-full bg-grey9">
+        <empty-list type="approval" tips="暂无审批单"></empty-list>
+    </view>
+</block>

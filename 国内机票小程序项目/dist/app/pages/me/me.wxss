@@ -1,0 +1,146 @@
+page {
+  box-sizing: border-box;
+  background: #f9f9f9; }
+
+.mine-container {
+  width: 100%;
+  background: #f9f9f9;
+  color: #333333;
+  margin-bottom: 20rpx; }
+  .mine-container .header {
+    width: 100%;
+    background: #ffffff;
+    padding-left: 32rpx;
+    position: fixed;
+    top: 0;
+    z-index: 101; }
+  .mine-container .user-info-content {
+    position: relative;
+    width: 100%;
+    height: 450rpx;
+    background-image: url("https://tehang-assets.oss-cn-shenzhen.aliyuncs.com/weapp/mine-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat; }
+    .mine-container .user-info-content .wx-info {
+      padding-top: 100rpx;
+      text-align: center;
+      position: relative; }
+      .mine-container .user-info-content .wx-info .wx-avatar {
+        width: 132rpx;
+        height: 132rpx;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        margin-bottom: 42rpx; }
+    .mine-container .user-info-content .employee-info {
+      padding-top: 36rpx; }
+      .mine-container .user-info-content .employee-info .thumbnail {
+        text-align: center;
+        margin-bottom: 40rpx; }
+        .mine-container .user-info-content .employee-info .thumbnail image {
+          width: 132rpx;
+          height: 132rpx; }
+      .mine-container .user-info-content .employee-info .invitation-tips {
+        font-size: 24rpx;
+        color: #fe7800;
+        margin: 0 20rpx;
+        margin-top: 16rpx;
+        line-height: 60rpx;
+        padding: 0 28rpx 0 34rpx;
+        background: #fcf5ee;
+        border-radius: 16rpx; }
+        .mine-container .user-info-content .employee-info .invitation-tips .tip-icon {
+          width: 24rpx;
+          height: 24rpx;
+          margin-right: 12rpx; }
+    .mine-container .user-info-content .logged-out {
+      padding-top: 100rpx; }
+      .mine-container .user-info-content .logged-out .tips {
+        text-align: center;
+        font-size: 32rpx;
+        margin-bottom: 56rpx; }
+      .mine-container .user-info-content .logged-out .login-btn {
+        width: 240rpx;
+        height: 64rpx;
+        line-height: 64rpx;
+        font-size: 28rpx;
+        color: #fff;
+        margin: 0 auto;
+        background: linear-gradient(90deg, #6677ff 0%, #3642ff 100%);
+        border-radius: 8rpx;
+        text-align: center; }
+  .mine-container .order-content {
+    position: relative;
+    margin: 0 20rpx;
+    margin-top: -60rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 32rpx 36rpx 28rpx 38rpx;
+    font-size: 28rpx;
+    z-index: 1; }
+    .mine-container .order-content .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30rpx; }
+      .mine-container .order-content .nav .title {
+        font-weight: bold; }
+      .mine-container .order-content .nav .suffix {
+        color: #999;
+        font-size: 24rpx;
+        display: flex; }
+    .mine-container .order-content .order-operate-list {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 14rpx;
+      padding-right: 4rpx; }
+      .mine-container .order-content .order-operate-list .item {
+        text-align: center;
+        font-size: 28rpx; }
+        .mine-container .order-content .order-operate-list .item .order-icon {
+          width: 54rpx;
+          height: 54rpx; }
+  .mine-container .nav-list-content {
+    margin: 24rpx 22rpx 0 22rpx;
+    border-radius: 16rpx;
+    background: #fff; }
+    .mine-container .nav-list-content .van-cell {
+      padding: 15px 17px 15px 19px;
+      background: transparent; }
+      .mine-container .nav-list-content .van-cell .cell-title {
+        font-size: 32rpx; }
+      .mine-container .nav-list-content .van-cell .title-icon {
+        color: #afafaf;
+        margin-right: 36rpx;
+        font-size: 32rpx; }
+
+.auth-content {
+  display: flex; }
+  .auth-content .auth-btn {
+    width: 48%; }
+
+.roles-list-content {
+  max-height: 560rpx;
+  overflow-y: auto; }
+  .roles-list-content .role-item {
+    font-size: 32rpx;
+    color: #333333;
+    padding: 24rpx 80rpx;
+    border-top: 1px solid #f1f1f5;
+    position: relative; }
+  .roles-list-content .role-item.selected {
+    color: #3642ff;
+    font-weight: bold; }
+    .roles-list-content .role-item.selected iconfont {
+      position: absolute;
+      right: 28rpx;
+      top: 28rpx;
+      font-size: 24rpx; }
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.text-underline {
+  text-decoration: underline; }

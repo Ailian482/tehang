@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "count-down": "./../count-down/count-down",
+    "van-popup": "./../../../@vant/weapp/dist/popup/index",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "number-encrypt": "./../../../components/number-encrypt/number-encrypt",
+    "dict-transform": "./../../../components/dict-transform/index"
+  }
+}

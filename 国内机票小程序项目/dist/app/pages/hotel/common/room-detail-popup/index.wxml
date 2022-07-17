@@ -1,0 +1,72 @@
+<view class="room-detail-container" wx:if="{{room}}">
+    <view class="room-title">{{room.roomName}}</view>
+    <view class="slides-container">
+        <block wx:if="{{room.pictures.length}}">
+            <swiper class="slides-content" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+                <block wx:for="{{room.pictures}}" wx:key="*this">
+                    <swiper-item>
+                        <view class="slides-item">
+                            <image mode="scaleToFill" src="{{item.url}}"></image>
+                        </view>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </block>
+        <image wx:else src="{{defaultHotelRoomImageUrl}}" class="h-190 w-full" />
+    </view>
+    <view class="room-basic-info">
+        <view class="room-info">
+            <view class="room-icon-value" wx:if="{{room.area}}">
+                <iconfont icon="area" size="12"></iconfont>
+                {{room.area}}
+            </view>
+            <view class="room-icon-value" wx:if="{{ratePlan.bedType}}">
+                <iconfont icon="bed" size="12"></iconfont>
+                {{ratePlan.bedType}}
+            </view>
+        </view>
+        <view class="room-facilities">
+            <view class="f-s-14 m-b-10 f-w-500">房间设施</view>
+            <view class="room-facilities-list">
+                <view class="room-icon-value" wx:if="{{room.wifi}}">
+                    <iconfont icon="wifi" size="12"></iconfont>
+                    Wi-Fi
+                </view>
+                <view class="room-icon-value" wx:if="{{room.floor}}">
+                    <iconfont icon="floor" size="12"></iconfont>
+                    {{room.floor}}层
+                </view>
+                <view class="room-icon-value" wx:if="{{ratePlan.windowType}}">
+                    <iconfont icon="window" size="12"></iconfont>
+                    {{ratePlan.windowType}}
+                </view>
+                <view class="room-icon-value" wx:if="{{ratePlan.breakfast}}">
+                    <iconfont icon="breakfast" size="12"></iconfont>
+                    {{ratePlan.breakfast}}
+                </view>
+                <view class="room-icon-value" wx:if="{{ratePlan.maxCount}}">
+                    <iconfont icon="people" size="12"></iconfont>
+                    {{ratePlan.maxCount}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="room-booking-rule text-grey1 m-b-20" wx:if="{{ratePlan.returnRule}}">
+        <view class="f-s-14 f-w-bold">退订政策</view>
+        <view class="f-s-12 m-t-6">{{ratePlan.returnRule}}</view>
+    </view>
+</view>
+<view class="box-shadow-footer bg-white p-l-16 p-r-10  d-flex align-items-center p-y-12" wx:if="{{ratePlan.avgPrice}}">
+    <view class="flex-1">
+        <text class="text-orange1 f-w-bold">
+            <text class="f-s-14 m-r-4">¥</text>
+            <text class="f-s-22 ">{{ratePlan.avgPrice}}</text>
+        </text>
+        <text class="f-s-12 text-grey2">/晚</text>
+    </view>
+    <view>
+        <button class="f-s-16 bg-btn-orange text-white w-127 h-42 r-full" bindtap="throttleBook">
+            预订
+        </button>
+    </view>
+</view>

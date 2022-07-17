@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "积分规则说明",
+  "usingComponents": {
+    "dict-transform": "./../../../../components/dict-transform/index"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "empty-list": "./../../../../components/empty-list/empty-list",
+    "employee-name": "./../../../../components/employee-name/employee-name",
+    "van-swipe-cell": "./../../../../../@vant/weapp/dist/swipe-cell/index",
+    "dict-transform": "./../../../../../components/dict-transform/index",
+    "number-encrypt": "./../../../../../components/number-encrypt/number-encrypt",
+    "iconfont": "./../../../../../components/icon-iconfont/index"
+  }
+}

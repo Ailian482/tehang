@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "出差申请",
+  "usingComponents": {
+    "footer-container": "./../../components/footer-container/footer-container",
+    "employee-name": "./../../components/employee-name/employee-name",
+    "iconfont": "./../../../components/icon-iconfont/index",
+    "van-calendar": "./../../../@vant/weapp/dist/calendar/index",
+    "loading": "./../../../components/loading/loading"
+  }
+}

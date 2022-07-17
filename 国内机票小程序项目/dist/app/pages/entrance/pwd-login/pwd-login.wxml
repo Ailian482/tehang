@@ -1,0 +1,69 @@
+<view class="login-container text-white">
+    <top-bar></top-bar>
+    <view class="wrapper">
+        <view>
+            <view class="p-t-96 m-b-32">
+                <text class="f-s-28">帐号密码登录</text>
+            </view>
+            <form>
+                <view class="d-flex text-white f-s-24 b-b-1 b-grey4">
+                    <input value="{{formData.mobile}}" data-name="mobile" bindinput="handleInput" class="flex-1 p-x-2 p-y-16" placeholder="请输入手机号" auto-focus="{{true}}" type="number" maxlength="11" />
+                    <view class="d-flex input-handler" wx:if="{{formData.mobile}}" bindtap="throttleClearMobile">
+                        <iconfont icon="delete" class="f-s-16" />
+                    </view>
+                </view>
+                <view class="d-flex text-white f-s-24 b-b-1 b-grey4">
+                    <input value="{{formData.password}}" data-name="password" bindinput="handleInput" class="flex-1 p-x-2 p-y-16" placeholder="请输入密码" password="{{!pwdVisible}}" />
+                    <view class="d-flex input-handler" bindtap="throttlePwdVisible" wx:if="{{formData.password}}">
+                        <iconfont icon="hide-pwd" class="f-s-10" wx:if="{{!pwdVisible}}" />
+                        <iconfont icon="show-pwd" class="f-s-12" wx:else />
+                    </view>
+                </view>
+                <button type="default" class="m-t-32 btn-submit" bindtap="throttleLogin">登录</button>
+            </form>
+        </view>
+        <view class="footer">
+            <view class="text-center m-t-112 f-s-12 text-d-l-underline">
+                <text bindtap="throttleViewServiceTel">客服电话</text>
+            </view>
+            <view class="m-t-24 f-s-12">
+                <text>登录即代表您同意特航商旅</text>
+                <text class="text-d-l-underline" bindtap="throttleViewProtocol">《服务协议》</text>
+                <text>和</text>
+                <text class="text-d-l-underline" bindtap="throttleViewPrivacy">《隐私政策》</text>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 客服电话 -->
+<van-overlay show="{{ serviceTelModalVisible }}">
+    <view class="overlay-wrapper">
+        <view class="content">
+            <iconfont icon="close" class="icon-close" bindtap="throttleHideServiceTel"></iconfont>
+            <view class="f-s-18  m-b-16 m-t-12 title">
+                <text>客服电话</text>
+            </view>
+            <view class="p-t-16">
+                <view class="m-b-20">
+                    <text>企业机构：</text>
+                    <text bindtap="throttleMakePhoneCall" class="text-d-l-underline text-primary" data-tel="{{tmcServiceTel}}">
+                        <text>{{tmcServiceTel}}</text>
+                    </text>
+                </view>
+                <view class="m-b-20">
+                    <text>政府单位：</text>
+                    <text bindtap="throttleMakePhoneCall" class="text-d-l-underline text-primary" data-tel="{{serviceTel}}">
+                        <text>{{serviceTel}}</text>
+                    </text>
+                </view>
+                <view>
+                    <text>个人会员：</text>
+                    <text bindtap="throttleMakePhoneCall" class="text-d-l-underline text-primary" data-tel="{{serviceTel}}">
+                        <text>{{serviceTel}}</text>
+                    </text>
+                </view>
+            </view>
+        </view>
+    </view>
+</van-overlay>
+<loading wx:if="{{isLoading}}" title="{{loadingTitle}}" />
