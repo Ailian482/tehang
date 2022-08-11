@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "修改入住人信息",
-  "usingComponents": {
-    "employee-name": "./../../../../components/employee-name/employee-name",
-    "iconfont": "./../../../../../components/icon-iconfont/index",
-    "teh-input": "./../../../../../components/teh-input/teh-input"
-  }
-}

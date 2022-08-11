@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "选择退票原因",
-  "usingComponents": {
-    "iconfont": "./../../../../components/icon-iconfont/index",
-    "teh-textarea": "./../../../../components/teh-textarea/teh-textarea"
-  }
-}

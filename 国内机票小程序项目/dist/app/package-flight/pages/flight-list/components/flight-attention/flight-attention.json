@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "iconfont": "./../../../../../../components/icon-iconfont/index",
-    "van-popup": "./../../../../../../@vant/weapp/dist/popup/index",
-    "date-format": "./../../../../../../components/date-format/date-format"
-  }
-}

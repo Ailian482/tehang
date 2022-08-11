@@ -1,6 +1,0 @@
-<view class="p-y-24 p-x-28 text-grey1 d-flex">
-    <view class="h-20 d-flex align-items-center">
-        <view class="h-4 w-4 bg-grey1 r-full m-r-12"></view>
-    </view>
-    <view class="flex-1">酒店钻级根据酒店设施、服务等综合计算得出，钻级越高代表酒店设施、服务越好。</view>
-</view>

@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "tab-bar": "./../../components/tab-bar/tab-bar",
-    "invitations-popup": "./../../components/invitations-popup/invitations-popup",
-    "employee-name": "./../../components/employee-name/employee-name",
-    "iconfont": "./../../../components/icon-iconfont/index",
-    "date-format": "./../../../components/date-format/date-format"
-  }
-}

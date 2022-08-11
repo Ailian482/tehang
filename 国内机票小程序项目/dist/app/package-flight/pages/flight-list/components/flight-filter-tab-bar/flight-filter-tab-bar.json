@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "airline-thumbnail": "./../../../../../components/airline-thumbnail/airline-thumbnail",
-    "van-popup": "./../../../../../../@vant/weapp/dist/popup/index",
-    "iconfont": "./../../../../../../components/icon-iconfont/index"
-  }
-}

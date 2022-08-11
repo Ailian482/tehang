@@ -1,8 +1,0 @@
-<view style="padding-top:{{style.paddingTop}};min-height:{{style.height}}" class="d-flex align-items-center p-x-10 relative">
-    <!-- 返回 -->
-    <iconfont icon="topbar-back-black" class="f-s-18" bindtap="throttleGoBack"></iconfont>
-    <!-- title -->
-    <view class="flex-1 text-center absolute" style="left:38px;right:38px;">
-        <slot></slot>
-    </view>
-</view>

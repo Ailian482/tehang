@@ -1,1 +1,0 @@
-<textarea placeholder="{{placeholder}}" value="{{val}}" bindinput="handleInput" class="{{classNames}}"></textarea>

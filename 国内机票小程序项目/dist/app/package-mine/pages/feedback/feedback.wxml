@@ -1,8 +1,0 @@
-<view class="d-flex justify-content-sp-bw bg-white p-16 m-t-14 text-grey1 f-s-16" bindtap="toFeedbackSheet">
-    我要反馈
-    <iconfont class="text-grey2 f-s-12" icon="arrow-right" slot="right-icon"></iconfont>
-</view>
-<view class="d-flex justify-content-sp-bw bg-white p-16 m-t-14 text-grey1 f-s-16" bindtap="toFeedbackHistory">
-    历史反馈
-    <iconfont class="text-grey2 f-s-12" icon="arrow-right" slot="right-icon"></iconfont>
-</view>

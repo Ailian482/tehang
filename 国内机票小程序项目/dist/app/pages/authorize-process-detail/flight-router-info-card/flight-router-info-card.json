@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "stop-info": "./../../../components/stop-info/stop-info",
-    "date-format": "./../../../../components/date-format/date-format"
-  }
-}

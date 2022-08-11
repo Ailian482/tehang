@@ -1,2 +1,0 @@
-# tehang
-work for tehang

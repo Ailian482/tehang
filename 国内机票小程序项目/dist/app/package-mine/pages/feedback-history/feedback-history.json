@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "历史反馈",
-  "usingComponents": {
-    "empty-list": "./../../../components/empty-list/empty-list",
-    "date-format": "./../../../../components/date-format/date-format"
-  }
-}

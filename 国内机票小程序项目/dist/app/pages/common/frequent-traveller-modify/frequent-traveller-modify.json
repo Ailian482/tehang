@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "新增常旅客",
-  "usingComponents": {
-    "iconfont": "./../../../../components/icon-iconfont/index",
-    "teh-input": "./../../../../components/teh-input/teh-input",
-    "loading": "./../../../../components/loading/loading",
-    "van-dialog": "./../../../../@vant/weapp/dist/dialog/index"
-  }
-}

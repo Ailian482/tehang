@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "teh-image": "./../../../../../components/teh-image/teh-image",
-    "iconfont": "./../../../../../components/icon-iconfont/index"
-  }
-}

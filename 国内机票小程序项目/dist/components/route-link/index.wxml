@@ -1,3 +1,0 @@
-<view bind:tap="handleLinkTap" class="route-link-container">
-  <slot></slot>
-</view>

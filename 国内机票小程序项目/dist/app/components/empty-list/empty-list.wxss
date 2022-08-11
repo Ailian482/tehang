@@ -1,9 +1,0 @@
-.empty-list {
-  padding-top: 200rpx;
-  text-align: center; }
-  .empty-list .empty-image {
-    width: 360rpx;
-    height: 360rpx; }
-  .empty-list .empty-tips {
-    color: #999999;
-    font-size: 24rpx; }

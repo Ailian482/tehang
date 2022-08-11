@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "dict-transform": "./../../../../components/dict-transform/index",
-    "number-encrypt": "./../../../../components/number-encrypt/number-encrypt",
-    "iconfont": "./../../../../components/icon-iconfont/index"
-  }
-}

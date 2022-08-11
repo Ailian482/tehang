@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "退订酒店",
-  "usingComponents": {
-    "footer-container": "./../../components/footer-container/footer-container",
-    "hotel-order-fee-popup": "./../hotel-order-detail/hotel-order-fee-popup/hotel-order-fee-popup",
-    "date-format": "./../../../components/date-format/date-format",
-    "loading": "./../../../components/loading/loading"
-  }
-}

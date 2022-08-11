@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "选择审批单",
-  "usingComponents": {
-    "empty-list": "./../../../components/empty-list/empty-list",
-    "dict-transform": "./../../../../components/dict-transform/index"
-  }
-}

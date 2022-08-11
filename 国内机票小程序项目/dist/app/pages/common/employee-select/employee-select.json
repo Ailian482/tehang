@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "选择员工",
-  "disableScroll": true,
-  "usingComponents": {
-    "employee-name": "./../../../components/employee-name/employee-name",
-    "iconfont": "./../../../../components/icon-iconfont/index"
-  }
-}

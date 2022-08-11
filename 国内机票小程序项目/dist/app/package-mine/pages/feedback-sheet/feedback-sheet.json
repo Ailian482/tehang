@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "我要反馈",
-  "usingComponents": {
-    "footer-container": "./../../../components/footer-container/footer-container",
-    "van-uploader": "./../../../../@vant/weapp/dist/uploader/index",
-    "loading": "./../../../../components/loading/loading"
-  }
-}

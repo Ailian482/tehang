@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "iconfont": "./../../../../components/icon-iconfont/index",
-    "iconfont-colorful": "./../../../../components/icon-iconfont-colorful/index"
-  }
-}

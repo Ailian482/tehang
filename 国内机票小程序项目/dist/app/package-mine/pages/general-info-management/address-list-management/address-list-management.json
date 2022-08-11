@@ -1,9 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "empty-list": "./../../../../components/empty-list/empty-list",
-    "van-swipe-cell": "./../../../../../@vant/weapp/dist/swipe-cell/index",
-    "number-encrypt": "./../../../../../components/number-encrypt/number-encrypt",
-    "iconfont": "./../../../../../components/icon-iconfont/index"
-  }
-}

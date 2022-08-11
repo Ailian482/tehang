@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "历史反馈详情",
-  "usingComponents": {
-    "date-format": "./../../../../components/date-format/date-format",
-    "van-popup": "./../../../../@vant/weapp/dist/popup/index",
-    "loading": "./../../../../components/loading/loading"
-  }
-}
