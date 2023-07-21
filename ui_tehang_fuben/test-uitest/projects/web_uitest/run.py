@@ -13,7 +13,7 @@ def main():
     pytest.main(['-v',
                  '-s',
                  '--reruns=1',
-                 r'testcase/test_05_web_domestic_hotel.py',
+                 r'testcase/test_03_web_flight.py',
                  '--capture=sys',
                  '--html=report/{}'.format(report_name),
                  '--self-contained-html'])
