@@ -1,0 +1,19 @@
+.vscode
+.idea/
+*.pyc
+*.log
+./projects/applet_uitest/reports/
+./projects/h5_uitest/reports/
+./projects/web_uitest/report/
+./reports
+./logs
+**/__pycache__
+/venv
+.DS_Store
+git
+.html
+*.html
+# virtualenv
+bin
+lib
+pyvenv.cfg
