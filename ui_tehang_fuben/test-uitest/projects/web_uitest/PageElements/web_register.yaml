@@ -17,6 +17,8 @@ GP机构: "xpath==//*[contains(text(),'GP')]"
 具体行业: "xpath==//cdk-virtual-scroll-viewport[1]/div[1]/nz-option-item[n]" # 使用时需将li[n]中的n替换为具体数字 1-13
 信用等级: "xpath==//*[@dicttype='CorpCreditRating']"
 具体等级: "xpath==//cdk-virtual-scroll-viewport[1]/div[1]/nz-option-item[n]" # 使用时需将li[n]中的n替换为具体数字 1-3
+归属服务商: "xpath==//*[@formcontrolname='spCode']"
+具体服务商: "xpath==//cdk-virtual-scroll-viewport[1]/div[1]/nz-option-item[n]"  # 使用时需要将li[n]中的n替换为具体数字 1-2
 客户地址: "xpath==//*[@formcontrolname='location']"
 客户级别: "xpath==//*[@ formcontrolname ='corpLevelId']"
 具体级别: "xpath==//cdk-virtual-scroll-viewport[1]/div[1]/nz-option-item[1]" # 使用时暂时先选择第一个

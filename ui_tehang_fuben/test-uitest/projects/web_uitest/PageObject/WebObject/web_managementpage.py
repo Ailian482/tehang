@@ -124,6 +124,30 @@ class ManagementPage(WebPage):
         log.info("校验 三线城市")
         return self.element_exist(management["三线城市"])
 
+    def forth_tier_cities(self):
+        log.info("校验 四线城市")
+        return self.element_exist(management["四线城市"])
+
+    def fifth_tier_cities(self):
+        log.info("校验 五线城市")
+        return self.element_exist(management["五线城市"])
+
+    def sixth_tier_cities(self):
+        log.info("校验 六线城市")
+        return self.element_exist(management["六线城市"])
+
+    def seventh_tier_cities(self):
+        log.info("校验 七线城市")
+        return self.element_exist(management["七线城市"])
+
+    def eighth_tier_cities(self):
+        log.info("校验 八线城市")
+        return self.element_exist(management["八线城市"])
+
+    def ninth_tier_cities(self):
+        log.info("校验 九线城市")
+        return self.element_exist(management["九线城市"])
+
     def other_cities(self):
         log.info("校验 其他城市")
         return self.element_exist(management["其他城市"])
@@ -299,6 +323,30 @@ class ManagementPage(WebPage):
     def third_tier_city(self):
         log.info("校验 等级三线城市")
         return self.element_exist(management["等级三线城市"])
+
+    def forth_tier_city(self):
+        log.info("校验 等级四线城市")
+        return self.element_exist(management["等级四线城市"])
+
+    def fifth_tier_city(self):
+        log.info("校验 等级五线城市")
+        return self.element_exist(management["等级五线城市"])
+
+    def sixth_tier_city(self):
+        log.info("校验 等级六线城市")
+        return self.element_exist(management["等级六线城市"])
+
+    def seventh_tier_city(self):
+        log.info("校验 等级七线城市")
+        return self.element_exist(management["等级七线城市"])
+
+    def eighth_tier_city(self):
+        log.info("校验 等级八线城市")
+        return self.element_exist(management["等级八线城市"])
+
+    def ninth_tier_city(self):
+        log.info("校验 等级九线城市")
+        return self.element_exist(management["等级九线城市"])
 
     def other_city(self):
         log.info("校验 等级其他城市")

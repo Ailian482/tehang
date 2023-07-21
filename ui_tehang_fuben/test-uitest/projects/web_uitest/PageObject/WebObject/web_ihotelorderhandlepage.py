@@ -99,7 +99,8 @@ class IntHotelOrderHandlePage(WebPage):
 
     def cancel_room(self, order_id):
         log.info("完成退房任务全流程")
-        if not self.to_task_detail_page(order_id, task_type="退房"):
+        # if not self.to_task_detail_page(order_id, task_type="退房"):
+        if not self.to_task_detail_page(order_id, task_type="退订"):
             return False
         self.cancel_room_page()
         return self.element_text(handle["退订结果"])

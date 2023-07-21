@@ -1,4 +1,5 @@
-国际酒店: "xpath==//a[contains(text(), '港澳台酒店 ')]"
+#国际酒店: "xpath==//a[contains(text(), '港澳台酒店 ')]"
+国际酒店: "xpath==//a[contains(text(), ' 国际酒店 ')]"
 目的地: "xpath==//input[@placeholder='支持中英文名检索']"
 曼谷: "xpath==//span[contains(text(), '曼谷(Bangkok)')]"
 入住日期: "xpath==//input[@placeholder='请选择日期']" # 第一个

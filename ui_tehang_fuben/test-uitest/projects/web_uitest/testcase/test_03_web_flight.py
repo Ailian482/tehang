@@ -33,7 +33,7 @@ def flight_stub(drivers):
 
 class TestFlight:
 
-    def book_flight(self, drivers, departure_city="深圳", arrive_city="北京", check=True):
+    def book_flight(self, drivers, departure_city="深圳", arrive_city="上海", check=True):
         """预订国内机票"""
         global ORDER_ID
         CustomerLogin(drivers).customer_login()

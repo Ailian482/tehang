@@ -91,6 +91,12 @@ class RegisterPage(WebPage):
         self.is_click(register["信用等级"])
         self.is_click(self.num_replace(register["具体等级"], 3))
 
+    def sp_name(self):
+        """选择归属服务商"""
+        log.info("选择归属服务商")
+        self.is_click(register["归属服务商"])
+        self.js_click(self.num_replace(register["具体服务商"], 2))
+
     def customer_address(self):
         """选择省市区"""
         log.info("选择省-市-区")
@@ -119,6 +125,7 @@ class RegisterPage(WebPage):
         self.business_status()
         self.industry()
         self.credit_rating()
+        self.sp_name()
         self.customer_address()
         self.customer_grade()
 

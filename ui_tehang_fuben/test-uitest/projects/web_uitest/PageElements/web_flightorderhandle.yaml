@@ -4,7 +4,7 @@
 查询: "xpath==//domestic-flight-task[1]/form[1]/nz-row[1]/nz-col[2]/button[1]"
 
 第一行: "xpath==//tbody/tr[1]/td[2]" # 判断订单号是否有任务
-任务类型: "xpath==//tbody/tr[1]/td[12]/span[2]/span[1]"
+任务类型: "xpath==//tbody/tr[1]/td[13]/span[2]/span[1]"
 
 # 调出任务
 勾选框: "xpath==//thead/tr[1]/th[1]/label[1]"
