@@ -127,9 +127,11 @@ class DomesticHotelTPage(WebPage):
 
     def choose_check_in_person(self, name=NAME):
         log.info("选中员工")
+        self.roll_to_tagert(domestic_hotel["姓名"])
+        sleep(1)
         self.js_click(domestic_hotel["姓名"])
         self.input_text(domestic_hotel["姓名"], name)
-        sleep(1)
+        sleep(0.5)
         self.js_click(domestic_hotel["感应员工信息"])
 
     def click_submit(self):
@@ -167,7 +169,7 @@ class DomesticHotelTPage(WebPage):
         self.click_view_detail()
         if not self.click_book():
             return False
-        sleep(0.5)
+        sleep(1)
         self.choose_check_in_person()
         self.click_submit()
         self.find_element(domestic_hotel["提交成功"])

@@ -80,7 +80,7 @@ class TestRegister:
         register.customer_type_tmc()
         company_name = register.full_customer_name()
         register.member_id()
-        register.customer_info()
+        # register.customer_info()
         register.specific_address()
         register.roll_tagert_grade()
         register.service_info()

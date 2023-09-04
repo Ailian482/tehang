@@ -21,7 +21,8 @@
 
 # 订房
 供应商: "xpath==//nz-select[@formcontrolname='supplierObject']"
-千淘: "xpath==//div[contains(text(),'千淘')]/.."
+#千淘: "xpath==//div[contains(text(),'千淘')]/.."
+千淘: "xpath==//div[contains(text(),'测试供应商001')]/.."
 供应商支付方式: "xpath==//nz-select[@formcontrolname='supplierPaymentMode']"
 第一个支付方式: "xpath==//cdk-virtual-scroll-viewport[1]/div[1]/nz-option-item[1]"
 供应商订单号: "xpath==//input[@formcontrolname='supplierOrderNo']"
