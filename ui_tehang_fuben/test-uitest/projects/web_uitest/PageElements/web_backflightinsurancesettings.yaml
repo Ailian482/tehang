@@ -1,0 +1,20 @@
+运营管理: "xpath==//a[contains(text(), '运营管理')]"
+商旅事业部机构客户: "xpath==//a[contains(@href,'/operation/tmc/corp?businessUnit=TMC')]"
+客户名称: "xpath==//input[@formcontrolname='nameLike']"
+查询: "xpath==//span[contains(text(), '查询')]"
+详情: "xpath==//span[contains(text(), '详情')]"
+
+基础信息: "xpath==//div[contains(text(), '基础信息')]"
+结算信息: "xpath==//div[contains(text(), '结算信息') and @class='ant-tabs-tab-btn']"
+员工授信: "xpath==//div[contains(text(), '员工授信')]"
+国内机票: "xpath==//div[contains(text(), '国内机票')]"
+国际机票: "xpath==//div[contains(text(), '国际机票')]"
+国内酒店: "xpath==//div[contains(text(), '国内酒店')]"
+国际酒店: "xpath==//div[contains(text(), '国际酒店')]"
+火车票: "xpath==//div[contains(text(), '火车票')]"
+其他产品: "xpath==//div[contains(text(), '其他产品')]"
+
+# 国内机票相关设置项
+选择保险: "xpath==//insurance-picker[@formcontrolname='insuranceCode']/input"   # 该项有两个元素
+
+保存: "xpath==//span[contains(text(), '保存')]"

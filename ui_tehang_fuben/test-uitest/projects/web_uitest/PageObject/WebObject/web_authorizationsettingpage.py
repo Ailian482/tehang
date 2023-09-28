@@ -3,6 +3,8 @@ from utils.logger import log
 from common.readelement import Element
 from common.readconfig import ini
 
+from selenium import webdriver
+
 authorizationsetting = Element('web', 'web_authorizationsettings')
 
 AUTHORIZER = ini._get("STAFF", "AUTHORIZER")
@@ -78,6 +80,7 @@ class AuthorizationSettingPage(WebPage):
         """删除二级授权人数据"""
         log.info("清空二级授权人数据")
         self.js_click(authorizationsetting["二级授权人删除"])
+
 
 if __name__ == "__maim__":
     pass
