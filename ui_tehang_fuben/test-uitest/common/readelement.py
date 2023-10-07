@@ -34,4 +34,4 @@ if __name__ == '__main__':
     ret = search["具体规模"]
     # number = random.randint(1, 4)
     # result = ret.replace("[n]", "[{}]".format(number))
-    print(ret)
+    print(type(ret))

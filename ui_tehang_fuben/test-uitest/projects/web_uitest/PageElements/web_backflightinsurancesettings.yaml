@@ -15,6 +15,13 @@
 其他产品: "xpath==//div[contains(text(), '其他产品')]"
 
 # 国内机票相关设置项
-选择保险: "xpath==//insurance-picker[@formcontrolname='insuranceCode']/input"   # 该项有两个元素
-
+保险复选框: "xpath==//div[@nzalign='middle'][n]/div[2]/flight-insurance-config/form/div/div/nz-form-item/nz-form-control/div/div/label[m]/span[1]"  # 该项有 4 个复选框
+自主预订赠险: "xpath==//div[@nzalign='middle'][1]/div[2]/flight-insurance-config/form/div/div/nz-form-item/nz-form-control/div/div/label[1]/span[1]"
+自主预订固定购险: "xpath==//div[@nzalign='middle'][1]/div[2]/flight-insurance-config/form/div/div/nz-form-item/nz-form-control/div/div/label[2]/span[1]"
+后台代订赠险: "xpath==//div[@nzalign='middle'][2]/div[2]/flight-insurance-config/form/div/div/nz-form-item/nz-form-control/div/div/label[1]/span[1]"
+后台代订固定购险: "xpath==//div[@nzalign='middle'][2]/div[2]/flight-insurance-config/form/div/div/nz-form-item/nz-form-control/div/div/label[2]/span[1]"
+选择自主预订保险: "xpath==//div[@nzalign='middle'][1]/div[2]/flight-insurance-config/form/div/div[2]/nz-form-item/nz-form-control/div/div/div/div/insurance-picker/input"
+选择后台代订保险: "xpath==//div[@nzalign='middle'][2]/div[2]/flight-insurance-config/form/div/div[2]/nz-form-item/nz-form-control/div/div/div/div/insurance-picker/input"
+选择具体保险: "xpath==//div[@class='ant-table-content']/table/tbody/tr[1]/td/span[2]/label/span/input"
+确定: "xpath==//span[contains(text(), '确定')]"
 保存: "xpath==//span[contains(text(), '保存')]"

@@ -12,4 +12,5 @@
 确定: "xpath==//span[contains(text(), '确定')]"
 默认购买: "xpath==//nz-select-item"
 是: "xpath==//nz-option-item[@title='是']"
+否: "xpath==//nz-option-item[@title='否']"
 保存: "xpath==//span[contains(text(), '保存')]"

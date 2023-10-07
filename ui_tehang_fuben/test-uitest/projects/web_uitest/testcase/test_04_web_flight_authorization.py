@@ -16,6 +16,7 @@ ORDER_ID = ""
 def flight_stub(drivers):
     AdminFlight().flight_stub(drivers)
 
+
 class TestAuthorization:
 
     def book_flight(self, drivers, departure_city="深圳", arrive_city="北京"):
