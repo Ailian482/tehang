@@ -319,9 +319,9 @@ class FlightInsuranceSettingPage(WebPage):
 
 
 if __name__ == "__main__":
-    CustomerLogin(drivers).customer_login()
-    FlightInsuranceSettingPage(drivers).close_front_flight_insurance()
     AdminLogin(drivers).admin_login()
     FlightInsuranceSettingPage(drivers).close_back_flight_insurance()
-    FlightInsuranceSettingPage(drivers).open_back_self_free_admin_regular_insurance()
+    CustomerLogin(drivers).customer_login()
+    FlightInsuranceSettingPage(drivers).close_front_flight_insurance()
+    FlightInsuranceSettingPage(drivers).open_front_flight_insurance_default_buy()
     drivers.quit()
