@@ -134,6 +134,16 @@ class FlightInsuranceSettingPage(WebPage):
         self.js_click(backflightinsurancesetting["选择具体保险"])
         self.js_click(backflightinsurancesetting["确定"])
 
+    def get_back_self_insurance_detail(self):
+        """获取后台自主预订具体保险信息"""
+        log.info("获取后台具体保险信息")
+
+
+    def get_back_admin_insurance_detail(self):
+        """获取后台自主预订具体保险信息"""
+        log.info("获取后台具体保险信息")
+
+
     def save_back_flight_setting(self):
         """点击后台国内机票配置保存按钮"""
         log.info("点击后台国内机票配置保存按钮")
