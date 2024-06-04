@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+      <html>
+      <head>
+      <title>火车票联程</title>
+      <meta charset="utf-8" />
+      <style>@charset "UTF-8";
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(255, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  color: #393838;
+  position: relative;
+}
+
+table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+}
+
+th {
+  padding: 5px 10px;
+}
+
+a, a:link, a:visited {
+  color: #34495e;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #59d69d;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  padding-left: 10px;
+  margin-bottom: 9px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  line-height: 36px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  line-height: 50px;
+}
+
+h2 {
+  font-size: 28px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h3 {
+  clear: both;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-left: 3px solid #59d69d;
+  padding-left: 8px;
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+hr {
+  margin: 0 0 19px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+blockquote {
+  padding: 13px 13px 21px 15px;
+  margin-bottom: 18px;
+  font-family: georgia, serif;
+  font-style: italic;
+}
+
+blockquote:before {
+  font-size: 40px;
+  margin-left: -10px;
+  font-family: georgia, serif;
+  color: #eee;
+}
+
+blockquote p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+
+code {
+  background-color: #fee9cc;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 1px 3px;
+  font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+pre {
+  display: block;
+  padding: 14px;
+  margin: 0 0 18px;
+  line-height: 16px;
+  font-size: 11px;
+  border: 1px solid #d9d9d9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #f6f6f6;
+}
+
+pre code {
+  background-color: #f6f6f6;
+  color: #737373;
+  font-size: 11px;
+  padding: 0;
+}
+
+sup {
+  font-size: 0.83em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  body,
+  code,
+  pre code,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+}
+html,
+body {
+  height: 100%;
+}
+
+.table-of-contents {
+  position: fixed;
+  top: 61px;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 260px;
+}
+
+.table-of-contents > ul > li > a {
+  font-size: 20px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.table-of-contents ul {
+  overflow: auto;
+  margin: 0px;
+  height: 100%;
+  padding: 0px 0px;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.table-of-contents ul li {
+  padding-left: 20px;
+}
+
+.table-of-contents a {
+  padding: 2px 0px;
+  display: block;
+  text-decoration: none;
+}
+
+.content-right {
+  max-width: 700px;
+  margin-left: 290px;
+  padding-left: 70px;
+  flex-grow: 1;
+}
+.content-right h2:target {
+  padding-top: 80px;
+}
+
+body > p {
+  margin-left: 30px;
+}
+
+body > table {
+  margin-left: 30px;
+}
+
+body > pre {
+  margin-left: 30px;
+}
+
+.curProject {
+  position: fixed;
+  top: 20px;
+  font-size: 25px;
+  color: black;
+  margin-left: -240px;
+  width: 240px;
+  padding: 5px;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+
+.g-doc {
+  margin-top: 56px;
+  padding-top: 24px;
+  display: flex;
+}
+
+.curproject-name {
+  font-size: 42px;
+}
+
+.m-header {
+  background: #32363a;
+  height: 56px;
+  line-height: 56px;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.m-header .title {
+  font-size: 22px;
+  color: #fff;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+  line-height: 56px;
+  border: none;
+}
+.m-header .nav {
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  right: 32px;
+  top: 0;
+}
+.m-header .nav a {
+  color: #fff;
+  margin-left: 16px;
+  padding: 8px;
+  transition: color .2s;
+}
+.m-header .nav a:hover {
+  color: #59d69d;
+}
+
+.m-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/*# sourceMappingURL=defaultTheme.css.map */
+</style>
+      </head>
+      <body>
+        <div class="m-header">
+          <a href="#" style="display: inherit;"><svg class="svg" width="32px" height="32px" viewBox="0 0 64 64" version="1.1"><title>Icon</title><desc>Created with Sketch.</desc><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1"><stop stop-color="#FFFFFF" offset="0%"></stop><stop stop-color="#F2F2F2" offset="100%"></stop></linearGradient><circle id="path-2" cx="31.9988602" cy="31.9988602" r="2.92886048"></circle><filter x="-85.4%" y="-68.3%" width="270.7%" height="270.7%" filterUnits="objectBoundingBox" id="filter-3"><feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset><feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur><feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.159703351 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix></filter></defs><g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="大屏幕"><g id="Icon"><circle id="Oval-1" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle><path d="M36.7078009,31.8054514 L36.7078009,51.7110548 C36.7078009,54.2844537 34.6258634,56.3695395 32.0579205,56.3695395 C29.4899777,56.3695395 27.4099998,54.0704461 27.4099998,51.7941246 L27.4099998,31.8061972 C27.4099998,29.528395 29.4909575,27.218453 32.0589004,27.230043 C34.6268432,27.241633 36.7078009,29.528395 36.7078009,31.8054514 Z" id="blue" fill="#2359F1" fill-rule="nonzero"></path><path d="M45.2586091,17.1026914 C45.2586091,17.1026914 45.5657231,34.0524383 45.2345291,37.01141 C44.9033351,39.9703817 43.1767091,41.6667796 40.6088126,41.6667796 C38.040916,41.6667796 35.9609757,39.3676862 35.9609757,37.0913646 L35.9609757,17.1034372 C35.9609757,14.825635 38.0418959,12.515693 40.6097924,12.527283 C43.177689,12.538873 45.2586091,14.825635 45.2586091,17.1026914 Z" id="green" fill="#57CF27" fill-rule="nonzero" transform="translate(40.674608, 27.097010) rotate(60.000000) translate(-40.674608, -27.097010) "></path><path d="M28.0410158,17.0465598 L28.0410158,36.9521632 C28.0410158,39.525562 25.9591158,41.6106479 23.3912193,41.6106479 C20.8233227,41.6106479 18.7433824,39.3115545 18.7433824,37.035233 L18.7433824,17.0473055 C18.7433824,14.7695034 20.8243026,12.4595614 23.3921991,12.4711513 C25.9600956,12.4827413 28.0410158,14.7695034 28.0410158,17.0465598 Z" id="red" fill="#FF561B" fill-rule="nonzero" transform="translate(23.392199, 27.040878) rotate(-60.000000) translate(-23.392199, -27.040878) "></path><g id="inner-round"><use fill="black" fill-opacity="1" filter="url(#filter-3)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use><use fill="#F7F7F7" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use></g></g></g></g></svg></a>
+          <a href="#"><h1 class="title">YAPI 接口文档</h1></a>
+          <div class="nav">
+            <a href="https://hellosean1025.github.io/yapi/">YApi</a>
+          </div>
+        </div>
+        <div class="g-doc">
+          <div class="table-of-contents"><ul><li><a href="#linktrain">linkTrain</a><ul><li><a href="#u521bu5efau8ba2u53550a3ca20id3du521bu5efau8ba2u53553e203ca3e">创建订单
+<a id=创建订单> </a></a></li><li><a href="#u8054u7a0bu51fau79680a3ca20id3du8054u7a0bu51fau79683e203ca3e">联程出票
+<a id=联程出票> </a></a></li><li><a href="#u8054u7a0bu67e5u8be20a3ca20id3du8054u7a0bu67e5u8be23e203ca3e">联程查询
+<a id=联程查询> </a></a></li></ul></li></ul></div>
+          <div id="right" class="content-right">
+           <h1 class="curproject-name"> 火车票联程 </h1> 
+<h1 id="linktrain">linkTrain</h1>
+<p></p>
+<h2 id="u521bu5efau8ba2u53550a3ca20id3du521bu5efau8ba2u53553e203ca3e">创建订单
+<a id=创建订单> </a></h2>
+<p></p>
+<h3 id="">基本信息</h3>
+<p><strong>Path：</strong> /api/linkTrain/createLinkOrder</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-2">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> cancelOrder</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">取消订单1是0否</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> outOrderNo</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">外部订单号（必填）且下单时必须唯一</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> orderNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">火车票订单号</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isQuietSeat</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否选择静音车厢 0或其他：否 1：是</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> remark</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">备注</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> trainUserAccount</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">12306账号(自购模式使用)</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> trainUserPassword</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">12306密码(自购模式使用)</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> orderSource</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">订单来源</span></td><td key=5></td></tr><tr key=0-8><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> robFlag</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否抢票</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-9><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ticketModel</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">购票模式，1自购，2线下电子票</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-10><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> autoPay</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">自动支付 0否，1是</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-11><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> contactInfo</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联系人</span></td><td key=5></td></tr><tr key=0-11-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联系人姓名</span></td><td key=5></td></tr><tr key=0-11-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cellphone</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联系人电话</span></td><td key=5></td></tr><tr key=0-11-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> contactEmail</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联系人邮箱</span></td><td key=5></td></tr><tr key=0-11-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> contactAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联系人地址</span></td><td key=5></td></tr><tr key=0-12><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> travels</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">行程</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-12-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> passengers</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘车人</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-12-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> outPassengerId</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分销商小订单号id</span></td><td key=5></td></tr><tr key=0-12-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> passengerType</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘机人类型<br />&nbsp; 成人票 = 1<br />&nbsp; 儿童票 = 2<br />&nbsp; 学生票 = 3<br />&nbsp; 残疾军人 = 4<br /></span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p><p key=3><span style="font-weight: '700'">枚举: </span><span>1,2,3,4</span></p></td></tr><tr key=0-12-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> passengerName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客姓名</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-0-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> idType</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件类型:1:中国居民身份证
+2:港澳台居民居住证
+C:港澳居民来往内地通行证
+G:台湾居民来往大陆通行证
+B:护照
+H:外国人永久居留身份证</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-0-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> idCard</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件号</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-0-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> birthday</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">生日(yyyy-MM-dd)</span></td><td key=5></td></tr><tr key=0-12-0-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> sex</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">性别 F 女 M 男</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-0-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> idValidity</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件有效期(yyyy-MM-dd)</span></td><td key=5></td></tr><tr key=0-12-0-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> idStartValidity</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件签发开始日期(yyyy-MM-dd)</span></td><td key=5></td></tr><tr key=0-12-0-9><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> country</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">国家三字码</span></td><td key=5></td></tr><tr key=0-12-0-10><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> phone</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客手机号</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-0-11><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> mail</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">邮箱</span></td><td key=5></td></tr><tr key=0-12-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> trainNo</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">车次号</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fromStation</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fromStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站code</span></td><td key=5></td></tr><tr key=0-12-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> toStation</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> toStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站Code</span></td><td key=5></td></tr><tr key=0-12-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> acceptNoSeat</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否接受无座，0不接受，1接收</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-12-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> acceptOthers</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否接受其他坐席（电子票使用），0不接受，1接收</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-12-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> chooseSeats</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">在线选座信息（自购:1D1F,电子票:文字描述）</span></td><td key=5></td></tr><tr key=0-12-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> travelDate</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发日期(yyyy-MM-dd)</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> endTravelDate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达日期(yyyy-MM-dd)</span></td><td key=5></td></tr><tr key=0-12-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fromTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发时间HH:mm</span></td><td key=5></td></tr><tr key=0-12-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> toTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达时间HH:mm</span></td><td key=5></td></tr><tr key=0-12-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dayDiff</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">抵达时间是在出发时间的第几天</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-12-14><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> userTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">耗时(HH:mm)</span></td><td key=5></td></tr><tr key=0-12-15><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> outTravelId</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分销商行程id</span></td><td key=5></td></tr><tr key=0-12-16><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> seatClass</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席类别
+9	商务座
+P 特等座
+M 一等座(占座回调时如返回DM, 则为：卧代一等座)
+O 二等座(占座回调时如返回DO, 则为：卧代二等座)
+6	高级软卧
+F 动卧
+4	软卧
+3	硬卧
+2	软座(占座回调时如返回D2, 则为：软卧代软座)
+E 特等软座
+1	硬座(占座回调时如返回D1, 则为：硬卧代硬座)
+I 一等卧
+J 二等卧
+A 高级动卧
+5	包厢硬卧
+H 一人软包
+7	一等软座
+8	二等软座
+0	无座
+Q 多功能座</span></td><td key=5><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-12-17><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ticketPrice</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">票面价</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>double</span></p></td></tr><tr key=0-13><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isModify</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否修改抢票订单，1修改，0不修改</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-14><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> deadlinehour</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">发车前n小时截止（单位：小时，可能为小数</span></td><td key=5></td></tr><tr key=0-15><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> robPayType</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">占座方式，(1 先支付,2 先占座 )</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-16><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> trainRobDetails</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">抢票备选</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-16-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fromStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站简码</span></td><td key=5></td></tr><tr key=0-16-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fromStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站名称</span></td><td key=5></td></tr><tr key=0-16-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> toStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站简码</span></td><td key=5></td></tr><tr key=0-16-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> toStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站名称</span></td><td key=5></td></tr><tr key=0-16-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> startTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">发车时间（HH:mm）</span></td><td key=5></td></tr><tr key=0-16-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> endTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到站时间（HH:mm）</span></td><td key=5></td></tr><tr key=0-16-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> trainCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">备选车次</span></td><td key=5></td></tr><tr key=0-16-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> startDate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">发车日期（yyyy-MM-dd）</span></td><td key=5></td></tr><tr key=0-16-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mainFlag</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">抢票优先级（数字越小优先级越高1-32）</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-16-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> seatClass</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">座位编码列表（相同日期相同车次不同坐席时传多个座位编码
+例如：“O,M”，中间以英文逗号“,”做分隔符。</span></td><td key=5></td></tr><tr key=0-16-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> seatName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席名称</span></td><td key=5></td></tr><tr key=0-16-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> distributionSubOrder</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分销商小订单号</span></td><td key=5></td></tr><tr key=0-17><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> expireTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">携程出票截至时间</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>date-time</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-3">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> code</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">状态码</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> success</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否成功</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">类型success、warning、error</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">错误信息</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">创建订单返回</span></td><td key=5></td></tr><tr key=0-4-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> orderNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">订单号</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> extras</span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">附加数据</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">时间</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>date-time</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8054u7a0bu51fau79680a3ca20id3du8054u7a0bu51fau79683e203ca3e">联程出票
+<a id=联程出票> </a></h2>
+<p></p>
+<h3 id="-4">基本信息</h3>
+<p><strong>Path：</strong> /api/trainTicket/issueLinkOrder</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-5">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> param</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联程出票</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> msgCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">消息号</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> msgInfo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">消息文本</span></td><td key=5></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> orderNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">订单号</span></td><td key=5></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> outOrderNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">外部订单号</span></td><td key=5></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> trainLink</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联程信息</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-4-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> isChangedOrder</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0：正常订单1：改签单</span></td><td key=5></td></tr><tr key=0-0-4-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> changedType</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签类型，0 未改签,1 无差价，2 高改低，3 低改高</span></td><td key=5></td></tr><tr key=0-0-4-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> changeTicketCost</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签手续费</span></td><td key=5></td></tr><tr key=0-0-4-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> changeTicketRate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签费率</span></td><td key=5></td></tr><tr key=0-0-4-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> payCount</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签待支付金额</span></td><td key=5></td></tr><tr key=0-0-4-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalPricediff</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签实际退款差额合计</span></td><td key=5></td></tr><tr key=0-0-4-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> diffrate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签费率（调整为：改签差额退票手续费率）</span></td><td key=5></td></tr><tr key=0-0-4-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> serviceCharge</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签手续费(调整为：改签差额退票手续费)</span></td><td key=5></td></tr><tr key=0-0-4-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> changePriceDiff</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签差价（已扣除改签手续费），正数表示需补充的差价，负数表示需退还的差价；    根据isChangedOrder判断，如果是正常订单，则为0</span></td><td key=5></td></tr><tr key=0-0-4-9><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> expirationTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">订单过期时间 yyyy-MM-dd HH:mm:ss</span></td><td key=5></td></tr><tr key=0-0-4-10><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> fromStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站Code</span></td><td key=5></td></tr><tr key=0-0-4-11><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> toStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站Code</span></td><td key=5></td></tr><tr key=0-0-4-12><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> departureTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发时间</span></td><td key=5></td></tr><tr key=0-0-4-13><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> arrivalTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达时间</span></td><td key=5></td></tr><tr key=0-0-4-14><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> trainNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">车次号</span></td><td key=5></td></tr><tr key=0-0-4-15><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ticketNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">取票号</span></td><td key=5></td></tr><tr key=0-0-4-16><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> orderAmount</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">订单金额</span></td><td key=5></td></tr><tr key=0-0-4-17><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> fromStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站</span></td><td key=5></td></tr><tr key=0-0-4-18><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> toStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站</span></td><td key=5></td></tr><tr key=0-0-4-19><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> issueTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出票时间</span></td><td key=5></td></tr><tr key=0-0-4-20><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> mailCharge</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">邮寄费用</span></td><td key=5></td></tr><tr key=0-0-4-21><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> msgDetail</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">有值时表示该失败原因针对这些乘客</span></td><td key=5></td></tr><tr key=0-0-4-22><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> remark</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">相关备注</span></td><td key=5></td></tr><tr key=0-0-4-23><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ticketGate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">检票口</span></td><td key=5></td></tr><tr key=0-0-4-24><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> passengers</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客信息</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-4-24-0><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> passengerId</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客id</span></td><td key=5></td></tr><tr key=0-0-4-24-1><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> passengerName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客姓名</span></td><td key=5></td></tr><tr key=0-0-4-24-2><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> passengerType</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">乘客类型</span></td><td key=5></td></tr><tr key=0-0-4-24-3><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> cardType</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件类型</span></td><td key=5></td></tr><tr key=0-0-4-24-4><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> cardNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">证件号</span></td><td key=5></td></tr><tr key=0-0-4-24-5><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> price</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">票价</span></td><td key=5></td></tr><tr key=0-0-4-24-6><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> pTicketNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">票号</span></td><td key=5></td></tr><tr key=0-0-4-24-7><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> pTicketNoOld</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签原票号</span></td><td key=5></td></tr><tr key=0-0-4-24-8><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> seatClass</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席类型</span></td><td key=5></td></tr><tr key=0-0-4-24-9><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> seatNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">座位信息</span></td><td key=5></td></tr><tr key=0-0-4-24-10><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> serviceCharge</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">改签手续费（作废）</span></td><td key=5></td></tr><tr key=0-0-4-24-11><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> oldPassengerId</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> method</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口名称(可以根据此字段分发)</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sign</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">签名</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-6">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> resCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">返回code:100：成功，999：失败</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> resMsg</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">失败原因</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8054u7a0bu67e5u8be20a3ca20id3du8054u7a0bu67e5u8be23e203ca3e">联程查询
+<a id=联程查询> </a></h2>
+<p></p>
+<h3 id="-7">基本信息</h3>
+<p><strong>Path：</strong> /api/linkTrain/linkQuery</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-8">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> trainDate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">发车日期（yyyy-MM-dd）</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> fromStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站名称</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> toStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> userName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">用户名</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> resultIndex</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">页码 0： 0-10条 10：10-20条 20：20-30条   / 字段不传值查询所有</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> passWord</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">登录密码</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isTransit</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">true:中转联程 false:自由联程</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> isShowWZ</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">默认不展示无座车次，如果传Y展示无座车次</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-9">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> code</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">状态码</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> success</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否成功</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">类型success、warning、error</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">错误信息</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> result</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-4-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> result_index</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">目前已返回组合数</span></td><td key=5></td></tr><tr key=0-4-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> can_query</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否有下一页</span></td><td key=5></td></tr><tr key=0-4-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> transferCombinationList</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">中转组合列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-4-2-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> toStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">终点站</span></td><td key=5></td></tr><tr key=0-4-2-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalRuntime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">总历时</span></td><td key=5></td></tr><tr key=0-4-2-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> transferInfos</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">中转车次信息</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-4-2-2-0><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> toStationNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达车次编号</span></td><td key=5></td></tr><tr key=0-4-2-2-1><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> startStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">这辆车次的始发站code</span></td><td key=5></td></tr><tr key=0-4-2-2-2><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> endStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">这辆车次的始发站名字</span></td><td key=5></td></tr><tr key=0-4-2-2-3><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> canBook</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否可购票</span></td><td key=5></td></tr><tr key=0-4-2-2-4><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> toDate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达日期</span></td><td key=5></td></tr><tr key=0-4-2-2-5><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> toStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站三字码</span></td><td key=5></td></tr><tr key=0-4-2-2-6><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> fromStationNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发车次编号</span></td><td key=5></td></tr><tr key=0-4-2-2-7><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> trainNo</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">车次号</span></td><td key=5></td></tr><tr key=0-4-2-2-8><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> seatList</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席信息</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-4-2-2-8-0><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> price</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">金额</span></td><td key=5></td></tr><tr key=0-4-2-2-8-1><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> seatCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席编码</span></td><td key=5></td></tr><tr key=0-4-2-2-8-2><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> count</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">余票</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-4-2-2-8-3><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> seatName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">坐席名称</span></td><td key=5></td></tr><tr key=0-4-2-2-8-4><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> seatInfo</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0:无  1:上  2:中  3:下</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-4-2-2-8-5><td key=0><span style="padding-left: 80px"><span style="color: #8c8a8a">├─</span> seatDiscount</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">价格折扣 例如：有折扣 "8.8",代表8.8折；无折扣不返回字段</span></td><td key=5></td></tr><tr key=0-4-2-2-9><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> fromStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站</span></td><td key=5></td></tr><tr key=0-4-2-2-10><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> seatTypes</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">所有坐席简码</span></td><td key=5></td></tr><tr key=0-4-2-2-11><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> toStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达站</span></td><td key=5></td></tr><tr key=0-4-2-2-12><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> fromDate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发日期</span></td><td key=5></td></tr><tr key=0-4-2-2-13><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> sequence</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">1:第一程车次 2:第二程车次</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-4-2-2-14><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> spanDays</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">跨天数</span></td><td key=5><p key=2><span style="font-weight: '700'">format: </span><span>int32</span></p></td></tr><tr key=0-4-2-2-15><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> fromTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发时间</span></td><td key=5></td></tr><tr key=0-4-2-2-16><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> trainDetailCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">车次号详码</span></td><td key=5></td></tr><tr key=0-4-2-2-17><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> fromStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站三字码</span></td><td key=5></td></tr><tr key=0-4-2-2-18><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> endStationCode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">这辆车次的终点站code</span></td><td key=5></td></tr><tr key=0-4-2-2-19><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> runTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">车次历时</span></td><td key=5></td></tr><tr key=0-4-2-2-20><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> toTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">到达时间</span></td><td key=5></td></tr><tr key=0-4-2-2-21><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> startStationName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">这辆车次的始发站名字</span></td><td key=5></td></tr><tr key=0-4-2-2-22><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> preSaleTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">预售时间</span></td><td key=5></td></tr><tr key=0-4-2-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> transferStopTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">中转停留时间</span></td><td key=5></td></tr><tr key=0-4-2-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> transferStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">中转站</span></td><td key=5></td></tr><tr key=0-4-2-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> fromStation</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">出发站</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> extras</span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">附加数据</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">时间</span></td><td key=5><p key=4><span style="font-weight: '700'">format: </span><span>date-time</span></p></td></tr>
+               </tbody>
+              </table>
+
+            <footer class="m-footer">
+              <p>Build by <a href="https://ymfe.org/">YMFE</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </body>
+      </html>
+      
