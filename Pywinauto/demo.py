@@ -23,7 +23,7 @@ pyautogui.press('enter')  # 按下回车打开应用程序
 time.sleep(5)
 
 # 点击搜索框
-region = (728, 72, 300, 400)
+region = (0, 0, 300, 400)
 print(region)
 search_position = pyautogui.locateOnScreen('./photos/iShot_2025-03-21_15.14.03.png', grayscale=True)  # 需要提前截取按钮图片
 print(f"找到输入框，位置: {search_position}")
